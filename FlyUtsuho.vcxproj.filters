@@ -101,9 +101,6 @@
     <ClCompile Include="CollisionReactor.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GeneralFileError.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -157,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Substance.cpp">
       <Filter>ソース ファイル %28Inferno%29</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\GeneralFileError.cpp">
+      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

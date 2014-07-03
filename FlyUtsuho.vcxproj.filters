@@ -189,14 +189,14 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="BGM\06.霊知の太陽信仰　～ Nuclear Fusion.wav">
-      <Filter>リソース ファイル\BGM</Filter>
-    </Media>
     <Media Include="SE\sensescircuit\pui.wav">
       <Filter>リソース ファイル\SE\sensescircuit</Filter>
     </Media>
     <Media Include="SE\niconicommons\nc899.wav">
       <Filter>リソース ファイル\SE\niconicommons</Filter>
+    </Media>
+    <Media Include="BGM\Nuclear_Fusion.wav">
+      <Filter>リソース ファイル\BGM</Filter>
     </Media>
   </ItemGroup>
 </Project>

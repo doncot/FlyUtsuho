@@ -13,15 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル %28Inferno%29">
-      <UniqueIdentifier>{6e27d546-8753-4711-a2b3-6f8921d6851e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル %28Inferno%29">
-      <UniqueIdentifier>{f5df6304-5007-4aa5-a4b3-931801eefc16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル %28Inferno%29\Exception">
-      <UniqueIdentifier>{59e01395-8b0e-4e2d-bad4-f975cbf0dcc1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="リソース ファイル\Sprites">
       <UniqueIdentifier>{a95b767c-21c3-493d-9256-f9d625e0145e}</UniqueIdentifier>
     </Filter>
@@ -36,6 +27,12 @@
     </Filter>
     <Filter Include="リソース ファイル\SE\niconicommons">
       <UniqueIdentifier>{d4e65620-f71c-4931-af9d-6935a035763c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inferno">
+      <UniqueIdentifier>{6e27d546-8753-4711-a2b3-6f8921d6851e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Inferno\Exception">
+      <UniqueIdentifier>{59e01395-8b0e-4e2d-bad4-f975cbf0dcc1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -54,44 +51,44 @@
     <ClInclude Include="ShooterElements.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Collision.h">
+      <Filter>Inferno</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Common.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\DXText.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Game.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\GameElements.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Graphics.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Input.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyException.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyTypes.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Texture.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Timer.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\TString.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Collision.h">
-      <Filter>ヘッダー ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -111,52 +108,55 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\AccessDenied.cpp">
-      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
+      <Filter>Inferno\Exception</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\CreationFailed.cpp">
-      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
+      <Filter>Inferno\Exception</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\Exception.cpp">
-      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
+      <Filter>Inferno\Exception</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\FileNotFound.cpp">
-      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
+      <Filter>Inferno\Exception</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Texture.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Timer.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\CollisionDetector.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\DXText.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Game.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\GraphicsDirectX9X.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Idea.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Input.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\MatrixUtility.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Substance.cpp">
-      <Filter>ソース ファイル %28Inferno%29</Filter>
+      <Filter>Inferno</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\GeneralFileError.cpp">
-      <Filter>ソース ファイル %28Inferno%29\Exception</Filter>
+      <Filter>Inferno\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="ShooterActor.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -39,4 +39,19 @@ private:
 
 };
 
+class ShooterActor : public Substance
+{
+public:
+	void Hit();
+	void Update();
+
+private:
+	//アニメーション用の状態
+	GEState m_curState;
+	Stopwatch m_timer;
+
+	//定数
+	const int HitBlowDistance = 20;
+};
+
 }

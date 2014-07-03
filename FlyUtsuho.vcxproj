@@ -120,6 +120,9 @@
     <ClCompile Include="MyTypes.cpp" />
     <ClCompile Include="SVShooter.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Spec.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

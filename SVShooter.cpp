@@ -77,6 +77,7 @@ bool SVShooter::Initialize()
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);
+		m_fireball = nullptr;
 
 		purpleBulletTex.LoadImageFile(m_graphics, _T("purplebullet.png"));
 		purpleBullet_.SetTexture(purpleBulletTex);

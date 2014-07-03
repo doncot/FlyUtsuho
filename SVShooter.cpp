@@ -67,22 +67,22 @@ bool SVShooter::Initialize()
 
 		//ゲーム要素の初期化
 		m_titleImage.Initialize();
-		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("intro.png"));
+		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));
 		m_titleImage.SetPosofULCorner(0, 0);
 
-		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("utsuho.png"));
+		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
 		m_utsuho_.SetTexture(m_utsuhoTex);
 		m_utsuho = new Inferno::Substance(&m_utsuho_);
 		m_utsuho->AMove(200, 200);
 
-		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("fireball.png"));
+		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);
 		m_fireball = nullptr;
 
-		purpleBulletTex.LoadImageFile(m_graphics, _T("purplebullet.png"));
+		purpleBulletTex.LoadImageFile(m_graphics, _T("Sprites\\purplebullet.png"));
 		purpleBullet_.SetTexture(purpleBulletTex);
 
-		m_onryouTex.LoadImageFile(Base::m_graphics, TEXT("onryou.png"));
+		m_onryouTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\onryou.png"));
 		m_onryou_.SetTexture(m_onryouTex);
 		auto tsub = new Inferno::Substance(&m_onryou_);
 		tsub->AMove(400, 300);
@@ -95,12 +95,12 @@ bool SVShooter::Initialize()
 		for (auto e = bg_underground.begin(); e != bg_underground.end();e++)
 		{
 			e->Initialize();
-			e->LoadTextureFromFile(m_graphics, TEXT("underground.png"));
+			e->LoadTextureFromFile(m_graphics, TEXT("Sprites\\underground.png"));
 		}
 		bg_underground[0].SetPosofULCorner(0, 0);
 		bg_underground[1].SetPosofULCorner(800, 0);
 
-		eggTex.LoadImageFile(m_graphics,_T("egg.bmp"));
+		eggTex.LoadImageFile(m_graphics,_T("Sprites\\egg.bmp"));
 		egg_.SetTexture(eggTex);
 		egg.SetIdea(&egg_);
 		egg.AMove(800, 300);
@@ -114,8 +114,8 @@ bool SVShooter::Initialize()
 		fire.Initialize(&audio);
 		pichun.Initialize(&audio);
 		bgm.LoadWaveFile(_T("06.霊知の太陽信仰　～ Nuclear Fusion.wav"));
-		fire.LoadWaveFile(_T("se\\sensescircuit\\pui.wav"));
-		pichun.LoadWaveFile(_T("se\\niconicommons\\nc899.wav"));
+		fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
+		pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
 		pichun.SetVolume(0.3f);
 
 		//テキスト

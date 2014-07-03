@@ -123,6 +123,16 @@
   <ItemGroup>
     <Text Include="Spec.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Sprites\egg.bmp" />
+    <Image Include="Sprites\fireball.png" />
+    <Image Include="Sprites\intro.png" />
+    <Image Include="Sprites\onryou.png" />
+    <Image Include="Sprites\purplebullet.png" />
+    <Image Include="Sprites\underground.png" />
+    <Image Include="Sprites\utsuho.png" />
+    <Image Include="Sprites\utsuho_moji.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

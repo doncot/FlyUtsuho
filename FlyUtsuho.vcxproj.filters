@@ -22,6 +22,9 @@
     <Filter Include="ソース ファイル %28Inferno%29\Exception">
       <UniqueIdentifier>{59e01395-8b0e-4e2d-bad4-f975cbf0dcc1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\Sprites">
+      <UniqueIdentifier>{a95b767c-21c3-493d-9256-f9d625e0145e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SVShooter.h">
@@ -146,5 +149,31 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Spec.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Sprites\egg.bmp">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\fireball.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\intro.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\onryou.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\purplebullet.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\underground.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\utsuho.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
+    <Image Include="Sprites\utsuho_moji.png">
+      <Filter>リソース ファイル\Sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

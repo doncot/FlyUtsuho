@@ -25,6 +25,18 @@
     <Filter Include="リソース ファイル\Sprites">
       <UniqueIdentifier>{a95b767c-21c3-493d-9256-f9d625e0145e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\SE">
+      <UniqueIdentifier>{3b0f738e-d169-483f-8783-2e2161211fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\BGM">
+      <UniqueIdentifier>{301b7a65-c243-4a27-a20e-8d418390df83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\SE\sensescircuit">
+      <UniqueIdentifier>{ea3ab3fd-7f43-4a42-b1cc-780f1e65f8d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="リソース ファイル\SE\niconicommons">
+      <UniqueIdentifier>{d4e65620-f71c-4931-af9d-6935a035763c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SVShooter.h">
@@ -175,5 +187,16 @@
     <Image Include="Sprites\utsuho_moji.png">
       <Filter>リソース ファイル\Sprites</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="BGM\06.霊知の太陽信仰　～ Nuclear Fusion.wav">
+      <Filter>リソース ファイル\BGM</Filter>
+    </Media>
+    <Media Include="SE\sensescircuit\pui.wav">
+      <Filter>リソース ファイル\SE\sensescircuit</Filter>
+    </Media>
+    <Media Include="SE\niconicommons\nc899.wav">
+      <Filter>リソース ファイル\SE\niconicommons</Filter>
+    </Media>
   </ItemGroup>
 </Project>

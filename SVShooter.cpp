@@ -113,7 +113,7 @@ bool SVShooter::Initialize()
 		bgm.Initialize(&audio);
 		fire.Initialize(&audio);
 		pichun.Initialize(&audio);
-		bgm.LoadWaveFile(_T("06.—ì’m‚Ì‘¾—zM‹Â@` Nuclear Fusion.wav"));
+		bgm.LoadWaveFile(_T("BGM\\06.—ì’m‚Ì‘¾—zM‹Â@` Nuclear Fusion.wav"));
 		fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
 		pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
 		pichun.SetVolume(0.3f);
@@ -343,7 +343,7 @@ bool SVShooter::GameLoop()
 
 			for (auto& e : m_onryouList)
 			{
-				e->Draw(m_graphics);
+				if(e) e->Draw(m_graphics);
 			}
 
 			if (egg.isActive()) egg.Draw(m_graphics);

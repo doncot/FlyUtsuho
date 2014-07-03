@@ -133,6 +133,11 @@
     <Image Include="Sprites\utsuho.png" />
     <Image Include="Sprites\utsuho_moji.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="BGM\06.霊知の太陽信仰　～ Nuclear Fusion.wav" />
+    <Media Include="SE\niconicommons\nc899.wav" />
+    <Media Include="SE\sensescircuit\pui.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

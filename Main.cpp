@@ -5,6 +5,8 @@
 
 using namespace Inferno;
 
+
+
 INT WINAPI _tWinMain(HINSTANCE hInst, HINSTANCE, LPTSTR, int nCmdShow)
 {
 	SVShooter game;

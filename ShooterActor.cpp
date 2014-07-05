@@ -7,27 +7,24 @@ namespace
 
 namespace Inferno
 {
-void ShooterActor::Hit()
-{
-	if (m_curState == GEState::ge_neutral)
+	void ShooterActor::Hit()
 	{
-		m_curState = GEState::ge_damage;
-		m_timer.Start(1000);
-		hitStartPoint = m_pos;
+		if (m_curState == GEState::ge_neutral)
+		{
+			m_curState = GEState::ge_damage;
+			m_timer.Start(1000);
+			hitStartPoint = m_pos;
+		}
+
+
+
+
+
+
+
 	}
 
-
-
-
-
-
-
-
-
-
-}
-
-void ShooterActor::Update() //これは派生クラスで定義するべきだな……
+void ShooterActor::Update()
 {
 	if (m_curState == GEState::ge_damage)
 	{

@@ -52,6 +52,7 @@ private:
 
 	//’è”
 	const int HitBlowDistance = 20;
+	Inferno::Vec2<int> hitStartPoint;
 };
 
 }

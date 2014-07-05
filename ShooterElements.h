@@ -1,7 +1,7 @@
 #pragma once
 
 #include<GameElements.h>
-#include<MyTypes.h>
+#include"MyTypes.h"
 #include<Timer.h>
 
 namespace Inferno

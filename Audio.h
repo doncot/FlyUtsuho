@@ -6,8 +6,8 @@ Audio.h
 #pragma once
 #include<Windows.h>
 #include<xaudio2.h>
-#include<MyException.h>
-#include<Common.h>
+#include"MyException.h"
+#include"Common.h"
 #include<sstream>
 #include<algorithm>
 #include<memory>

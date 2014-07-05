@@ -41,7 +41,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\misono\Dropbox\Create\Programming\src_game;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;Inferno;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -78,44 +78,44 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Collision.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Common.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\DXText.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Game.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\GameElements.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Graphics.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Input.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyException.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyTypes.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Texture.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Timer.h" />
-    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\TString.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Inferno\Collision.h" />
+    <ClInclude Include="Inferno\Common.h" />
+    <ClInclude Include="Inferno\DXText.h" />
+    <ClInclude Include="Inferno\Game.h" />
+    <ClInclude Include="Inferno\GameElements.h" />
+    <ClInclude Include="Inferno\Graphics.h" />
+    <ClInclude Include="Inferno\Input.h" />
+    <ClInclude Include="Inferno\MyException.h" />
+    <ClInclude Include="Inferno\MyTypes.h" />
+    <ClInclude Include="Inferno\SimpleWindow.h" />
+    <ClInclude Include="Inferno\Texture.h" />
+    <ClInclude Include="Inferno\Timer.h" />
+    <ClInclude Include="Inferno\TString.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="ShooterElements.h" />
     <ClInclude Include="SVShooter.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\CollisionDetector.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\DXText.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\AccessDenied.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\CreationFailed.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\Exception.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\FileNotFound.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\GeneralFileError.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Game.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\GraphicsDirectX9X.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Idea.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Input.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\MatrixUtility.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Substance.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Texture.cpp" />
-    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Timer.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionReactor.cpp" />
+    <ClCompile Include="Inferno\CollisionDetector.cpp" />
+    <ClCompile Include="Inferno\DXText.cpp" />
+    <ClCompile Include="Inferno\Exception\AccessDenied.cpp" />
+    <ClCompile Include="Inferno\Exception\CreationFailed.cpp" />
+    <ClCompile Include="Inferno\Exception\Exception.cpp" />
+    <ClCompile Include="Inferno\Exception\FileNotFound.cpp" />
+    <ClCompile Include="Inferno\Exception\GeneralFileError.cpp" />
+    <ClCompile Include="Inferno\Game.cpp" />
+    <ClCompile Include="Inferno\GraphicsDirectX9X.cpp" />
+    <ClCompile Include="Inferno\Idea.cpp" />
+    <ClCompile Include="Inferno\Input.cpp" />
+    <ClCompile Include="Inferno\MatrixUtility.cpp" />
+    <ClCompile Include="Inferno\SimpleWindow.cpp" />
+    <ClCompile Include="Inferno\Substance.cpp" />
+    <ClCompile Include="Inferno\Texture.cpp" />
+    <ClCompile Include="Inferno\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyTypes.cpp" />
     <ClCompile Include="ShooterActor.cpp" />

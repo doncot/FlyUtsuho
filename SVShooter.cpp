@@ -2,13 +2,13 @@
 
 #include<Texture.h>
 #include<GameElements.h>
-#include<Common.h>
+#include"Common.h"
 #include<Collision.h>
 #include"Audio.h"
 #include<Timer.h>
-#include<MyException.h>
+#include"MyException.h"
 #include<DXText.h>
-#include<TString.h>
+#include"TString.h"
 #include<vector>
 #include<cmath>
 #include<sstream>

@@ -21,7 +21,7 @@
 #define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
 #define new DBG_NEW
 #endif
-#endif  // _DEBUG
+#endif  //_DEBUG
 
 namespace
 {
@@ -59,6 +59,7 @@ SVShooter::~SVShooter()
 	}
 	for (auto i = purpleBullets.begin(); i != purpleBullets.end();)
 	{
+		SAFE_DELETE(*i);
 		i = purpleBullets.erase(i);
 	}
 
@@ -267,6 +268,7 @@ bool SVShooter::GameLoop()
 		{
 			if (!Inferno::IsPointInsideRect((*i)->GetPosition(), m_screenRect))
 			{
+				SAFE_DELETE(*i);
 				i = purpleBullets.erase(i);
 				continue;
 			}
@@ -296,6 +298,7 @@ bool SVShooter::GameLoop()
 			if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetRegion()) )
 			{
 				//’e‚ğíœ
+				SAFE_DELETE(*e);
 				e = purpleBullets.erase(e);
 				//”í’eSE
 				pichun.Stop();

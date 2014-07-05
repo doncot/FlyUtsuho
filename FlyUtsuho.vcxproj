@@ -78,19 +78,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Collision.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Common.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\DXText.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Game.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\GameElements.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Graphics.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Input.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\MyException.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\MyTypes.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\SimpleWindow.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Texture.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\Timer.h" />
-    <ClInclude Include="..\..\..\Dropbox\Create\Programming\src_game\TString.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Collision.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Common.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\DXText.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Game.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\GameElements.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Graphics.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Input.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyException.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\MyTypes.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Texture.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\Timer.h" />
+    <ClInclude Include="..\..\Dropbox\Create\Programming\src_game\TString.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
@@ -98,22 +98,22 @@
     <ClInclude Include="SVShooter.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\CollisionDetector.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\DXText.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Exception\AccessDenied.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Exception\CreationFailed.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Exception\Exception.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Exception\FileNotFound.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Exception\GeneralFileError.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Game.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\GraphicsDirectX9X.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Idea.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Input.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\MatrixUtility.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\SimpleWindow.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Substance.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Texture.cpp" />
-    <ClCompile Include="..\..\..\Dropbox\Create\Programming\src_game\Timer.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\CollisionDetector.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\DXText.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\AccessDenied.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\CreationFailed.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\Exception.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\FileNotFound.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Exception\GeneralFileError.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Game.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\GraphicsDirectX9X.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Idea.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Input.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\MatrixUtility.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\SimpleWindow.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Substance.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Texture.cpp" />
+    <ClCompile Include="..\..\Dropbox\Create\Programming\src_game\Timer.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionReactor.cpp" />
     <ClCompile Include="Main.cpp" />

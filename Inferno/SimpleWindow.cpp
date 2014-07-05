@@ -101,6 +101,9 @@ void SimpleWindow::Resize(const int width, const int height)
 
 void SimpleWindow::SetPos(const WindowPostion x, const WindowPostion y)
 {
+	//GetWindowPlacementとSetWindowPlacementで
+	//位置の保存と復元ができる
+
 	// ウインドウ全体の横幅の幅を計算
 	RECT rect;
 	GetWindowRect(m_hWnd, &rect);		// ウインドウ全体のサイズ取得

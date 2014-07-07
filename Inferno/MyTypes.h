@@ -46,9 +46,7 @@ typedef D3DMATRIX Matrix;
 Matrix* MatrixIdentity(Matrix* m);
 Matrix* MatrixTransform2D(Matrix* m, const float x, const float y);
 
-//Windows&DirectX‚ÌRECTŠg’£
-//typedef RECT Rect;
-
+//MyRECT
 class Rect
 {
 public:

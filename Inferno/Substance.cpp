@@ -18,31 +18,41 @@ void Substance::SetIdea(Idea* idea)
 
 void Substance::AMove(const int x, const int y)
 {
+	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	m_pos.x = x;
 	m_pos.y = y;
 }
 
 void Substance::AMove(const Vec2<int>& c)
 {
+	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	AMove(c.x, c.y);
 }
 
 void Substance::RMove(const int x, const int y)
 {
+	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	m_pos.x += x;
 	m_pos.y += y;
 }
 
 void Substance::RMove(const Vec2<int>& c)
 {
-	m_pos += c;
+	if (CheckAttribute(GEAttribute::ge_userLock)) return;
+	RMove(c.x, c.y);
 }
 
 //左上座標で位置を指定
 void Substance::SetPosofULCorner(const int x, const int y)
 {
+	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	m_pos.x = x + m_idea->GetWidth()/2;
 	m_pos.y = y + m_idea->GetHeight()/2;
+}
+
+void Substance::Rotate(const float angle)
+{
+	m_angle = angle;
 }
 
 Vec2<int> Substance::GetPosition() const
@@ -69,7 +79,7 @@ void Substance::SetAttribute(GEAttribute attr, bool value)
 		m_attribute |= attr;
 	}
 	//ビットを降ろす場合
-	else if (!value)
+	else
 	{
 		m_attribute &= ~attr;
 	}

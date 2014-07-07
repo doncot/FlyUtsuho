@@ -22,12 +22,6 @@ enum GEAttribute
 	ge_userLock = 1, //ユーザーからの操作をロック
 	ge_draw = 2, //描画するか否か
 };
-enum class GEState
-{
-	ge_neutral,
-	ge_damage
-};
-//enum class GEAnimeState;
 
 class Idea
 {
@@ -77,7 +71,7 @@ public:
 	//左上座標で位置を指定
 	void SetPosofULCorner(const int x, const int y);
 	//時計周りに回転（度数指定）
-	void Rotate(const int degree);
+	void Rotate(const float degree);
 
 	Vec2<int> GetPosition() const;
 	//位置座標とサイズから現在領域を求める
@@ -97,6 +91,7 @@ public:
 protected:
 	Idea* m_idea;
 	Vec2<int> m_pos; //現在座標
+	float m_angle; //度数法で回転情報
 	char m_attribute; //属性（描画属性など）を指定
 };
 

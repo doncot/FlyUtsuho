@@ -39,17 +39,24 @@ private:
 
 };
 
+enum class SEState
+{
+	se_neutral,
+	se_damage
+};
+//enum class SEAnimeState;
+
 class ShooterActor : public Substance
 {
 public:
-	ShooterActor() : m_curState(GEState::ge_neutral) {}
+	ShooterActor() : m_curState(SEState::se_neutral) {}
 
 	void Hit();
 	void Update();
 
 private:
 	//アニメーション用の状態
-	GEState m_curState;
+	SEState m_curState;
 	Stopwatch m_timer;
 
 	//定数

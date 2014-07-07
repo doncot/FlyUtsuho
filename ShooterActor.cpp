@@ -4,27 +4,28 @@ namespace Inferno
 {
 void ShooterActor::Hit()
 {
-	if (m_curState == GEState::ge_neutral)
+	if (m_curState == SEState::se_neutral)
 	{
-		m_curState = GEState::ge_damage;
+		m_curState = SEState::se_damage;
 		m_timer.Start(500);
 		hitStartPoint = m_pos;
+		SetAttribute(GEAttribute::ge_userLock, true);
 	}
 }
 
 void ShooterActor::Update()
 {
-	if (m_curState == GEState::ge_damage)
+	if (m_curState == SEState::se_damage)
 	{
 		//ダメージフェーズが終わったら
 		if (m_timer.HasFinished())
 		{
-			m_curState = GEState::ge_neutral;
+			m_curState = SEState::se_neutral;
+			SetAttribute(GEAttribute::ge_userLock, false);
 		}
 
 		//アニメーション
 		m_pos.x += -8; //左に下がる
-		
 	}
 }
 

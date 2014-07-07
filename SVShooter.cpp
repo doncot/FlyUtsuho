@@ -80,7 +80,8 @@ bool SVShooter::Initialize()
 
 		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
 		m_utsuho_.SetTexture(m_utsuhoTex);
-		m_utsuho = new Inferno::Substance(&m_utsuho_);
+		m_utsuho = new Inferno::ShooterActor();
+		m_utsuho->SetIdea(&m_utsuho_);
 		m_utsuho->AMove(200, 200);
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
@@ -205,6 +206,9 @@ bool SVShooter::GameLoop()
 		//ƒXƒRƒA
 		m_score.Update();
 
+		//Ž©‹@
+		m_utsuho->Update();
+
 		//”wŒi
 		for (auto e = bg_underground.begin(); e != bg_underground.end(); e++)
 		{
@@ -306,7 +310,7 @@ bool SVShooter::GameLoop()
 
 				m_score -= 2500;
 				
-				//m_utsuho->Hit();
+				m_utsuho->Hit();
 				
 				continue;
 			}

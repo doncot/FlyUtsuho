@@ -17,11 +17,17 @@ Rigidbody:剛体。「物理衝突」をするSubstance。
 namespace Inferno
 {
 //ゲーム要素の状態（アクションゲーム用なので継承先に本来あるべき
+enum class GEAttribute
+{
+	ge_userLock = 1, //ユーザーからの操作をロック
+	ge_draw = 2, //描画するか否か
+};
 enum class GEState
 {
 	ge_neutral,
 	ge_damage
 };
+//enum class GEAnimeState;
 
 class Idea
 {
@@ -82,6 +88,9 @@ public:
 	//活動状態を設定
 	void Activate();
 	void Deactivate();
+
+	void SetAttribute(GEAttribute attr);
+	bool CheckAttribute(GEAttribute attr);
 	
 	virtual void Update();
 

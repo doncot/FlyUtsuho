@@ -33,7 +33,7 @@ private:
 
 	Inferno::Texture m_utsuhoTex;
 	Inferno::Idea m_utsuho_;
-	Inferno::Substance* m_utsuho;
+	Inferno::ShooterActor* m_utsuho;
 
 	Inferno::Texture m_fireballTex;
 	Inferno::Idea m_fireball_;

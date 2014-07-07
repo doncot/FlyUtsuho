@@ -42,6 +42,8 @@ private:
 class ShooterActor : public Substance
 {
 public:
+	ShooterActor() : m_curState(GEState::ge_neutral) {}
+
 	void Hit();
 	void Update();
 

@@ -12,7 +12,7 @@ namespace Inferno
 DXText::DXText()
 : m_font(nullptr)
 {
-	MatrixIdentity(&m_matrix);
+	m_matrix.LoadIdentity();
 }
 
 void DXText::Initialize(const Graphics& g, int point, const std::wstring& font)
@@ -46,7 +46,7 @@ int DXText::Print(const Graphics& g,const std::wstring& str, int x, int y)
 
 	m_rect.AMove(x, y);
 
-	MatrixIdentity(&m_matrix);
+	m_matrix.LoadIdentity();
 	g.TransformSprite(&m_matrix);
 	return m_font->DrawTextW(g.GetSprite(), str.c_str(), -1, &m_rect.GetMSRECT(), DT_LEFT|DT_NOCLIP, D3DCOLOR_XRGB(255, 255, 255));
 }
@@ -55,7 +55,7 @@ int DXText::Print(const Graphics& g,const std::wstring& str, Rect* rect)
 {
 	if (!m_font) return 0;
 
-	MatrixIdentity(&m_matrix);
+	m_matrix.LoadIdentity();
 	g.TransformSprite(&m_matrix);
 	return m_font->DrawTextW(g.GetSprite(), str.c_str(), -1, &rect->GetMSRECT(), DT_LEFT, D3DCOLOR_XRGB(255, 255, 255));
 }

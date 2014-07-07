@@ -133,7 +133,7 @@ bool Graphics::LoadTexture(const std::wstring& filename,unsigned* width, unsigne
 
 void Graphics::TransformSprite(const Matrix* m) const
 {
-	m_sprite->SetTransform(&D3DXMATRIX(*m));
+	m_sprite->SetTransform(&D3DXMATRIX(m->GetD3DMatrix()));
 }
 
 void Graphics::DrawSprite(const LP_TEXTURE tex, Vec2<float> center) const

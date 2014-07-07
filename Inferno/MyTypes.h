@@ -41,10 +41,22 @@ template<typename T> struct Vec2 //テンプレートはヘッダーに実装を書くのが正解
 };
 
 //DirectXの標準行列（3DXのヘルパー関連はなるべく使わない）
-typedef D3DMATRIX Matrix;
+//MyMatrix(4*4)
+//typedef D3DMATRIX Matrix;
+class Matrix
+{
+public:
+	void LoadIdentity();
+	void Transform2D(const float x, const float y);
+	const D3DMATRIX GetD3DMatrix() const;
+
+private:
+	float m[4][4];
+};
+
 //以下行列関連ユーテリティ
-Matrix* MatrixIdentity(Matrix* m);
-Matrix* MatrixTransform2D(Matrix* m, const float x, const float y);
+//Matrix* MatrixIdentity(Matrix* m);
+//Matrix* MatrixTransform2D(Matrix* m, const float x, const float y);
 
 //MyRECT
 class Rect

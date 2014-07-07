@@ -170,7 +170,6 @@ bool SVShooter::GameLoop()
 		Base::m_graphics.EndScene();
 
 		break;
-
 	case sn_main:
 		//入力
 		const int utsuhoVel = 6;
@@ -249,7 +248,7 @@ bool SVShooter::GameLoop()
 		{
 			egg.AMove(800, 300);
 			eggInterval.Restart();
-			egg.Activate();
+			egg.SetAttribute(Inferno::GEAttribute::ge_draw,true);
 		}
 		else
 		{
@@ -322,11 +321,11 @@ bool SVShooter::GameLoop()
 		//卵と自機の衝突検出
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetRegion(), egg.GetRegion()))
 		{
-			if (egg.isActive())
+			if (egg.CheckAttribute(Inferno::GEAttribute::ge_draw))
 			{
 				m_score += 1000;
 				eggInterval.Restart();
-				egg.Deactivate();
+				egg.SetAttribute(Inferno::GEAttribute::ge_draw, false);
 			}
 		}
 
@@ -360,7 +359,7 @@ bool SVShooter::GameLoop()
 				if(e) e->Draw(m_graphics);
 			}
 
-			if (egg.isActive()) egg.Draw(m_graphics);
+			egg.Draw(m_graphics);
 
 			//スコア
 			dLight.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);

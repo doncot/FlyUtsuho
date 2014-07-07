@@ -3,13 +3,17 @@
 
 namespace Inferno
 {
-Substance::Substance() : m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_isActive(true){}
-Substance::Substance(Idea* idea) : m_idea(idea), m_pos(Vec2<int>(0, 0)),m_isActive(true){}
+Substance::Substance() : m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0){}
+Substance::Substance(Idea* idea) : m_idea(idea), m_pos(Vec2<int>(0, 0)),m_attribute(0)
+{
+	SetAttribute(GEAttribute::ge_draw, true);
+}
 Substance::~Substance() {}
 
 void Substance::SetIdea(Idea* idea)
 {
 	m_idea = idea;
+	SetAttribute(GEAttribute::ge_draw, true);
 }
 
 void Substance::AMove(const int x, const int y)
@@ -52,16 +56,33 @@ Rect Substance::GetRegion() const
 	return r;
 }
 
-bool Substance::isActive() const { return m_isActive; }
+bool Substance::CheckAttribute(GEAttribute attr) const
+{
+	return (m_attribute & attr) ? true : false;
+}
 
-void Substance::Activate() { m_isActive = true; }
+void Substance::SetAttribute(GEAttribute attr, bool value)
+{
+	//ビットを立てる場合
+	if (value)
+	{
+		m_attribute |= attr;
+	}
+	//ビットを降ろす場合
+	else if (!value)
+	{
+		m_attribute &= ~attr;
+	}
+}
 
-void Substance::Deactivate() { m_isActive = false; }
 
 void Substance::Update() {}
 
 void Substance::Draw(const Graphics& g) const
 {
+	//描画状態でない場合、帰る
+	if (!CheckAttribute(GEAttribute::ge_draw)) return;
+
 	D3DXMATRIX matWorld; //これをメンバにすれば省略できるがさてさて
 	D3DXMatrixIdentity(&matWorld);
 	//ここからピクセル座標(int)よりスクリーン座標(float)へ変換をする

@@ -17,7 +17,7 @@ Rigidbody:剛体。「物理衝突」をするSubstance。
 namespace Inferno
 {
 //ゲーム要素の状態（アクションゲーム用なので継承先に本来あるべき
-enum class GEAttribute
+enum GEAttribute
 {
 	ge_userLock = 1, //ユーザーからの操作をロック
 	ge_draw = 2, //描画するか否か
@@ -83,14 +83,9 @@ public:
 	//位置座標とサイズから現在領域を求める
 	Rect GetRegion() const;
 
-	//活動中（描画アリ、効果アリ）か判定（イマイチ曖昧である）
-	bool isActive() const;
-	//活動状態を設定
-	void Activate();
-	void Deactivate();
-
-	void SetAttribute(GEAttribute attr);
-	bool CheckAttribute(GEAttribute attr);
+	//属性（描画可能など）を指定
+	void SetAttribute(GEAttribute attr, bool value);
+	bool CheckAttribute(GEAttribute attr) const;
 	
 	virtual void Update();
 
@@ -102,7 +97,7 @@ public:
 protected:
 	Idea* m_idea;
 	Vec2<int> m_pos; //現在座標
-	bool m_isActive;
+	char m_attribute; //属性（描画属性など）を指定
 };
 
 //単数しかない要素の場合、いちいちイデアから実体を作るのが面倒なのでこっちを使う
@@ -121,6 +116,7 @@ public:
 	{
 		m_tex = new Texture();
 		m_idea = new Idea();
+		SetAttribute(GEAttribute::ge_draw, true);
 	}
 	void LoadTextureFromFile(const Graphics& g, const wstring& str)
 	{

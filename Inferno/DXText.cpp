@@ -60,18 +60,4 @@ int DXText::Print(const Graphics& g,const std::wstring& str, Rect* rect)
 	return m_font->DrawTextW(g.GetSprite(), str.c_str(), -1, &rect->GetMSRECT(), DT_LEFT, D3DCOLOR_XRGB(255, 255, 255));
 }
 
-/*
-void DXText::Draw(const std::string& str, const int len)
-{
-	D3DXMATRIX matrix;
-	D3DXMatrixIdentity(&matrix);
-	GraphicsDirectX::m_sprite->SetTransform(&matrix);
-	if (SUCCEEDED(GraphicsDirectX::m_sprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_TEXTURE)))
-	{
-		m_font->DrawText(GraphicsDirectX::m_sprite, TString(str), len, &m_rect, DT_LEFT | DT_NOCLIP, D3DCOLOR_XRGB(255, 255, 255));
-	}
-	GraphicsDirectX::m_sprite->End();
-}
-*/
-
 }

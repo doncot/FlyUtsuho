@@ -111,7 +111,6 @@
     <ClCompile Include="Inferno\GraphicsDirectX9X.cpp" />
     <ClCompile Include="Inferno\Idea.cpp" />
     <ClCompile Include="Inferno\Input.cpp" />
-    <ClCompile Include="Inferno\MatrixUtility.cpp" />
     <ClCompile Include="Inferno\SimpleWindow.cpp" />
     <ClCompile Include="Inferno\Substance.cpp" />
     <ClCompile Include="Inferno\Texture.cpp" />

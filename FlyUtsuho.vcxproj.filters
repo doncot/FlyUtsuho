@@ -128,9 +128,6 @@
     <ClCompile Include="Inferno\Input.cpp">
       <Filter>Inferno</Filter>
     </ClCompile>
-    <ClCompile Include="Inferno\MatrixUtility.cpp">
-      <Filter>Inferno</Filter>
-    </ClCompile>
     <ClCompile Include="Inferno\SimpleWindow.cpp">
       <Filter>Inferno</Filter>
     </ClCompile>

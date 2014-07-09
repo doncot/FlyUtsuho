@@ -9,16 +9,16 @@
 
 namespace Inferno
 {
-	//substance側からアニメの種類を設定
-	enum Animetype
-	{
-		Transform,
-	};
+//substance側からアニメの種類を設定
+enum Animetype
+{
+	Transform,
+};
 
 class Animation
 {
 	//TODOスペル確認
-	enum Transittype
+	enum TransitType
 	{
 		Liner,
 		EasyIn,
@@ -28,35 +28,20 @@ public:
 	virtual ~Animation();
 
 
-	//ディレイ時間、終了時間、開始座標、到達座標、ループ設定、（同期/非同期[待つか待たないか]）
+	//ディレイ時間、終了時間、開始点、到達点、ループ設定、（同期/非同期[待つか待たないか]）
 	//到達座標のみ-1で現在座標
-	void SetTransform(const Millisec delay, const Millisec dur, const Vec2<int> s, const Vec2<int> e, const bool loopFlag=false);
+	void Start(const Millisec delay, const Millisec dur, const int s, const int e, const bool loopFlag=false);
+	int GetVaule();
+	bool HasEnded() const;
 
-	//透明度を変化させる
-	////ディレイ時間、終了時間、開始透明度、到達透明度、ループ設定、（同期/非同期[待つか待たないか]）
-	void SetAlpha(Millisec delay, Millisec dur, float s, float e);
-
-	Vec2<int> DoTransform(const Millisec frameTime) const;
-	float DoAlpha(const Millisec frameTime);
-
-	//substanceにオーバーライドしてもらう
-	//後で純粋にする
-	virtual void Update(){};
-	
 private:
 	Timer m_timer;
 	Millisec m_delay;
 	Millisec m_dur;
-	Animetype m_type;
-	//transform
-	Vec2<int> m_startCor;
-	Vec2<int> m_endCor;
-	//rotate
-	//scale
-	//alpha
-	float m_startAlpha;
-	float m_endAlpha;
+	TransitType m_type;
 	bool m_loop;
+	int m_start;
+	int m_end;
 };
 
 

@@ -50,11 +50,6 @@ namespace
 		time /= duration;
 		return change * time * time + base;
 	};
-
-	double EaseInQuart(double change, double base, double duration, double time)
-	{
-		return -change * (std::pow(time / duration - 1, 4) - 1) + base;
-	}
 }
 
 namespace Inferno
@@ -68,75 +63,39 @@ Animation::~Animation()
 {
 }
 
-void Animation::SetTransform(const Millisec delay,const Millisec dur,const Vec2<int> s,const Vec2<int> e,const bool loopFlag)
+void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
+		const bool loopFlag = false)
 {
-	Vec2<int> temp=e;
 	m_delay = delay;
 	m_dur = dur;
-	m_startCor = s;
-	if (e.x == -1)
-	{
-		temp.x = s.x;
-	}
-	if (e.y == -1)
-	{
-		temp.y = s.y;
-	}
-	m_endCor = temp;
+	m_start = s;
+	m_end = e;
 	m_loop = loopFlag;
 	m_timer.Start();
 }
 
-void Animation::SetAlpha(Millisec delay, Millisec dur, float s, float e)
+int Animation::GetVaule()
 {
-	m_delay = delay;
-	m_dur = dur;
-	m_startAlpha = s;
-	m_endAlpha = e;
-
-	m_timer.Start();
-}
-
-Vec2<int> Animation::DoTransform(Millisec) const
-{
-	Vec2<int> inner;
 	Millisec etime = m_timer.GetElapsed();
 	//時満たず
 	if (etime < m_delay)
 	{
-		return m_startCor;
+		return m_start;
 	}
 	//終わったら帰れ
 	if (etime > m_delay + m_dur)
 	{
-		return m_endCor;
+		return m_end;
 	}
-	//double d = (etime - m_delay) / static_cast<double>(m_dur);
-	inner.x = EaseInQuart( m_endCor.x - m_startCor.x, m_startCor.x, m_dur, etime - m_delay);
-	//inner.x = EaseInCube(m_endCor.x - m_startCor.x) * d;
-	inner.y = EaseInQuad( m_endCor.y - m_startCor.y, m_startCor.y, m_dur, etime - m_delay); 
 
-	return inner;
+	return EaseInQuad(m_end - m_start, m_start, m_dur, etime - m_delay);
+
 }
 
-float Animation::DoAlpha(Millisec)
+bool Animation::HasEnded() const
 {
-	float inner;
-	Millisec etime = m_timer.GetElapsed();
-	//時満たず
-	if (etime < m_delay)
-	{
-		return m_startAlpha;
-	}
-	//終わったら帰れ
-	if (etime > m_delay + m_dur)
-	{
-		return m_endAlpha;
-	}
-
-	inner = (m_endAlpha - m_startAlpha) * (etime - m_delay) / m_dur;
-
-	return m_startAlpha + inner;
+	return m_timer.GetElapsed() > m_delay + m_dur;
 }
+
 
 }

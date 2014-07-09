@@ -64,7 +64,7 @@ Animation::~Animation()
 }
 
 void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
-		const bool loopFlag = false)
+		const bool loopFlag)
 {
 	m_delay = delay;
 	m_dur = dur;
@@ -89,7 +89,6 @@ int Animation::GetVaule()
 	}
 
 	return EaseInQuad(m_end - m_start, m_start, m_dur, etime - m_delay);
-
 }
 
 bool Animation::HasEnded() const

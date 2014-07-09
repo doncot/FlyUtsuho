@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
     <ClInclude Include="Inferno\Collision.h" />
     <ClInclude Include="Inferno\Common.h" />
@@ -98,6 +99,7 @@
     <ClInclude Include="SVShooter.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionReactor.cpp" />
     <ClCompile Include="Inferno\CollisionDetector.cpp" />

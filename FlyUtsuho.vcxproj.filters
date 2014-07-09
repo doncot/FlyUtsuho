@@ -90,6 +90,9 @@
     <ClInclude Include="Inferno\TString.h">
       <Filter>Inferno</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Inferno</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">
@@ -154,6 +157,9 @@
     </ClCompile>
     <ClCompile Include="Inferno\Exception\GeneralFileError.cpp">
       <Filter>Inferno\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Inferno</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

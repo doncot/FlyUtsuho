@@ -26,6 +26,7 @@ void ShooterActor::Update()
 
 		//アニメーション
 		m_pos.x += -8; //左に下がる
+		m_angle += 30; //回転
 	}
 }
 

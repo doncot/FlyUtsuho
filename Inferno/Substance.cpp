@@ -1,10 +1,15 @@
+#define _USE_MATH_DEFINES //一番上にやる必要あり（プロジェクト設定からでもよい）
+#include<cmath>
+
 #include<GameElements.h>
 #include"Graphics.h"
 
 namespace Inferno
 {
-Substance::Substance() : m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0){}
-Substance::Substance(Idea* idea) : m_idea(idea), m_pos(Vec2<int>(0, 0)),m_attribute(0)
+Substance::Substance() : m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0),m_angle(0)
+{}
+Substance::Substance(Idea* idea) 
+	: m_idea(idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0)
 {
 	SetAttribute(GEAttribute::ge_draw, true);
 }
@@ -99,9 +104,14 @@ void Substance::Draw(const Graphics& g) const
 	//ここからピクセル座標(int)よりスクリーン座標(float)へ変換をする
 	matWorld._41 = static_cast<float>(m_pos.x);
 	matWorld._42 = static_cast<float>(m_pos.y);
-	g.GetSprite()->SetTransform(&matWorld);
 	//回転
+	float radian = m_angle * M_PI / 180;
+	matWorld._11 = std::cosf(radian);
+	matWorld._12 = std::sinf(radian);
+	matWorld._21 = -std::sinf(radian);
+	matWorld._22 = std::cosf(radian);
 
+	g.GetSprite()->SetTransform(&matWorld);
 
 	//ここでアルファが・・・？
 

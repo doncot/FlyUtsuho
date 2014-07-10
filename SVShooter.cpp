@@ -41,6 +41,7 @@ namespace
 	Inferno::Audio pichun;
 
 	//text
+	Inferno::DXText scoreText;
 	Inferno::DXText dLight;
 }
 
@@ -128,6 +129,7 @@ bool SVShooter::Initialize()
 		pichun.SetVolume(0.3f);
 
 		//テキスト
+		scoreText.Initialize(m_graphics);
 		dLight.Initialize(m_graphics);
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
@@ -362,7 +364,10 @@ bool SVShooter::GameLoop()
 			egg.Draw(m_graphics);
 
 			//スコア
-			dLight.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);
+			wstringstream ss;
+			ss << m_utsuho->GetPosition().x;
+			scoreText.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);
+			dLight.Print(m_graphics, ss.str() , 650, 30);
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();

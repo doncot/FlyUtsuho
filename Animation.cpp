@@ -93,7 +93,7 @@ void Animation::KF_Set(const int key,const Millisec delay, const Millisec dur,
 		m_endKey = key;	
 	}
 	//ÅIŒo‰ß‚ğŒvZ
-	for (int i = 0; i < m_endKey + 1; i++)
+	for (int i = 0; i < m_endKey; i++)
 	{
 		m_endTime += m_kfset[i].delay + m_kfset[i].dur;
 	}
@@ -143,5 +143,15 @@ bool Animation::HasEnded() const
 	return m_timer.GetElapsed() > m_endTime;
 }
 
+void Animation::KF_Clear()
+{
+	for (int i = 0; i < m_endKey; i++)
+	{
+		m_kfset[i].Clear();
+	}
+	m_curKey = 0;
+	m_endKey = 0;
+	m_endTime = 0;
+}
 
 }

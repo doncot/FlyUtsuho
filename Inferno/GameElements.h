@@ -21,6 +21,7 @@ enum GEAttribute
 {
 	ge_userLock = 1, //ユーザーからの操作をロック
 	ge_draw = 2, //描画するか否か
+	ge_nohit = 4, //衝突判定をするか否か
 };
 
 class Idea

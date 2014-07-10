@@ -111,6 +111,7 @@ void Substance::Draw(const Graphics& g) const
 	matWorld._21 = -std::sinf(radian);
 	matWorld._22 = std::cosf(radian);
 
+	//値をセット
 	g.GetSprite()->SetTransform(&matWorld);
 
 	//ここでアルファが・・・？

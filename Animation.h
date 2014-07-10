@@ -32,6 +32,8 @@ public:
 		const int s, const int e, const TransitType type = TT_Linear, const bool loopFlag = false);
 	int GetValue();
 	bool HasEnded() const;
+	//キーフレームを設定した場合、再び使う前にリセット
+	void KF_Clear();
 
 private:
 	struct KeyFrameSet
@@ -44,6 +46,17 @@ private:
 		bool loop;
 		int start;
 		int end;
+
+		void Clear()
+		{
+			key = 0;
+			delay = 0;
+			dur = 0;
+			type = TT_Linear;
+			loop = false;
+			start = 0;
+			end = 0;
+		}
 	};
 
 	Timer m_timer;

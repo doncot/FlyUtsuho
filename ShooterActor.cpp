@@ -15,8 +15,9 @@ void ShooterActor::Hit()
 	{
 		m_curState = SEState::se_damage;
 		aTransX.Start(0, 600, m_pos.x, m_pos.x - 200, Animation::TransitType::TT_Linear);
-		aRotate.Start(0, 500, 0, 600, Animation::TransitType::TT_Linear);
-		aRotate.Start(1, 100, 0, 120, Animation::TransitType::TT_EaseOut);
+		aRotate.KF_Clear();
+		aRotate.KF_Set(0, 0, 400, 0, 400, Animation::TransitType::TT_Linear);
+		aRotate.KF_Set(1, 400, 300, 600, 720, Animation::TransitType::TT_EaseOut);
 		SetAttribute(GEAttribute::ge_userLock, true);
 	}
 }

@@ -63,12 +63,12 @@ public:
 	void SetIdea(Idea* idea);
 
 	//絶対座標指定移動
-	void AMove(const int x, const int y);
+	virtual void AMove(const int x, const int y);
 	//絶対座標指定移動
-	void AMove(const Vec2<int>& c);
+	virtual void AMove(const Vec2<int>& c);
 	//相対標指定移動
-	void RMove(const int x, const int y);
-	void RMove(const Vec2<int>& c);
+	virtual void RMove(const int x, const int y);
+	virtual void RMove(const Vec2<int>& c);
 	//左上座標で位置を指定
 	void SetPosofULCorner(const int x, const int y);
 	//時計周りに回転（度数指定）

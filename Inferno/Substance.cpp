@@ -30,7 +30,6 @@ void Substance::AMove(const int x, const int y)
 
 void Substance::AMove(const Vec2<int>& c)
 {
-	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	AMove(c.x, c.y);
 }
 
@@ -43,7 +42,6 @@ void Substance::RMove(const int x, const int y)
 
 void Substance::RMove(const Vec2<int>& c)
 {
-	if (CheckAttribute(GEAttribute::ge_userLock)) return;
 	RMove(c.x, c.y);
 }
 

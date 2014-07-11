@@ -39,15 +39,15 @@ const D3DMATRIX Matrix::GetD3DMatrix() const
 
 Rect::Rect() :m_height(0),m_width(0){}
 
-Rect::Rect(const int height, const int width)
+Rect::Rect(const int width, const int height)
 {
-	SetSize(height, width);
+	SetSize(width, height);
 }
 
-Rect::Rect(const Vec2<int>& p, const int height, const int width)
+Rect::Rect(const Vec2<int>& p, const int width, const int height)
 {
 	m_center = p;
-	SetSize(height, width);
+	SetSize(width, height);
 }
 
 //Win32‚ÌRECT‚ð•Ô‚·
@@ -74,10 +74,10 @@ Vec2<int> Rect::UpperRight() const { return Vec2<int>(Right(), Top()); }
 Vec2<int> Rect::BottomLeft() const { return Vec2<int>(Left(), Bottom()); }
 Vec2<int> Rect::BottomRight() const { return Vec2<int>(Right(), Bottom()); }
 
-void Rect::SetSize(const int height, const int width)
+void Rect::SetSize(const int width, const int height)
 {
-	m_height = height;
 	m_width = width;
+	m_height = height;
 }
 
 void Rect::AMove(const Vec2<int>& v)

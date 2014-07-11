@@ -2,31 +2,31 @@
 
 namespace Inferno
 {
-void KeepSubInsideRect(Substance* s, const Rect& r)
+Vec2<int> KeepSubInsideRect(const Rect& r1, const Rect& r2)
 {
 	//sがr内に収まるかどうかチェック。収まらないなら、差分を足す
 	//sがrの上側にいる
-	Vec2<int> result=s->GetPosition();
-	if (s->GetRegion().Top() < r.Top())
-	{
-		result.y = s->GetRegion().Height() / 2;
-	}
-	//sがrの下側にいる
-	if (s->GetRegion().Bottom() > r.Bottom())
-	{
-		result.y = r.Bottom() - s->GetRegion().Height() / 2;
-	}
+	Vec2<int> result=r1.Center();
 	//sがrの左側にいる
-	if (s->GetRegion().Left() < r.Left())
+	if (r1.Left() < r2.Left())
 	{
-		result.x = s->GetRegion().Width() / 2;
+		result.x = r1.Width() / 2;
 	}
 	//sがrの右側にいる
-	if (s->GetRegion().Right() > r.Right())
+	else if (r1.Right() > r2.Right())
 	{
-		result.x = r.Right() - s->GetRegion().Width() / 2;
+		result.x = r2.Right() - r1.Width() / 2;
 	}
-	s->AMove(result);
+	if (r1.Top() < r2.Top())
+	{
+		result.y = r1.Height() / 2;
+	}
+	//sがrの下側にいる
+	else if (r1.Bottom() > r2.Bottom())
+	{
+		result.y = r2.Bottom() - r1.Height() / 2;
+	}
+	return result;
 }
 
 

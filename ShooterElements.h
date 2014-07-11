@@ -49,7 +49,15 @@ enum class SEState
 class ShooterActor : public Substance
 {
 public:
-	ShooterActor() : m_curState(SEState::se_neutral) {}
+	typedef Substance Base;
+
+	ShooterActor() : m_curState(SEState::se_neutral),m_moveLimit(0,0) {}
+
+	//相対標指定移動
+	void RMove(const int x, const int y);
+	void RMove(const Vec2<int>& c);
+
+	void SetMoveLimit(const Rect& rect);
 
 	void Hit();
 	void Update();
@@ -58,6 +66,8 @@ private:
 	//アニメーション用の状態
 	SEState m_curState;
 	Stopwatch m_timer;
+
+	Rect m_moveLimit;
 
 	//定数
 	const int HitBlowDistance = 20;

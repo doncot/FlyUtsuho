@@ -84,6 +84,7 @@ bool SVShooter::Initialize()
 		m_utsuho = new Inferno::ShooterActor();
 		m_utsuho->SetIdea(&m_utsuho_);
 		m_utsuho->AMove(200, 200);
+		m_utsuho->SetMoveLimit(Inferno::Rect(800, 600));
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);
@@ -292,9 +293,6 @@ bool SVShooter::GameLoop()
 				break;
 			}
 		}
-
-		//自機が画面外に出ないように
-		Inferno::KeepSubInsideRect(m_utsuho, m_screenRect);
 
 		//敵弾と自機の衝突判定
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end();)

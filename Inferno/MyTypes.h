@@ -56,8 +56,8 @@ class Rect
 {
 public:
 	Rect();
-	Rect(const int height, const int width);
-	Rect(const Vec2<int>& p, const int height, const int width);
+	Rect(const int width, const int height);
+	Rect(const Vec2<int>& p, const int width, const int height);
 
 	//Win32‚ÌRECT‚ð•Ô‚·
 	RECT GetMSRECT() const;
@@ -71,7 +71,7 @@ public:
 	Vec2<int> BottomLeft() const;
 	Vec2<int> BottomRight() const;
 
-	void SetSize(const int Height, const int Width);
+	void SetSize(const int Width, const int Height);
 	void AMove(const Vec2<int>& v);
 	void AMove(const int x, const int y);
 	void RMove(const int x, const int y);
@@ -81,7 +81,7 @@ public:
 	Vec2<int> Center() const;
 
 
-	const Rect operator=(const Rect& r);
+	//const Rect operator=(const Rect& r);
 
 private:
 	Vec2<int> m_center;

@@ -17,6 +17,6 @@ namespace Inferno
 	bool IsRect1NotHittingRect2(const Rect& r1, const Rect& r2);
 
 	//Õ“Ë‰“š
-	void KeepSubInsideRect(Substance* s, const Rect& r);
+	Vec2<int> KeepSubInsideRect(const Rect& r1, const Rect& r2);
 
 }

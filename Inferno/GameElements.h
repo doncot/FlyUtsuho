@@ -75,6 +75,7 @@ public:
 	void Rotate(const float degree);
 
 	Vec2<int> GetPosition() const;
+
 	//位置座標とサイズから現在領域を求める
 	Rect GetRegion() const;
 

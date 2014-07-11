@@ -41,7 +41,7 @@ void ShooterActor::Hit()
 		aTransX.Start(0, 600, m_pos.x, m_pos.x - 200, Animation::TransitType::TT_EaseOut);
 		aRotate.KF_Clear();
 		aRotate.KF_Set(0, 0, 400, 0, 400, Animation::TransitType::TT_Linear);
-		aRotate.KF_Set(1, 400, 300, 600, 720, Animation::TransitType::TT_EaseOut);
+		aRotate.KF_Set(1, 400, 600, 600, 1080, Animation::TransitType::TT_EaseOut);
 		SetAttribute(GEAttribute::ge_userLock, true);
 	}
 }

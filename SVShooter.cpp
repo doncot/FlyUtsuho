@@ -84,7 +84,7 @@ bool SVShooter::Initialize()
 		m_utsuho = new Inferno::ShooterActor();
 		m_utsuho->SetIdea(&m_utsuho_);
 		m_utsuho->AMove(200, 200);
-		m_utsuho->SetMoveLimit(Inferno::Rect(800, 600));
+		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);

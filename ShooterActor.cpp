@@ -53,13 +53,21 @@ void ShooterActor::Update()
 		{
 			m_curState = SEState::se_neutral;
 			SetAttribute(GEAttribute::ge_userLock, false);
+			m_angle = 0; //ここでリセットしないと次も値が溜まったままになる
 		}
+		else
+		{
+			//アニメーション
+			m_pos.x = aTransX.GetValue();
+			//簡易版
+			//double dx = (120 - m_pos.x) / 30.0;
+			//m_pos.x += dx;
+			m_pos = KeepSubInsideRect(this->GetRegion(), m_moveLimit);
 
-		//アニメーション
-		m_pos.x = aTransX.GetValue();
-		m_pos = KeepSubInsideRect(this->GetRegion(), m_moveLimit);
-
-		m_angle = aRotate.GetValue();
+			m_angle = aRotate.GetValue();
+			//double dAngle = (720 - m_angle) / 10.0;
+			//m_angle += dAngle;
+		}
 	}
 }
 

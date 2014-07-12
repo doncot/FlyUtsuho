@@ -6,42 +6,6 @@
 
 namespace
 {
-	double EaseInCube(int x)
-	{
-		double result = 0;
-		bool negative = false;
-		if (x < 0)
-		{
-			x *= -1;
-			negative = true;
-		}
-		else if (x == 0) return 0;
-
-		double tx = x / std::sqrt(x); //1‚É³‹K‰»
-		result = tx*tx*tx;
-
-		if (!negative) return result;
-		else return result *= -1;
-	}
-
-	double EaseOutCube(int x)
-	{
-		double result = 0;
-		bool negative = false;
-		if (x < 0)
-		{
-			x *= -1;
-			negative = true;
-		}
-		else if (x == 0) return 0;
-
-		double tx = x / std::sqrt(x); //1‚É³‹K‰»
-		result = 1.0 - (1.0 - tx)*(1.0 - tx)*(1.0 - tx);
-
-		if (!negative) return result;
-		else return result *= -1;
-	}
-
 	double Linear(double change, double base, double duration, double time)
 	{
 		return change * ( time / duration ) + base;

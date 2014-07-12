@@ -15,18 +15,24 @@ namespace
 	double EaseInQuad(double change, double base, double duration, double time) {
 		time /= duration;
 		return change * time * time + base;
-	};
+	}
 
 	double EaseOutQuad(double change, double base, double duration, double time) {
 		time /= duration;
-		return change * sqrt(sqrt(time)) + base;
-	};
+		return -change * time *(time - 2) + base;
+	}
+
+	double EaseInOutQuad(double change, double base, double duration, double time) {
+		time /= duration / 2;
+		if (time < 1) return change / 2 * time*time + base;
+		return -change / 2 * ((--time)*(time - 2) - 1) + base;
+	}
 }
 
 namespace Inferno
 {
 Animation::Animation()
-	:m_endKey(0)
+	:m_endKey(0), m_endTime(0)
 {
 }
 
@@ -37,6 +43,7 @@ Animation::~Animation()
 void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
 		const Animation::TransitType type, const bool loopFlag)
 {
+	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
 }
 
@@ -57,7 +64,7 @@ void Animation::KF_Set(const int key,const Millisec delay, const Millisec dur,
 		m_endKey = key;	
 	}
 	//ÅIŒo‰ß‚ðŒvŽZ
-	for (int i = 0; i < m_endKey; i++)
+	for (int i = 0; i <= m_endKey; i++)
 	{
 		m_endTime += m_kfset[i].delay + m_kfset[i].dur;
 	}
@@ -97,8 +104,8 @@ int Animation::GetValue()
 	default:
 		assert(0);
 	}
-
 	//‚±‚±‚É—ˆ‚é‚±‚Æ‚Í‚È‚¢
+	assert(0);
 	return 0;
 }
 

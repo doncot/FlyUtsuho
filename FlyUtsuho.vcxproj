@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="GameCommon.h" />
     <ClInclude Include="Inferno\Collision.h" />
     <ClInclude Include="Inferno\Common.h" />
     <ClInclude Include="Inferno\DXText.h" />

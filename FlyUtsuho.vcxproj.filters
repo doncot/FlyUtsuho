@@ -93,6 +93,9 @@
     <ClInclude Include="Animation.h">
       <Filter>Inferno</Filter>
     </ClInclude>
+    <ClInclude Include="GameCommon.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp">

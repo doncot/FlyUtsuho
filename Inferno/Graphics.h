@@ -34,7 +34,7 @@ public:
 
 	void TransformSprite(const Matrix* m) const;
 
-	void DrawSprite(const LP_TEXTURE tex,Vec2<float> center) const;
+	void DrawSprite(const LP_TEXTURE tex,Vec2<float> center,const int alpha=255) const;
 
 private:
 	LPDIRECT3D9       m_d3d;

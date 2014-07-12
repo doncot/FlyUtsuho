@@ -6,10 +6,11 @@
 
 namespace Inferno
 {
-Substance::Substance() : m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0),m_angle(0)
+Substance::Substance() 
+	: m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {}
 Substance::Substance(Idea* idea) 
-	: m_idea(idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0)
+	: m_idea(idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {
 	SetAttribute(GEAttribute::ge_draw, true);
 }
@@ -88,6 +89,10 @@ void Substance::SetAttribute(GEAttribute attr, bool value)
 	}
 }
 
+void Substance::SetAlpha(const int alpha)
+{
+	m_alpha = alpha;
+}
 
 void Substance::Update() {}
 
@@ -112,11 +117,9 @@ void Substance::Draw(const Graphics& g) const
 	//値をセット
 	g.GetSprite()->SetTransform(&matWorld);
 
-	//ここでアルファが・・・？
-
-
 	g.DrawSprite(m_idea->GetTexture()->GetTexture(),
-		Vec2<float>( static_cast<float>(m_idea->GetDrawBase().x), static_cast<float>(m_idea->GetDrawBase().y) )
+		Vec2<float>( static_cast<float>(m_idea->GetDrawBase().x),static_cast<float>(m_idea->GetDrawBase().y) ),
+		m_alpha
 		);
 }
 

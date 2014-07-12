@@ -83,6 +83,8 @@ public:
 	void SetAttribute(GEAttribute attr, bool value);
 	bool CheckAttribute(GEAttribute attr) const;
 	
+	void SetAlpha(const int alpha);
+
 	virtual void Update();
 
 	void Draw(const Graphics& g) const;
@@ -94,6 +96,7 @@ protected:
 	Idea* m_idea;
 	Vec2<int> m_pos; //現在座標
 	float m_angle; //度数法で回転情報
+	int m_alpha;
 	char m_attribute; //属性（描画属性など）を指定
 };
 

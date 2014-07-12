@@ -136,10 +136,10 @@ void Graphics::TransformSprite(const Matrix* m) const
 	m_sprite->SetTransform(&D3DXMATRIX(m->GetD3DMatrix()));
 }
 
-void Graphics::DrawSprite(const LP_TEXTURE tex, Vec2<float> center) const
+void Graphics::DrawSprite(const LP_TEXTURE tex, Vec2<float> center, const int alpha) const
 {
 	m_sprite->Draw(tex, NULL, &D3DXVECTOR3(center.x, center.y, 0),
-		NULL, 0xffffffff);
+		NULL, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 }

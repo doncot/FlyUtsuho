@@ -46,12 +46,12 @@ enum class SEState
 };
 //enum class SEAnimeState;
 
-class ShooterActor : public Substance
+class Player : public Substance
 {
 public:
 	typedef Substance Base;
 
-	ShooterActor() : m_curState(SEState::se_neutral),m_moveLimit(0,0) {}
+	Player() : m_curState(SEState::se_neutral),m_moveLimit(0,0) {}
 
 	//‘Š‘Î•WŽw’èˆÚ“®
 	void RMove(const int x, const int y);

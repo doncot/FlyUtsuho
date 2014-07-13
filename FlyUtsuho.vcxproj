@@ -120,7 +120,7 @@
     <ClCompile Include="Inferno\Timer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyTypes.cpp" />
-    <ClCompile Include="ShooterActor.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="SVShooter.cpp" />
   </ItemGroup>
   <ItemGroup>

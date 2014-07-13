@@ -81,7 +81,7 @@ bool SVShooter::Initialize()
 
 		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
 		m_utsuho_.SetTexture(m_utsuhoTex);
-		m_utsuho = new Inferno::ShooterActor();
+		m_utsuho = new Inferno::Player();
 		m_utsuho->SetIdea(&m_utsuho_);
 		m_utsuho->AMove(200, 200);
 		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));

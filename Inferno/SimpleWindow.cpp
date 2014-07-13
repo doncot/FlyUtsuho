@@ -30,6 +30,8 @@ SimpleWindow::~SimpleWindow()
 
 bool SimpleWindow::Initialize()
 {
+	::SetProcessDPIAware();
+
 	//WindowClass設定
 	m_wc.cbSize = sizeof(WNDCLASSEX);
 	m_wc.style = CS_CLASSDC | CS_HREDRAW | CS_VREDRAW; //CS_CLASSDC:全てのウィンドウが同じデバイスコンテキストを共有する
@@ -62,8 +64,6 @@ bool SimpleWindow::Initialize()
 	}
 
 	this->Resize(800, 600);
-
-	//::SetProcessDPIAware();
 
 	return true;
 }

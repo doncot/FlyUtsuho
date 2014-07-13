@@ -11,7 +11,7 @@ namespace
 
 namespace Inferno
 {
-void ShooterActor::RMove(const int x, const int y)
+void Player::RMove(const int x, const int y)
 {
 	Base::RMove(x, y);
 	Vec2<int> d;
@@ -22,19 +22,19 @@ void ShooterActor::RMove(const int x, const int y)
 	}
 }
 
-void ShooterActor::RMove(const Vec2<int>& c)
+void Player::RMove(const Vec2<int>& c)
 {
 	RMove(c.x, c.y);
 }
 
-void ShooterActor::SetMoveLimit(const Rect& rect)
+void Player::SetMoveLimit(const Rect& rect)
 {
 	Rect temp = rect;
 	temp.SetPosofULCorner(0, 0);
 	m_moveLimit = temp;
 }
 
-void ShooterActor::Hit()
+void Player::Hit()
 {
 	if (m_curState == SEState::se_neutral)
 	{
@@ -45,7 +45,7 @@ void ShooterActor::Hit()
 	}
 }
 
-void ShooterActor::Update()
+void Player::Update()
 {
 	if (m_curState == SEState::se_damage)
 	{

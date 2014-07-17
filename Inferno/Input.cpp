@@ -33,11 +33,16 @@ bool Input::IsKeyDown(const unsigned char vkey) const
 	return m_keysDown[vkey];
 }
 
-bool Input::IsKeyPressed(const unsigned char vkey)
+bool Input::CheckKeyPressed(const unsigned char vkey)
 {
 	bool rvalue = m_keysPressed[vkey];
 	m_keysPressed[vkey] = false;
 	return rvalue;
+}
+
+bool Input::IsKeyPressed(const unsigned char vkey) const
+{
+	return m_keysPressed[vkey];
 }
 
 bool Input::IsAnyKeyPressed() const

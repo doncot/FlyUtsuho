@@ -230,8 +230,7 @@ bool SVShooter::GameLoop()
 		}
 		if (m_onryouList[1])
 		{
-			m_onryouList[1]->AMove(m_onryouList[1]->GetPosition().x,
-				static_cast<const int>(300 + 125 * std::sin(PI * 2 / 60 * m_elapsedFrame / 3.5)));
+			m_onryouList[1]->Update();
 		}
 
 		static Inferno::Stopwatch eggInterval(6000);
@@ -244,7 +243,9 @@ bool SVShooter::GameLoop()
 		}
 		else
 		{
+			static int angle = 0;
 			egg.RMove(-4, 0);
+			egg.Rotate(angle += 3);
 		}
 
 		//衝突判定
@@ -354,7 +355,7 @@ bool SVShooter::GameLoop()
 			wstringstream ss;
 			ss << m_utsuho->GetPosition().x;
 			scoreText.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);
-			dLight.Print(m_graphics, ss.str() , 650, 30);
+			//dLight.Print(m_graphics, ss.str() , 650, 30);
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();

@@ -2,6 +2,15 @@
 
 #define PI 3.14159265358979323846
 
+namespace
+{
+	double SinWaveMotion(Millisec count, double period, double amplitude)
+	{
+		//sin( PI*2 / ŽüŠú * Count ) * U•
+		return amplitude * std::sin(PI * 2 / period * count);
+	}
+}
+
 namespace Inferno
 {
 	Enemy::Enemy()
@@ -18,7 +27,8 @@ namespace Inferno
 	void Enemy::Update()
 	{
 		this->AMove(this->GetPosition().x,
-			static_cast<const int>(200 + 200 * std::sin(PI * 2 / 60 * m_timer.GetElapsed() / 100.0)));
+			static_cast<const int>(230+SinWaveMotion(m_timer.GetElapsed(), 2000, 180) )
+			);
 
 		static Inferno::Stopwatch shootInterval(ShootInterval);
 		if (shootInterval.HasFinished())

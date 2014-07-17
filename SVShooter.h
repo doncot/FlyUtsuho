@@ -31,7 +31,13 @@ private:
 
 	Inferno::Instant m_titleImage;
 
+	Inferno::Texture m_utsuhoTex;
+	Inferno::Idea m_utsuho_;
 	Inferno::Player* m_utsuho;
+
+	Inferno::Texture m_fireballTex;
+	Inferno::Idea m_fireball_;
+	Inferno::Bullet* m_fireball;
 
 	Inferno::Texture m_onryouTex;
 	Inferno::Idea m_onryou_;

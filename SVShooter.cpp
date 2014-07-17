@@ -53,6 +53,7 @@ SVShooter::SVShooter()
 SVShooter::~SVShooter()
 {
 	SAFE_DELETE(m_utsuho);
+	SAFE_DELETE(m_fireball);
 	for (auto e : m_onryouList)
 	{
 		SAFE_DELETE(e);
@@ -78,8 +79,16 @@ bool SVShooter::Initialize()
 		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));
 		m_titleImage.SetPosofULCorner(0, 0);
 
-		m_utsuho = new Inferno::Player(m_graphics, m_input);
-		m_utsuho->LoadResource();
+		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
+		m_utsuho_.SetTexture(m_utsuhoTex);
+		m_utsuho = new Inferno::Player();
+		m_utsuho->SetIdea(&m_utsuho_);
+		m_utsuho->AMove(200, 200);
+		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));
+
+		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
+		m_fireball_.SetTexture(m_fireballTex);
+		m_fireball = nullptr;
 
 		purpleBulletTex.LoadImageFile(m_graphics, _T("Sprites\\purplebullet.png"));
 		purpleBullet_.SetTexture(purpleBulletTex);
@@ -166,7 +175,34 @@ bool SVShooter::GameLoop()
 		break;
 	case sn_main:
 		//入力
+		const int utsuhoVel = 6;
+		if (m_input.IsKeyDown(VK_UP))
+		{
+			m_utsuho->RMove(0, -utsuhoVel);
+		}
+		if (m_input.IsKeyDown(VK_DOWN))
+		{
+			m_utsuho->RMove(0, utsuhoVel);
+		}
+		if (m_input.IsKeyDown(VK_LEFT))
+		{
+			m_utsuho->RMove(-utsuhoVel, 0);
+		}
+		if (m_input.IsKeyDown(VK_RIGHT))
+		{
+			m_utsuho->RMove(utsuhoVel, 0);
+		}
+		if (m_input.IsKeyPressed('Z'))
+		{
+			if (m_fireball == nullptr)
+			{
+				m_fireball = new Inferno::Bullet(&m_fireball_);
+				m_fireball->Fire(m_utsuho->GetPosition(), 5, 0);
 
+				fire.Stop();
+				fire.Play();
+			}
+		}
 
 		//更新処理（移動・アニメーション）
 		//スコア
@@ -181,6 +217,7 @@ bool SVShooter::GameLoop()
 			e->RMove(-1, 0);
 		}
 		//弾
+		if (m_fireball) m_fireball->Update();
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end(); e++)
 		{
 			(*e)->Update();

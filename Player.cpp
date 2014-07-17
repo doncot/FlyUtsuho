@@ -11,28 +11,6 @@ namespace
 
 namespace Inferno
 {
-
-Player::~Player()
-{
-	SAFE_DELETE(m_fireball);
-}
-
-void Player::LoadResource()
-{
-	//自分のリソース
-	//将来的にはテクスチャはリソースマネージャーが持つため、イデアはここでロードしてよい
-	m_utsuhoTex.LoadImageFile(*m_graphics, TEXT("Sprites\\utsuho.png"));
-	m_utsuho_.SetTexture(m_utsuhoTex);
-	this->SetIdea(&m_utsuho_);
-	this->AMove(200, 200);
-	this->SetMoveLimit(Inferno::Rect(700, 600));
-
-	//弾（将来的にはリソースマネージャーから入手する）
-	m_fireballTex.LoadImageFile(*m_graphics, TEXT("Sprites\\fireball.png"));
-	m_fireball_.SetTexture(m_fireballTex);
-	m_fireball = nullptr;
-}
-
 void Player::RMove(const int x, const int y)
 {
 	Base::RMove(x, y);
@@ -49,48 +27,11 @@ void Player::RMove(const Vec2<int>& c)
 	RMove(c.x, c.y);
 }
 
-void Player::AcceptPlayerControl()
-{
-	if (m_input->IsKeyDown(VK_UP))
-	{
-		this->RMove(0, -MoveVel);
-	}
-	if (m_input->IsKeyDown(VK_DOWN))
-	{
-		this->RMove(0, MoveVel);
-	}
-	if (m_input->IsKeyDown(VK_LEFT))
-	{
-		this->RMove(-MoveVel, 0);
-	}
-	if (m_input->IsKeyDown(VK_RIGHT))
-	{
-		this->RMove(MoveVel, 0);
-	}
-	if (m_input->IsKeyPressed('Z'))
-	{
-		if (m_fireball == nullptr)
-		{
-			m_fireball = new Inferno::Bullet(&m_fireball_);
-			m_fireball->Fire(this->GetPosition(), 5, 0);
-
-			//SE
-			//fire.Stop();
-			//fire.Play();
-		}
-	}
-}
-
 void Player::SetMoveLimit(const Rect& rect)
 {
 	Rect temp = rect;
 	temp.SetPosofULCorner(0, 0);
 	m_moveLimit = temp;
-}
-
-void Player::SetInput(const Input& input)
-{
-	m_input = &input;
 }
 
 void Player::Hit()
@@ -135,9 +76,6 @@ void Player::Update()
 			SetAlpha(Inferno::Blink(count++, 0xff, 25));
 		}
 	}
-
-	//弾
-	if (m_fireball) m_fireball->Update();
 }
 
 }

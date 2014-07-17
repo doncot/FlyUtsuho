@@ -16,10 +16,8 @@ public:
 	int GetMouseY() const;
 	bool IsMouseLButtonPressed() const;
 	bool IsKeyDown(const unsigned char vkey) const;
-	//IskeyPressedが真になった場合、呼び出し後該当キーはリセットされる。
-	bool CheckKeyPressed(const unsigned char vkey);
-	//IsKeyPressedのconstバージョン。リセットしない
-	bool IsKeyPressed(const unsigned char vkey) const;
+	//IskeyPressedが真になった場合、呼び出し後該当キーはリセットされる（リセットしないバージョンも需要あれば作る予定）。
+	bool IsKeyPressed(const unsigned char vkey);
 	bool IsAnyKeyPressed() const;
 
 	void ClearMouseLButton();
@@ -43,5 +41,7 @@ private:
 	//入力コンテキストハンドル（IMEを無効にする際保存しておき、再び有効に戻す際に使う）
 	HIMC m_hIMC;
 };
+
+
 
 }

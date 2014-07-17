@@ -41,7 +41,7 @@ private:
 
 	Inferno::Texture m_onryouTex;
 	Inferno::Idea m_onryou_;
-	std::vector<Inferno::Substance*> m_onryouList;
+	std::vector<Inferno::Enemy*> m_onryouList;
 
 	Inferno::Score<int> m_score;
 };

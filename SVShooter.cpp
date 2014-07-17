@@ -82,7 +82,7 @@ bool SVShooter::Initialize()
 		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
 		m_utsuho_.SetTexture(m_utsuhoTex);
 		m_utsuho = new Inferno::Player();
-		m_utsuho->SetIdea(&m_utsuho_);
+		m_utsuho->SetIdea(m_utsuho_);
 		m_utsuho->AMove(200, 200);
 		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));
 
@@ -95,10 +95,10 @@ bool SVShooter::Initialize()
 
 		m_onryouTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\onryou.png"));
 		m_onryou_.SetTexture(m_onryouTex);
-		auto tsub = new Inferno::Substance(&m_onryou_);
+		auto tsub = new Inferno::Enemy(m_onryou_);
 		tsub->AMove(400, 300);
 		m_onryouList.push_back(tsub);
-		tsub = new Inferno::Substance(&m_onryou_);
+		tsub = new Inferno::Enemy(m_onryou_);
 		tsub->AMove(600, 400);
 		m_onryouList.push_back(tsub);
 
@@ -113,7 +113,7 @@ bool SVShooter::Initialize()
 
 		eggTex.LoadImageFile(m_graphics,_T("Sprites\\egg.bmp"));
 		egg_.SetTexture(eggTex);
-		egg.SetIdea(&egg_);
+		egg.SetIdea(egg_);
 		egg.AMove(800, 300);
 
 		//Å‰‚ÌƒV[ƒ“
@@ -196,7 +196,7 @@ bool SVShooter::GameLoop()
 		{
 			if (m_fireball == nullptr)
 			{
-				m_fireball = new Inferno::Bullet(&m_fireball_);
+				m_fireball = new Inferno::Bullet(m_fireball_);
 				m_fireball->Fire(m_utsuho->GetPosition(), 5, 0);
 
 				fire.Stop();
@@ -226,17 +226,7 @@ bool SVShooter::GameLoop()
 		//“G
 		if (m_onryouList[0])
 		{
-			m_onryouList[0]->AMove(m_onryouList[0]->GetPosition().x,
-				static_cast<const int>(200 + 200 * std::sin(PI * 2 / 60 * m_elapsedFrame / 3.0)));
-			
-			static Inferno::Stopwatch shootInterval(800);
-			if (shootInterval.HasFinished())
-			{
-				auto born = new Inferno::Bullet(&purpleBullet_);
-				born->Fire(m_onryouList[0]->GetPosition(), Inferno::Vec2<int>(-2, 0));
-				purpleBullets.push_back(born);
-				shootInterval.Restart();
-			}
+			m_onryouList[0]->Update();
 		}
 		if (m_onryouList[1])
 		{

@@ -103,6 +103,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CollisionReactor.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Inferno\CollisionDetector.cpp" />
     <ClCompile Include="Inferno\DXText.cpp" />
     <ClCompile Include="Inferno\Exception\AccessDenied.cpp" />

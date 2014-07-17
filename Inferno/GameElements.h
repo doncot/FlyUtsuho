@@ -57,10 +57,10 @@ class Substance
 {
 public:
 	Substance();
-	Substance(Idea* idea);
+	Substance(const Idea& idea);
 	virtual ~Substance();
 
-	void SetIdea(Idea* idea);
+	void SetIdea(const Idea& idea);
 
 	//絶対座標指定移動
 	virtual void AMove(const int x, const int y);
@@ -93,7 +93,7 @@ public:
 	Substance& operator=(const Substance& s);
 
 protected:
-	Idea* m_idea;
+	const Idea* m_idea;
 	Vec2<int> m_pos; //現在座標
 	float m_angle; //度数法で回転情報
 	int m_alpha;

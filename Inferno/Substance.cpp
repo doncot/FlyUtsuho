@@ -9,16 +9,16 @@ namespace Inferno
 Substance::Substance() 
 	: m_idea(nullptr), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {}
-Substance::Substance(Idea* idea) 
-	: m_idea(idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
+Substance::Substance(const Idea& idea) 
+	: m_idea(&idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {
 	SetAttribute(GEAttribute::ge_draw, true);
 }
 Substance::~Substance() {}
 
-void Substance::SetIdea(Idea* idea)
+void Substance::SetIdea(const Idea& idea)
 {
-	m_idea = idea;
+	m_idea = &idea;
 	SetAttribute(GEAttribute::ge_draw, true);
 }
 

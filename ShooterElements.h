@@ -9,7 +9,7 @@ namespace Inferno
 class Bullet : public Substance
 {
 public:
-	Bullet(Inferno::Idea* idea) : Substance(idea) {}
+	Bullet(const Inferno::Idea& idea) : Substance(idea) {}
 
 	void Fire(const Inferno::Vec2<int>& bornPos, const int x, const int y)
 	{
@@ -77,9 +77,16 @@ private:
 class Enemy : public Substance
 {
 public:
+	Enemy();
+	Enemy(const Idea& idea);
+
+	void Update();
 
 private:
-	
+	Timer m_timer;
+
+	//íËêî
+	const Millisec ShootInterval = 800;
 };
 
 }

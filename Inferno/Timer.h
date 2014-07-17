@@ -13,7 +13,6 @@ namespace Inferno
 
 		void Start();
 		Millisec Timer::GetElapsed() const;
-		Millisec GetCurTime() const;
 		void Restart();
 
 		bool HasStarted() const;

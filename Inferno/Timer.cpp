@@ -15,11 +15,6 @@ Millisec Timer::GetElapsed() const
 	return timeGetTime() - m_start;
 }
 
-Millisec Timer::GetCurTime() const
-{
-	return timeGetTime();
-}
-
 void Timer::Restart()
 {
 	this->Start();

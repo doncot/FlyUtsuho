@@ -242,7 +242,6 @@ bool SVShooter::GameLoop()
 		{
 			m_onryouList[1]->AMove(m_onryouList[1]->GetPosition().x,
 				static_cast<const int>(300 + 125 * std::sin(PI * 2 / 60 * m_elapsedFrame / 3.5)));
-		
 		}
 
 		static Inferno::Stopwatch eggInterval(6000);

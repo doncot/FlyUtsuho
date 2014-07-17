@@ -53,7 +53,7 @@ public:
 
 	Player() : m_curState(SEState::se_neutral),m_moveLimit(0,0) {}
 
-	//相対標指定移動
+	//相対標指定移動（将来的には自身で移動を管理したい）
 	void RMove(const int x, const int y);
 	void RMove(const Vec2<int>& c);
 
@@ -72,6 +72,14 @@ private:
 	//定数
 	const int HitBlowDistance = 20;
 	Inferno::Vec2<int> hitStartPoint;
+};
+
+class Enemy : public Substance
+{
+public:
+
+private:
+	
 };
 
 }

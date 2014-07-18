@@ -228,7 +228,7 @@ bool SVShooter::GameLoop()
 		//“G
 		if (sceneTimer.GetElapsed() > 500)
 		{
-			m_onryouList[0]->Entry();
+			if (m_onryouList[0]) m_onryouList[0]->Entry();
 		}
 
 		if (m_onryouList[0])

@@ -34,8 +34,8 @@ namespace Inferno
 		this->SetAttribute(GEAttribute::ge_draw, true);
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
-		m_entryAnimation[0].Start(0, 1200, 900, 550, Animation::TT_EaseOut);
-		m_entryAnimation[1].Start(0, 1200, 50, 230, Animation::TT_EaseOut);
+		m_entryAnime[0].Start(0, 1200, 900, 550, Animation::TT_EaseOut);
+		m_entryAnime[1].Start(0, 1200, 50, 230, Animation::TT_EaseOut);
 	}
 
 	void Enemy::Update()
@@ -49,11 +49,11 @@ namespace Inferno
 			break;
 
 		case EState::e_entry:
-			this->AMove(m_entryAnimation[0].GetValue(),
-				m_entryAnimation[1].GetValue()
+			this->AMove(m_entryAnime[0].GetValue(),
+				m_entryAnime[1].GetValue()
 				);
 			
-			if (m_entryAnimation[0].HasEnded())
+			if (m_entryAnime[0].HasEnded())
 			{
 				m_curState = EState::e_neutral;
 			}

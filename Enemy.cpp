@@ -34,8 +34,8 @@ namespace Inferno
 		this->SetAttribute(GEAttribute::ge_draw, true);
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
-		m_entryAnime[0].Start(0, 1200, 900, 550, Animation::TT_EaseOut);
-		m_entryAnime[1].Start(0, 1200, 50, 230, Animation::TT_EaseOut);
+		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::TT_EaseOut);
+		m_entryAnime[1].Start(0, 1000, 50, 150, Animation::TT_EaseOut);
 	}
 
 	void Enemy::Update()
@@ -56,13 +56,17 @@ namespace Inferno
 			if (m_entryAnime[0].HasEnded())
 			{
 				m_curState = EState::e_neutral;
+				m_neutralAnime[0].Start(100, 3000, 680, 320, Animation::TT_Linear);
 			}
 			break;
 
 		case EState::e_neutral:
+			/*
 			this->AMove(this->GetPosition().x,
 				static_cast<const int>(230 + SinWaveMotion(m_timer.GetElapsed(), 3000, 180))
 				);
+			*/
+			this->AMove(m_neutralAnime[0].GetValue(), GetPosition().y);
 
 			if (shootInterval.HasFinished())
 			{

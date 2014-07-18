@@ -36,9 +36,9 @@ void Player::SetMoveLimit(const Rect& rect)
 
 void Player::Hit()
 {
-	if (m_curState == SEState::se_neutral)
+	if (m_curState == PState::p_neutral)
 	{
-		m_curState = SEState::se_damage;
+		m_curState = PState::p_damage;
 		aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::TT_EaseOut);
 		aRotate.Start(0, 600, 0, 720, Animation::TransitType::TT_EaseOut);
 		SetAttribute(GEAttribute::ge_userLock, true);
@@ -47,12 +47,12 @@ void Player::Hit()
 
 void Player::Update()
 {
-	if (m_curState == SEState::se_damage)
+	if (m_curState == PState::p_damage)
 	{
 		//ダメージフェーズが終わったら
 		if (aTransX.HasEnded())
 		{
-			m_curState = SEState::se_neutral;
+			m_curState = PState::p_neutral;
 			SetAttribute(GEAttribute::ge_userLock, false);
 			m_angle = 0; //ここでリセットしないと次も値が溜まったままになる
 			SetAlpha(0xff);

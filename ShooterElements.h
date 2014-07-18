@@ -39,10 +39,10 @@ private:
 
 };
 
-enum class SEState
+enum class PState
 {
-	se_neutral,
-	se_damage,
+	p_neutral,
+	p_damage,
 };
 //enum class SEAnimeState;
 
@@ -51,7 +51,7 @@ class Player : public Substance
 public:
 	typedef Substance Base;
 
-	Player() : m_curState(SEState::se_neutral),m_moveLimit(0,0) {}
+	Player() : m_curState(PState::p_neutral),m_moveLimit(0,0) {}
 
 	//相対標指定移動（将来的には自身で移動を管理したい）
 	void RMove(const int x, const int y);
@@ -64,7 +64,7 @@ public:
 
 private:
 	//アニメーション用の状態
-	SEState m_curState;
+	PState m_curState;
 	Stopwatch m_timer;
 
 	Rect m_moveLimit;

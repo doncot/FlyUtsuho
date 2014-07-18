@@ -237,7 +237,7 @@ bool SVShooter::GameLoop()
 		}
 		if (m_onryouList[1])
 		{
-			//m_onryouList[1]->Update();
+			m_onryouList[1]->Update();
 		}
 
 		static Inferno::Stopwatch eggInterval(6000);

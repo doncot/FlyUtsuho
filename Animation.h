@@ -4,6 +4,8 @@
 派生クラスで特殊なアニメーション（イーズインとか）
 これをSubstance渡す
 */
+#pragma once
+
 #include<Timer.h>
 #include<MyTypes.h>
 #include<vector>

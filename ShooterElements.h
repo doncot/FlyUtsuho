@@ -3,6 +3,7 @@
 #include<GameElements.h>
 #include"MyTypes.h"
 #include<Timer.h>
+#include"Animation.h"
 
 namespace Inferno
 {
@@ -94,6 +95,7 @@ public:
 private:
 	Timer m_timer;
 	EState m_curState = EState::e_standby;
+	Animation m_entryAnimation;
 
 	//íËêî
 	const Millisec ShootInterval = 800;

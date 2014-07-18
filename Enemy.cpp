@@ -29,6 +29,7 @@ namespace Inferno
 		m_curState = EState:: e_entry;
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
+		m_entryAnimation.Start(0, 1500, 900, 550, Animation::TT_EaseOut);
 	}
 
 	void Enemy::Update()
@@ -42,7 +43,11 @@ namespace Inferno
 			break;
 
 		case EState::e_entry:
-			m_curState = EState::e_neutral;
+			this->AMove(m_entryAnimation.GetValue(),this->GetPosition().y);
+			if (m_entryAnimation.HasEnded())
+			{
+				m_curState = EState::e_neutral;
+			}
 			break;
 
 		case EState::e_neutral:

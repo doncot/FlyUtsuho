@@ -53,8 +53,6 @@ private:
 	int m_clientWidth;
 	int m_clientHeight;
 	
-
-
 private:
 	SimpleWindow(SimpleWindow& w) = delete;
 	SimpleWindow operator=(SimpleWindow& w) = delete;

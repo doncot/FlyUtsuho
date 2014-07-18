@@ -39,6 +39,8 @@ bool Game::Initialize()
 	//グラフィックスの初期化
 	m_graphics.Initialize(GetHWND());
 
+	//タイマーをスタート
+	
 
 	return true;
 }
@@ -53,7 +55,7 @@ void Game::SetClientSize(const int width, const int height)
 bool Game::GameLoop()
 {
 	//フレーム管理
-	static int previousFrame=0;
+	static int previousFrame = 0;
 	m_frameCount = m_elapsedFrame - previousFrame;
 	m_elapsedFrame++;
 	previousFrame = m_elapsedFrame;

@@ -7,6 +7,7 @@ Game.h
 #include<SimpleWindow.h>
 #include"Graphics.h"
 #include<Input.h>
+#include"Timer.h"
 
 class Game: public Inferno::SimpleWindow
 {
@@ -24,6 +25,7 @@ protected:
 	Inferno::Input m_input;	
 
 	bool m_IsInitialized;
+	Inferno::Timer m_timer; //ゲーム開始時にスタート
 	int m_elapsedFrame; //ゲーム開始からの経過フレーム
 	int m_frameCount; //前回のループからの経過フレーム
 

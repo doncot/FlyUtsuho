@@ -30,7 +30,7 @@ SimpleWindow::~SimpleWindow()
 
 bool SimpleWindow::Initialize()
 {
-	//::SetProcessDPIAware();
+	::SetProcessDPIAware();
 
 	//WindowClassê›íË
 	m_wc.cbSize = sizeof(WNDCLASSEX);

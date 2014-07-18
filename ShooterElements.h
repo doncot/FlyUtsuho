@@ -76,6 +76,7 @@ private:
 
 enum class EState
 {
+	e_standby,
 	e_neutral,
 	e_damage,
 	e_entry,
@@ -92,7 +93,7 @@ public:
 
 private:
 	Timer m_timer;
-	EState m_curState;
+	EState m_curState = EState::e_standby;
 
 	//’è”
 	const Millisec ShootInterval = 800;

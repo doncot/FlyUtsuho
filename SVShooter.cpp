@@ -148,7 +148,6 @@ bool SVShooter::GameLoop()
 {
 	Base::GameLoop();
 	static Inferno::Timer sceneTimer;
-	if (!sceneTimer.HasStarted()) sceneTimer.Start();
 
 	switch (m_scene)
 	{
@@ -174,6 +173,8 @@ bool SVShooter::GameLoop()
 
 		break;
 	case sn_main:
+		if (!sceneTimer.HasStarted()) sceneTimer.Start();
+
 		//“ü—Í
 		const int utsuhoVel = 6;
 		if (m_input.IsKeyDown(VK_UP))
@@ -216,21 +217,27 @@ bool SVShooter::GameLoop()
 		{
 			e->RMove(-1, 0);
 		}
-		//’e
+		//Ž©‹@‚Ì’e
 		if (m_fireball) m_fireball->Update();
+		//“G‚Ì’e
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end(); e++)
 		{
 			(*e)->Update();
 		}
 
 		//“G
+		if (sceneTimer.GetElapsed() > 500)
+		{
+			m_onryouList[0]->Entry();
+		}
+
 		if (m_onryouList[0])
 		{
 			m_onryouList[0]->Update();
 		}
 		if (m_onryouList[1])
 		{
-			m_onryouList[1]->Update();
+			//m_onryouList[1]->Update();
 		}
 
 		static Inferno::Stopwatch eggInterval(6000);

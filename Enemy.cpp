@@ -24,6 +24,11 @@ namespace Inferno
 		this->SetIdea(idea);
 	}
 
+	void Enemy::Entry()
+	{
+		
+	}
+
 	void Enemy::Update()
 	{
 		this->AMove(this->GetPosition().x,

@@ -42,7 +42,7 @@ private:
 enum class SEState
 {
 	se_neutral,
-	se_damage
+	se_damage,
 };
 //enum class SEAnimeState;
 
@@ -74,12 +74,20 @@ private:
 	Inferno::Vec2<int> hitStartPoint;
 };
 
+enum class EState
+{
+	e_neutral,
+	e_damage,
+	e_entry,
+};
+
 class Enemy : public Substance
 {
 public:
 	Enemy();
 	Enemy(const Idea& idea);
 
+	void Entry();
 	void Update();
 
 private:

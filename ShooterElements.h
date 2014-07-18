@@ -92,6 +92,7 @@ public:
 
 private:
 	Timer m_timer;
+	EState m_curState;
 
 	//’è”
 	const Millisec ShootInterval = 800;

@@ -13,20 +13,18 @@ namespace
 
 namespace Inferno
 {
-	Enemy::Enemy()
-	{
-		m_timer.Start();
-	}
+	Enemy::Enemy(){}
 
 	Enemy::Enemy(const Idea& idea)
 	{
-		m_timer.Start();
 		this->SetIdea(idea);
 	}
 
 	void Enemy::Entry()
 	{
-		
+		m_curState = EState:: e_entry;
+		m_timer.Start();
+		SetPosofULCorner(-100, 200);
 	}
 
 	void Enemy::Update()

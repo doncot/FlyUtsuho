@@ -14,11 +14,15 @@ namespace
 
 namespace Inferno
 {
-	Enemy::Enemy(){}
+	Enemy::Enemy()
+	{
+		this->SetAttribute(GEAttribute::ge_draw, false);
+	}
 
 	Enemy::Enemy(const Idea& idea)
 	{
 		this->SetIdea(idea);
+		this->SetAttribute(GEAttribute::ge_draw, false);
 	}
 
 	void Enemy::Entry()
@@ -27,9 +31,11 @@ namespace Inferno
 		if (m_curState != EState::e_standby) return;
 
 		m_curState = EState:: e_entry;
+		this->SetAttribute(GEAttribute::ge_draw, true);
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
-		m_entryAnimation.Start(0, 1500, 900, 550, Animation::TT_EaseOut);
+		m_entryAnimation[0].Start(0, 1200, 900, 550, Animation::TT_EaseOut);
+		m_entryAnimation[1].Start(0, 1200, 50, 230, Animation::TT_EaseOut);
 	}
 
 	void Enemy::Update()
@@ -43,8 +49,11 @@ namespace Inferno
 			break;
 
 		case EState::e_entry:
-			this->AMove(m_entryAnimation.GetValue(),this->GetPosition().y);
-			if (m_entryAnimation.HasEnded())
+			this->AMove(m_entryAnimation[0].GetValue(),
+				m_entryAnimation[1].GetValue()
+				);
+			
+			if (m_entryAnimation[0].HasEnded())
 			{
 				m_curState = EState::e_neutral;
 			}
@@ -52,7 +61,7 @@ namespace Inferno
 
 		case EState::e_neutral:
 			this->AMove(this->GetPosition().x,
-				static_cast<const int>(230 + SinWaveMotion(m_timer.GetElapsed(), 2000, 180))
+				static_cast<const int>(230 + SinWaveMotion(m_timer.GetElapsed(), 3000, 180))
 				);
 
 			if (shootInterval.HasFinished())
@@ -67,6 +76,7 @@ namespace Inferno
 			break;
 
 		default:
+			//shoudn't come here
 			assert(0);
 			break;
 		}

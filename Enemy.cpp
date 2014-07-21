@@ -56,7 +56,7 @@ namespace Inferno
 			if (m_entryAnime[0].HasEnded())
 			{
 				m_curState = EState::e_neutral;
-				m_neutralAnime[0].Start(100, 3000, 680, 320, Animation::TT_Linear);
+				m_anime[0].Start(100, 3000, 680, 320, Animation::TT_Linear);
 			}
 			break;
 
@@ -66,7 +66,7 @@ namespace Inferno
 				static_cast<const int>(230 + SinWaveMotion(m_timer.GetElapsed(), 3000, 180))
 				);
 			*/
-			this->AMove(m_neutralAnime[0].GetValue(), GetPosition().y);
+			this->AMove(m_anime[0].GetValue(), GetPosition().y);
 
 			if (shootInterval.HasFinished())
 			{

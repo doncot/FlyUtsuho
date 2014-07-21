@@ -6,13 +6,14 @@
 #include"TString.h"
 #include"MyTypes.h"
 
-extern Inferno::Input* g_GlobalInput; //‚Æ‚è‚ ‚¦‚¸
+//extern Inferno::Input* g_GlobalInput; //‚Æ‚è‚ ‚¦‚¸
+
+LPCTSTR className = TEXT("SimpleWindow");
 
 namespace
 {
-LRESULT WINAPI SimpleWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	LRESULT WINAPI SimpleWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 }
-LPCTSTR className = TEXT("SimpleWindow");
 
 namespace Inferno
 {

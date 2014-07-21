@@ -81,7 +81,6 @@ enum class EState
 	e_neutral,
 	//e_damage,
 	e_entry,
-	e_leave,
 };
 
 class Enemy : public Substance
@@ -97,7 +96,7 @@ private:
 	Timer m_timer;
 	EState m_curState = EState::e_standby;
 	Animation m_entryAnime[2];
-	Animation m_neutralAnime[2];
+	Animation m_anime[2];
 
 	//’è”
 	const Millisec ShootInterval = 800;

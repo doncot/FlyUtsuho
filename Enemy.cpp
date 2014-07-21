@@ -36,6 +36,7 @@ namespace Inferno
 		SetPosofULCorner(700, 100);
 		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::TT_EaseOut);
 		m_entryAnime[1].Start(0, 1000, 50, 150, Animation::TT_EaseOut);
+		m_anime[0].Set(100, 3000, 680, 320, Animation::TT_Linear);
 	}
 
 	void Enemy::Update()
@@ -56,7 +57,7 @@ namespace Inferno
 			if (m_entryAnime[0].HasEnded())
 			{
 				m_curState = EState::e_neutral;
-				m_anime[0].Start(100, 3000, 680, 320, Animation::TT_Linear);
+				m_anime[0].Start();
 			}
 			break;
 

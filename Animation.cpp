@@ -40,7 +40,7 @@ Animation::~Animation()
 {
 }
 
-void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false)
+void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);

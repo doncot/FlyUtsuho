@@ -37,6 +37,8 @@ namespace Inferno
 		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::TT_EaseOut);
 		m_entryAnime[1].Start(0, 1000, 50, 150, Animation::TT_EaseOut);
 		m_anime[0].Set(100, 3000, 680, 320, Animation::TT_Linear);
+		m_exitAnime[0].Set(50, 1200, 320, -100, Animation::TT_EaseIn);
+		m_exitAnime[1].Set(50, 1200, 150, -100, Animation::TT_EaseIn);
 	}
 
 	void Enemy::Update()
@@ -78,8 +80,20 @@ namespace Inferno
 				shootInterval.Restart();
 				*/
 			}
+
+			if (m_anime[0].HasEnded())
+			{
+				m_curState = EState::e_leave;
+				m_exitAnime[0].Start();
+				m_exitAnime[1].Start();
+			}
+
 			break;
 
+		case EState::e_leave:
+			this->AMove(m_exitAnime[0].GetValue(), m_exitAnime[1].GetValue());
+
+			break;
 		default:
 			//shoudn't come here
 			assert(0);

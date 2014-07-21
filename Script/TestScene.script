@@ -1,0 +1,14 @@
+//最初に生成を行う。属性も指定
+create(1,ENEMY)
+//load命令-画像リソースをロード
+//第一引数は識別番号（同じ画像を使用する奴が来たら上で使いまわす）
+loadimage(1,"onryou.png")
+//deploy命令(設置するだけ):entry(id,deploytiming(シーン開始からの時刻), deployCordinet[x,y])
+deploy(1,500,[900,50])
+//move命令:move(id,delay,dur,rel-value[x,y],transitType)
+//entry
+move(1,0,1000,[-220,100],EASEOUT)
+//平常動作
+move(1,100,300,[-360,0],LINEAR)
+//leave
+move(1,50,120,[-400,-200],EASEIN)

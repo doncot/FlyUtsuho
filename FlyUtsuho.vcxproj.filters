@@ -34,6 +34,9 @@
     <Filter Include="Inferno\Exception">
       <UniqueIdentifier>{7f4b7e42-34b8-421a-8ffb-e64e6caee791}</UniqueIdentifier>
     </Filter>
+    <Filter Include="リソース ファイル\Script">
+      <UniqueIdentifier>{323bead2-14c8-42a3-b868-a3d4ad6f3de9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SVShooter.h">
@@ -207,5 +210,10 @@
     <Media Include="BGM\Nuclear_Fusion.wav">
       <Filter>リソース ファイル\BGM</Filter>
     </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Script\TestScene.script">
+      <Filter>リソース ファイル\Script</Filter>
+    </None>
   </ItemGroup>
 </Project>

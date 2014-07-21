@@ -40,34 +40,45 @@ Animation::~Animation()
 {
 }
 
-void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
-		const Animation::TransitType type, const bool loopFlag)
+void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
 }
 
-void Animation::KF_Set(const int key,const Millisec delay, const Millisec dur,
+void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	const int s, const int e, const Animation::TransitType type, const bool loopFlag)
 {
-	if (key >= m_kfset.size()) 
-		m_kfset.resize(key+1);
+	if (key >= m_kfset.size())
+		m_kfset.resize(key + 1);
 	m_kfset[key].delay = delay;
 	m_kfset[key].dur = dur;
 	m_kfset[key].start = s;
 	m_kfset[key].end = e;
 	m_kfset[key].type = type;
 	m_kfset[key].loop = loopFlag;
-	m_timer.Start();
 	if (key > m_endKey)
 	{
-		m_endKey = key;	
+		m_endKey = key;
 	}
 	//ÅIŒo‰ß‚ğŒvZ
 	for (int i = 0; i <= m_endKey; i++)
 	{
 		m_endTime += m_kfset[i].delay + m_kfset[i].dur;
 	}
+}
+
+void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
+		const Animation::TransitType type, const bool loopFlag)
+{
+	KF_Clear();
+	KF_Set(0, delay, dur, s, e, type, loopFlag);
+	m_timer.Start();
+}
+
+void Animation::Start()
+{
+	m_timer.Start();
 }
 
 int Animation::GetValue()

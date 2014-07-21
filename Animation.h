@@ -29,9 +29,13 @@ public:
 
 	//ディレイ時間、終了時間、開始点、到達点、ループ設定、（同期/非同期[待つか待たないか]）
 	//到達座標のみ-1で現在座標
-	void Start(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag=false);
+	void Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
 	void KF_Set(const int key,const Millisec delay, const Millisec dur,
 		const int s, const int e, const TransitType type = TT_Linear, const bool loopFlag = false);
+	//設定と同時にスタート（主にテスト用）
+	void Start(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
+	//登録済みのスタート
+	void Start();
 	int GetValue();
 	bool HasEnded() const;
 	//キーフレームを設定した場合、再び使う前にリセット

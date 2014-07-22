@@ -96,6 +96,7 @@
     <ClInclude Include="Inferno\TString.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="Scripter.h" />
     <ClInclude Include="ShooterElements.h" />
     <ClInclude Include="SVShooter.h" />
   </ItemGroup>

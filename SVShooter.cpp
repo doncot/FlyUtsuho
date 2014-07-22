@@ -13,6 +13,7 @@
 #include<cmath>
 #include<sstream>
 #include"ShooterElements.h"
+#include"Scripter.h"
 
 #define PI 3.14159265358979323846
 
@@ -132,6 +133,10 @@ bool SVShooter::Initialize()
 		//テキスト
 		scoreText.Initialize(m_graphics);
 		dLight.Initialize(m_graphics);
+
+		//スクリプト
+		Inferno::Scripter scene1;
+		scene1.LoadSceneFromScript(_T("Script\\test.txt"));
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
 	{

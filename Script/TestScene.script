@@ -1,3 +1,4 @@
+encoding(sjis)
 //最初に生成を行う。属性も指定
 create(1,ENEMY)
 //load命令-画像リソースをロード

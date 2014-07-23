@@ -136,7 +136,7 @@ bool SVShooter::Initialize()
 
 		//スクリプト
 		Inferno::Scripter scene1;
-		scene1.LoadSceneFromScript(_T("Script\\test.txt"));
+		scene1.LoadSceneFromScript(_T("Script\\TestScene.script"));
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
 	{

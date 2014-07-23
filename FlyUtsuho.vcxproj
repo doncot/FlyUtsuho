@@ -126,6 +126,7 @@
     <ClCompile Include="SVShooter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ScriptSpec.txt" />
     <Text Include="Spec.txt" />
   </ItemGroup>
   <ItemGroup>

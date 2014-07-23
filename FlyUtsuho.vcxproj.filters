@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Spec.txt" />
+    <Text Include="ScriptSpec.txt" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sprites\egg.bmp">

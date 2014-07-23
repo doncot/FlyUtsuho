@@ -72,6 +72,7 @@ public:
 	//左上座標で位置を指定
 	void SetPosofULCorner(const int x, const int y);
 	//時計周りに回転（度数指定）
+	void Rotate(const int degree);
 	void Rotate(const float degree);
 
 	Vec2<int> GetPosition() const;

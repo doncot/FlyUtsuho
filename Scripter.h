@@ -102,7 +102,7 @@ public:
 
 			if (IsCreate(buff))
 			{
-				int test = 1;
+				int test = 2;
 			}
 		}
 

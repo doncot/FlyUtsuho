@@ -86,6 +86,9 @@ public:
 	
 	void SetAlpha(const int alpha);
 
+	void SetID(const int id);
+	int GetID() const;
+
 	virtual void Update();
 
 	void Draw(const Graphics& g) const;

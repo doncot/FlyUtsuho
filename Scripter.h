@@ -21,11 +21,6 @@ namespace
 		return std::regex_match(str, pattern);
 	}
 
-	bool IsCreate(const string& str)
-	{
-		std::regex pattern("^create\\(\s*([^,]+)\s*,\s*([^)]+)\\)$", std::regex_constants::extended);
-		return std::regex_match(str, pattern);
-	}
 }
 
 namespace Inferno
@@ -49,12 +44,13 @@ public:
 			char buff[Maxbuff];
 			ifpeek.getline(buff, 1024); //一行だけ読む
 
-			//判定（bom付きも考慮）
+			//エンコーディング判定（bom付きも考慮）
+			//utf8
 			std::regex patternU8("(\xEF\xBB\xBF)?encoding\\(UTF8\\)", 
 				std::regex_constants::extended | std::regex_constants::icase);
 			bool resultU8 = std::regex_match(buff, patternU8);
 			if (resultU8) m_encoding = Encoding::e_utf8;
-
+			//sjis
 			std::regex patternSJIS("encoding\\(SJIS\\)", 
 				std::regex_constants::extended | std::regex_constants::icase);
 			bool resultSJIS = std::regex_match(buff, patternSJIS);
@@ -91,7 +87,7 @@ public:
 		}
 		
 		char buff[1024];
-		bool match = false;
+		match_results<const char*> match;
 		while (in.good())
 		{
 			//一行読み込む
@@ -100,9 +96,14 @@ public:
 			//コメントは読み飛ばす
 			if (IsComment(buff)) continue;
 
-			if (IsCreate(buff))
+			//create命令
 			{
-				int test = 2;
+				std::regex pattern("^create\\([:s:]*([^,]+)[:s:]*,[:s:]*([^)]+)[:s:]*\\)$", std::regex_constants::extended);
+				if (std::regex_match(buff, match, pattern))
+				{
+					//id
+					string str = match.str(1);
+				}
 			}
 		}
 

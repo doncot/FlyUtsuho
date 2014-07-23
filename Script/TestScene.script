@@ -1,6 +1,6 @@
 encoding(sjis)
 //最初に生成を行う。属性も指定
-create(1,ENEMY)
+create(1)
 //load命令-画像リソースをロード
 //第一引数は識別番号（同じ画像を使用する奴が来たら上で使いまわす）
 loadimage(1,"onryou.png")

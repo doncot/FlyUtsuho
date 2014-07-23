@@ -14,7 +14,9 @@ namespace Inferno
 
 	void ShooterScene::CreateEnemy(const int id)
 	{
-
+		Substance* insert = new Substance();
+		insert->SetID(id);
+		m_subList.push_back(insert);
 	}
 
 }

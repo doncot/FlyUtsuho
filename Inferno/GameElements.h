@@ -97,6 +97,7 @@ public:
 	Substance& operator=(const Substance& s);
 
 protected:
+	int m_id;
 	const Idea* m_idea;
 	Vec2<int> m_pos; //Œ»İÀ•W
 	float m_angle; //“x”–@‚Å‰ñ“]î•ñ

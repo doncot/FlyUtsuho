@@ -26,6 +26,9 @@
 
 namespace
 {
+	//scene
+	Inferno::ShooterScene scene;
+
 	//image
 	std::vector<Inferno::Instant> bg_underground;
 	Inferno::Texture purpleBulletTex;
@@ -135,8 +138,7 @@ bool SVShooter::Initialize()
 		dLight.Initialize(m_graphics);
 
 		//スクリプト
-		Inferno::Scripter scene1;
-		scene1.LoadSceneFromScript(_T("Script\\TestScene.script"));
+		Inferno::Scripter::LoadSceneFromScript(&scene, m_graphics, _T("Script\\TestScene.script"));
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
 	{
@@ -283,7 +285,6 @@ bool SVShooter::GameLoop()
 			i++;
 		}
 		
-
 		//怨霊と火弾の衝突判定
 		for (unsigned int i = 0; i < m_onryouList.size(); i++)
 		{

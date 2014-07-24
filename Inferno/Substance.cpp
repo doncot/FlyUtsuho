@@ -54,10 +54,8 @@ void Substance::SetPosofULCorner(const int x, const int y)
 	m_pos.y = y + m_idea->GetHeight()/2;
 }
 
-void Substance::Rotate(const float angle)
-{
-	m_angle = angle;
-}
+void Substance::Rotate(const int angle) { m_angle = angle; }
+void Substance::Rotate(const float angle) {	m_angle = angle; }
 
 Vec2<int> Substance::GetPosition() const
 {
@@ -93,6 +91,10 @@ void Substance::SetAlpha(const int alpha)
 {
 	m_alpha = alpha;
 }
+
+void Substance::SetID(const int id) { m_id = id; }
+
+int Substance::GetID() const { return m_id; }
 
 void Substance::Update() {}
 

@@ -8,7 +8,6 @@ namespace Inferno
 		{
 			SAFE_DELETE(*i);
 			i = m_subList.erase(i);
-			i++;
 		}
 	}
 

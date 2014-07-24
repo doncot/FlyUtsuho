@@ -3,7 +3,7 @@ encoding(sjis)
 create(1)
 //load命令-画像リソースをロード
 //第一引数は識別番号（同じ画像を使用する奴が来たら上で使いまわす）
-loadimage(1,"onryou.png")
+loadimage(1,"Sprites\\onryou.png")
 //deploy命令(設置するだけ):entry(id,deploytiming(シーン開始からの時刻), deployCordinet[x,y])
 deploy(1,500,[900,50])
 //move命令:move(id,delay,dur,rel-value[x,y],transitType)

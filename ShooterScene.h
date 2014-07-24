@@ -4,19 +4,28 @@
 
 namespace Inferno
 {
+
 class ShooterScene
 {
+private:
+	struct EnemyBase
+	{
+		Inferno::Idea m_idea;
+		Inferno::Texture m_tex;
+	};
+
 public:
 	~ShooterScene();
 
 	void CreateEnemy(const int id);
 	void DeleteEnemy(const int id);
 
-	//LoadImage‚Íƒ}ƒNƒ‰˜õ‚³‚ê‚Ä‚¢‚é
-	void Loadimage(const int id, const string& filename);
+	void SetTexture(const int id, const Texture& tex);
+
 
 private:
 	std::list<Substance*> m_subList;
+	std::list<EnemyBase*> m_baseList;
 };
 
 

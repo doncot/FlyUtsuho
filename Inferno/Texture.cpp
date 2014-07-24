@@ -114,4 +114,22 @@ Rect Texture::GetSubRegion(const int n) const
 	return m_subRegions.at(n).rect;
 }
 
+Texture& Texture::operator=(const Texture& tex)
+{
+	//自己代入をチェック
+	if (this == &tex) return *this;
+
+	//LP_TEXTUREの参照カウンタを足す
+	m_tex = tex.m_tex;
+	m_tex->AddRef();
+
+	//スタックオブジェクトをそのままコピー
+	this->m_texName = tex.m_texName;
+	this->m_width = tex.m_width;
+	this->m_height = tex.m_height;
+	this->m_subRegions = tex.m_subRegions;
+
+	return *this;
+}
+
 }

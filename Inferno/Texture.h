@@ -34,6 +34,9 @@ public:
 	LP_TEXTURE GetTexture() const;
 	Rect GetSubRegion(const int n) const;
 
+	//LP_TEXTUREがあるから、deepcopyが必要
+	Texture& operator=(const Texture& tex);
+
 private:
 	LP_TEXTURE m_tex; //LP_TEXTURE自体がItextureインターフェイスへのポインタ
 	TString m_texName;

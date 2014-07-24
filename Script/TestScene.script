@@ -1,15 +1,15 @@
-encoding(sjis)
-//Å‰‚É¶¬‚ğs‚¤B‘®«‚àw’è
+encoding(utf8)
+//æœ€åˆã«ç”Ÿæˆã‚’è¡Œã†ã€‚å±æ€§ã‚‚æŒ‡å®š
 create(1)
-//load–½—ß-‰æ‘œƒŠƒ\[ƒX‚ğƒ[ƒh
-//‘æˆêˆø”‚Í¯•Ê”Ô†i“¯‚¶‰æ‘œ‚ğg—p‚·‚é“z‚ª—ˆ‚½‚çã‚Åg‚¢‚Ü‚í‚·j
+//loadå‘½ä»¤-ç”»åƒãƒªã‚½ãƒ¼ã‚¹ã‚’ãƒ­ãƒ¼ãƒ‰
+//ç¬¬ä¸€å¼•æ•°ã¯è­˜åˆ¥ç•ªå·ï¼ˆåŒã˜ç”»åƒã‚’ä½¿ç”¨ã™ã‚‹å¥´ãŒæ¥ãŸã‚‰ä¸Šã§ä½¿ã„ã¾ã‚ã™ï¼‰
 loadimage(1,"Sprites\\onryou.png")
-//deploy–½—ß(İ’u‚·‚é‚¾‚¯):entry(id,deploytiming(ƒV[ƒ“ŠJn‚©‚ç‚Ì), deployCordinet[x,y])
+//deployå‘½ä»¤(è¨­ç½®ã™ã‚‹ã ã‘):entry(id,deploytiming(ã‚·ãƒ¼ãƒ³é–‹å§‹ã‹ã‚‰ã®æ™‚åˆ»), deployCordinet[x,y])
 deploy(1,500,[900,50])
-//move–½—ß:move(id,delay,dur,rel-value[x,y],transitType)
+//moveå‘½ä»¤:move(id,delay,dur,rel-value[x,y],transitType)
 //entry
 move(1,0,1000,[-220,100],EASEOUT)
-//•½í“®ì
+//å¹³å¸¸å‹•ä½œ
 move(1,100,300,[-360,0],LINEAR)
 //leave
 move(1,50,120,[-400,-200],EASEIN)

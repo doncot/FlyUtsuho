@@ -1,4 +1,4 @@
-encoding(utf8)
+﻿encoding(utf8)
 //最初に生成を行う。属性も指定
 create(1)
 //load命令-画像リソースをロード

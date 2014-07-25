@@ -73,13 +73,14 @@ public:
 		{
 		case Encoding::e_utf8:
 			in.open(filename);
-			//utf-8をutf16で開く
-			in.imbue(std::locale(in.getloc(), new std::codecvt_utf8_utf16<wchar_t>));
+			//utf-8をutf16で開く（consume_header=BOMを取り除く）
+			in.imbue(std::locale(in.getloc(), 
+				new std::codecvt_utf8_utf16<wchar_t, 0x10ffff, consume_header>));
 			break;
 
 		case Encoding::e_sjis:
-			//デフォルトのロケールは日本語なのでそれにまかせる（国際化を考えるとまずいが）
 			in.open(filename);
+			in.imbue(std::locale("japanese"));
 			break;
 
 		default:
@@ -103,7 +104,7 @@ public:
 
 			//encoding命令は飛ばす
 			{
-				std::wregex pattern(L"(\xEF\xBB\xBF)?encoding\\(.+\\)",
+				std::wregex pattern(L"encoding\\(.+\\)",
 					std::regex_constants::extended | std::regex_constants::icase);
 				if (std::regex_match(buff, pattern)) continue;
 			}
@@ -126,7 +127,6 @@ public:
 				if (std::regex_match(buff, match, pattern))
 				{
 					Texture newTex;
-					//TString使用は応急処置
 					newTex.LoadImageFile(g,match.str(2));
 					scene->SetTexture(std::atoi( TString(match.str(1)).GetStringA() ), newTex);
 				}

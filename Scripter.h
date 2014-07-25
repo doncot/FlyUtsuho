@@ -47,6 +47,7 @@ public:
 		//受け付けるのはsjisかutf8。デフォルトはutf8
 		{
 			std::ifstream ifpeek(filename);
+			ifpeek.imbue(std::locale("En-US"));
 			if (ifpeek.fail())
 			{
 				throw GeneralFileError(filename, L"ファイルを開くことに失敗しました");

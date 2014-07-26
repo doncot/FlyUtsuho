@@ -19,9 +19,9 @@ namespace Inferno
 //ゲーム要素の状態（アクションゲーム用なので継承先に本来あるべき
 enum GEAttribute
 {
-	ge_userLock = 1, //ユーザーからの操作をロック
-	ge_draw = 2, //描画するか否か
-	ge_nohit = 4, //衝突判定をするか否か
+	UserLock = 1, //ユーザーからの操作をロック
+	Draw = 2, //描画するか否か
+	NoHit = 4, //衝突判定をするか否か
 };
 
 class Idea
@@ -89,6 +89,9 @@ public:
 	void SetID(const int id);
 	int GetID() const;
 
+	//DispatchMessage(GMessageQueue)
+	//InterpretMessage(GMessageQueue);
+
 	virtual void Update();
 
 	void Draw(const Graphics& g) const;
@@ -121,7 +124,7 @@ public:
 	{
 		m_tex = new Texture();
 		m_idea = new Idea();
-		SetAttribute(GEAttribute::ge_draw, true);
+		SetAttribute(GEAttribute::Draw, true);
 	}
 	void LoadTextureFromFile(const Graphics& g, const wstring& str)
 	{

@@ -16,29 +16,29 @@ namespace Inferno
 {
 	Enemy::Enemy()
 	{
-		this->SetAttribute(GEAttribute::ge_draw, false);
+		this->SetAttribute(GEAttribute::Draw, false);
 	}
 
 	Enemy::Enemy(const Idea& idea)
 	{
 		this->SetIdea(idea);
-		this->SetAttribute(GEAttribute::ge_draw, false);
+		this->SetAttribute(GEAttribute::Draw, false);
 	}
 
 	void Enemy::Entry()
 	{
 		//スタンバイ状態でないなら帰る
-		if (m_curState != EState::e_standby) return;
+		if (m_curState != EState::Standby) return;
 
-		m_curState = EState:: e_entry;
-		this->SetAttribute(GEAttribute::ge_draw, true);
+		m_curState = EState:: Entry;
+		this->SetAttribute(GEAttribute::Draw, true);
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
-		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::TT_EaseOut);
-		m_entryAnime[1].Start(0, 1000, 50, 150, Animation::TT_EaseOut);
-		m_anime[0].Set(100, 3000, 680, 320, Animation::TT_Linear);
-		m_exitAnime[0].Set(50, 1200, 320, -100, Animation::TT_EaseIn);
-		m_exitAnime[1].Set(50, 1200, 150, -100, Animation::TT_EaseIn);
+		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::EaseOut);
+		m_entryAnime[1].Start(0, 1000, 50, 150, Animation::EaseOut);
+		m_anime[0].Set(100, 3000, 680, 320, Animation::Linear);
+		m_exitAnime[0].Set(50, 1200, 320, -100, Animation::EaseIn);
+		m_exitAnime[1].Set(50, 1200, 150, -100, Animation::EaseIn);
 	}
 
 	void Enemy::Update()
@@ -47,23 +47,23 @@ namespace Inferno
 
 		switch (m_curState)
 		{
-		case EState::e_standby:
+		case EState::Standby:
 			//do nothing
 			break;
 
-		case EState::e_entry:
+		case EState::Entry:
 			this->AMove(m_entryAnime[0].GetValue(),
 				m_entryAnime[1].GetValue()
 				);
 			
 			if (m_entryAnime[0].HasEnded())
 			{
-				m_curState = EState::e_neutral;
+				m_curState = EState::Neutral;
 				m_anime[0].Start();
 			}
 			break;
 
-		case EState::e_neutral:
+		case EState::Neutral:
 			/*
 			this->AMove(this->GetPosition().x,
 				static_cast<const int>(230 + SinWaveMotion(m_timer.GetElapsed(), 3000, 180))
@@ -83,14 +83,14 @@ namespace Inferno
 
 			if (m_anime[0].HasEnded())
 			{
-				m_curState = EState::e_leave;
+				m_curState = EState::Leave;
 				m_exitAnime[0].Start();
 				m_exitAnime[1].Start();
 			}
 
 			break;
 
-		case EState::e_leave:
+		case EState::Leave:
 			this->AMove(m_exitAnime[0].GetValue(), m_exitAnime[1].GetValue());
 
 			break;

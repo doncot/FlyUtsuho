@@ -36,9 +36,9 @@ namespace Inferno
 class Scripter
 {
 public:
-	static void LoadSceneFromScript(ShooterScene* scene, const Graphics& g, const std::wstring& filename)
+	static void LoadSceneFromScript(ShooterScene* scene, const std::wstring& filename)
 	{
-		//仕様するエンコーディング
+		//使用するエンコーディング（デフォルトはutf8）
 		Encoding encoding = Encoding::e_utf8;
 		//古いロケールを一時保存
 		std::locale oldLocale;
@@ -127,9 +127,24 @@ public:
 					std::regex_constants::extended);
 				if (std::regex_match(buff, match, pattern))
 				{
-					Texture newTex;
-					newTex.LoadImageFile(g,match.str(2));
-					scene->SetTexture(std::atoi( TString(match.str(1)).GetStringA() ), newTex);
+					scene->SetImageFromFile(std::atoi( TString(match.str(1)).GetStringA() ),
+						match.str(2));
+
+					continue;
+				}
+			}
+
+			//deploy命令
+			{
+				std::wregex pattern(L"^deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
+				if (std::regex_match(buff, match, pattern))
+				{
+					scene->DeployEnemy(std::atoi(TString(match.str(1)).GetStringA()),
+						std::atoi(TString(match.str(2)).GetStringA()),
+						Vec2<int>(std::atoi(TString(match.str(3)).GetStringA()),
+						std::atoi(TString(match.str(4)).GetStringA()))
+						);
+					continue;
 				}
 			}
 		}

@@ -1,5 +1,7 @@
 #pragma once
 
+#include"Common.h"
+
 typedef unsigned long int Millisec;
 const int FixFPS = 60;
 
@@ -8,17 +10,23 @@ namespace Inferno
 	class Timer
 	{
 	public:
-		Timer() :m_start(0){};
-		~Timer(){};
+		Timer(){};
+		~Timer()
+		{
+			SAFE_DELETE(m_pauseTimer);
+		}
 
 		void Start();
+		void Stop();
 		Millisec Timer::GetElapsed() const;
-		void Restart();
+		void Pause();
+		void UnPause();
 
 		bool HasStarted() const;
 
 	private:
-		Millisec m_start;
+		Millisec m_start = 0;
+		Timer* m_pauseTimer = nullptr;
 	};
 
 	//指定時間経過しているかどうかを判定するクラス

@@ -6,7 +6,7 @@
 
 namespace
 {
-	double Linear(double change, double base, double duration, double time)
+	double LinearMove(double change, double base, double duration, double time)
 	{
 		return change * ( time / duration ) + base;
 	}
@@ -49,7 +49,7 @@ void Animation::Set(const Millisec delay, const Millisec dur, const int s, const
 void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	const int s, const int e, const Animation::TransitType type, const bool loopFlag)
 {
-	if (key >= m_kfset.size())
+	if ( static_cast<unsigned int>(key) >= m_kfset.size())
 		m_kfset.resize(key + 1);
 	m_kfset[key].delay = delay;
 	m_kfset[key].dur = dur;
@@ -100,15 +100,15 @@ int Animation::GetValue()
 
 	switch (m_kfset[m_curKey].type)
 	{
-	case TT_Linear:
-		return Linear(m_kfset[m_curKey].end - m_kfset[m_curKey].start,
+	case Linear:
+		return LinearMove(m_kfset[m_curKey].end - m_kfset[m_curKey].start,
 			m_kfset[m_curKey].start, m_kfset[m_curKey].dur,
 			etime - m_kfset[m_curKey].delay);
-	case TT_EaseIn:
+	case EaseIn:
 		return EaseInQuad(m_kfset[m_curKey].end - m_kfset[m_curKey].start,
 			m_kfset[m_curKey].start, m_kfset[m_curKey].dur,
 			etime - m_kfset[m_curKey].delay);
-	case TT_EaseOut:
+	case EaseOut:
 		return EaseOutQuad(m_kfset[m_curKey].end - m_kfset[m_curKey].start,
 			m_kfset[m_curKey].start, m_kfset[m_curKey].dur,
 			etime - m_kfset[m_curKey].delay);

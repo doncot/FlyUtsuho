@@ -15,7 +15,31 @@ namespace Inferno
 			SAFE_DELETE(*i);
 			i = m_baseList.erase(i);
 		}
+
+		for (auto i = m_taskList.begin(); i != m_taskList.end();)
+		{
+			SAFE_DELETE(*i);
+			i = m_taskList.erase(i);
+		}
+
+		//queue
+		{
+			/*
+			for (auto& e = m_taskQueue.front(); m_taskQueue.empty()!=true; e++)
+			{
+				SAFE_DELETE(e);
+				m_taskQueue.pop();
+			}
+			*/
+			//スワップトリック
+			/*
+			std::queue<BaseTask*> emptyTaskQueue;
+			std::swap(m_taskQueue, emptyTaskQueue);
+			*/
+		}
 	}
+
+	void ShooterScene::SetGraphics(const Graphics& g) {	m_graphics = &g; }
 
 	void ShooterScene::CreateEnemy(const int id)
 	{
@@ -24,24 +48,61 @@ namespace Inferno
 		m_subList.push_back(insert);
 	}
 
-	void ShooterScene::SetTexture(const int id, const Texture& tex)
+	void ShooterScene::SetImageFromFile(const int id, const wstring& filename)
 	{
 		auto newBase = new EnemyBase();
-		newBase->m_tex = tex;
+		newBase->m_tex.LoadImageFile(*m_graphics, filename);
 		newBase->m_idea.SetTexture(newBase->m_tex);
-		//重複があったら抜く
+		//TODO:Ideaに重複があったら抜く
+
+		//新しいBaseを登録
 		m_baseList.push_back(newBase);
 
 
 		//該当のidを持つSubstanceにEnemyBaseをセット
-		for (auto& e = m_subList.begin(); e != m_subList.end(); e++)
+		for (auto e : m_subList)
 		{
 			//idが一致したら
-			if ((*e)->GetID() == id)
+			if (e->GetID() == id)
 			{
-				(*e)->SetIdea(newBase->m_idea);
+				e->SetIdea(newBase->m_idea);
 			}
 		}
 	}
 
+	void ShooterScene::DeployEnemy(const int id, const Millisec deployTime, const Vec2<int> deployCor)
+	{
+		//該当のidを持つSubstanceをデプロイ
+		for (auto e : m_subList)
+		{
+			//idが一致したら
+			if ( e->GetID() == id)
+			{
+				auto newTask = new DeployTask(id);
+				newTask->SetDeployTiming(deployTime);
+
+				m_taskList.push_back(newTask);
+			}
+		}
+	}
+
+	void ShooterScene::Update()
+	{
+		//全タスクを回す
+		for (auto e : m_taskList)
+		{
+			//タスクの開始で
+
+		}
+
+	}
+
+	//ShooterScene private
+	void ShooterScene::OnTaskStart(BaseTask* task)
+	{
+		if (m_activeSceneTimer.GetElapsed() > task->GetDeployTiming())
+		{
+
+		}
+	}
 }

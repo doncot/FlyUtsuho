@@ -18,9 +18,9 @@ public:
 	//TODOスペル確認
 	enum TransitType
 	{
-		TT_Linear,
-		TT_EaseIn,
-		TT_EaseOut
+		Linear,
+		EaseIn,
+		EaseOut
 	};
 
 	Animation();
@@ -31,7 +31,7 @@ public:
 	//到達座標のみ-1で現在座標
 	void Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
 	void KF_Set(const int key,const Millisec delay, const Millisec dur,
-		const int s, const int e, const TransitType type = TT_Linear, const bool loopFlag = false);
+		const int s, const int e, const TransitType type = Linear, const bool loopFlag = false);
 	//設定と同時にスタート（主にテスト用）
 	void Start(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
 	//登録済みのスタート
@@ -58,7 +58,7 @@ private:
 			key = 0;
 			delay = 0;
 			dur = 0;
-			type = TT_Linear;
+			type = Linear;
 			loop = false;
 			start = 0;
 			end = 0;

@@ -10,19 +10,37 @@ void Timer::Start()
 	m_start = timeGetTime();
 }
 
+void Timer::Stop()
+{
+	m_start = 0;
+}
+
 Millisec Timer::GetElapsed() const
 {
 	return timeGetTime() - m_start;
 }
 
-void Timer::Restart()
-{
-	this->Start();
-}
-
 bool Timer::HasStarted() const
 {
 	return m_start != 0 ? true : false;
+}
+
+void Timer::Pause()
+{
+	//まだポーズタイマーを使ったことがない場合
+	if (!m_pauseTimer)
+	{
+		m_pauseTimer = new Timer();
+	}
+	m_pauseTimer->Start();
+}
+
+void Timer::UnPause()
+{
+	//経過時間だけ巻き戻す
+	m_start -= m_pauseTimer->GetElapsed();
+	//ここで止めないと二回目に呼んだときに二重に引いてしまう
+	m_pauseTimer->Stop();
 }
 
 Stopwatch::Stopwatch() { m_targetTime = -1; }
@@ -50,7 +68,7 @@ void Stopwatch::Start(const Millisec msec)
 
 void Stopwatch::Restart()
 {
-	m_timer.Restart();
+	m_timer.Start();
 }
 
 double Stopwatch::DurationTimeRate() const

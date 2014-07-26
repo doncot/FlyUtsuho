@@ -42,8 +42,8 @@ private:
 
 enum class PState
 {
-	p_neutral,
-	p_damage,
+	Neutral,
+	Damaged,
 };
 //enum class SEAnimeState;
 
@@ -52,7 +52,7 @@ class Player : public Substance
 public:
 	typedef Substance Base;
 
-	Player() : m_curState(PState::p_neutral),m_moveLimit(0,0) {}
+	Player() : m_curState(PState::Neutral),m_moveLimit(0,0) {}
 
 	//相対標指定移動（将来的には自身で移動を管理したい）
 	void RMove(const int x, const int y);
@@ -77,11 +77,11 @@ private:
 
 enum class EState
 {
-	e_standby,
-	e_neutral,
-	//e_damage,
-	e_entry,
-	e_leave,
+	Standby,
+	Neutral,
+	//Damage,
+	Entry,
+	Leave,
 };
 
 class Enemy : public Substance
@@ -95,7 +95,7 @@ public:
 
 private:
 	Timer m_timer;
-	EState m_curState = EState::e_standby;
+	EState m_curState = EState::Standby;
 	Animation m_entryAnime[2];
 	Animation m_anime[2];
 	Animation m_exitAnime[2];

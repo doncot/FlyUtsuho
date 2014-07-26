@@ -12,19 +12,19 @@ Substance::Substance()
 Substance::Substance(const Idea& idea) 
 	: m_idea(&idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {
-	SetAttribute(GEAttribute::ge_draw, true);
+	SetAttribute(GEAttribute::Draw, true);
 }
 Substance::~Substance() {}
 
 void Substance::SetIdea(const Idea& idea)
 {
 	m_idea = &idea;
-	SetAttribute(GEAttribute::ge_draw, true);
+	SetAttribute(GEAttribute::Draw, true);
 }
 
 void Substance::AMove(const int x, const int y)
 {
-	if (CheckAttribute(GEAttribute::ge_userLock)) return;
+	if (CheckAttribute(GEAttribute::UserLock)) return;
 	m_pos.x = x;
 	m_pos.y = y;
 }
@@ -36,7 +36,7 @@ void Substance::AMove(const Vec2<int>& c)
 
 void Substance::RMove(const int x, const int y)
 {
-	if (CheckAttribute(GEAttribute::ge_userLock)) return;
+	if (CheckAttribute(GEAttribute::UserLock)) return;
 	m_pos.x += x;
 	m_pos.y += y;
 }
@@ -49,7 +49,7 @@ void Substance::RMove(const Vec2<int>& c)
 //左上座標で位置を指定
 void Substance::SetPosofULCorner(const int x, const int y)
 {
-	if (CheckAttribute(GEAttribute::ge_userLock)) return;
+	if (CheckAttribute(GEAttribute::UserLock)) return;
 	m_pos.x = x + m_idea->GetWidth()/2;
 	m_pos.y = y + m_idea->GetHeight()/2;
 }
@@ -101,7 +101,7 @@ void Substance::Update() {}
 void Substance::Draw(const Graphics& g) const
 {
 	//描画状態でない場合、帰る
-	if (!CheckAttribute(GEAttribute::ge_draw)) return;
+	if (!CheckAttribute(GEAttribute::Draw)) return;
 
 	D3DXMATRIX matWorld; //これをメンバにすれば省略できるがさてさて
 	D3DXMatrixIdentity(&matWorld);

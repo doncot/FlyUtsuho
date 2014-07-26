@@ -138,7 +138,8 @@ bool SVShooter::Initialize()
 		dLight.Initialize(m_graphics);
 
 		//スクリプト
-		Inferno::Scripter::LoadSceneFromScript(&scene, m_graphics, _T("Script\\TestScene.script"));
+		scene.SetGraphics(m_graphics);
+		Inferno::Scripter::LoadSceneFromScript(&scene,_T("Script\\TestScene.script"));
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
 	{
@@ -253,7 +254,7 @@ bool SVShooter::GameLoop()
 		{
 			egg.AMove(800, 300);
 			eggInterval.Restart();
-			egg.SetAttribute(Inferno::GEAttribute::ge_draw,true);
+			egg.SetAttribute(Inferno::GEAttribute::Draw,true);
 		}
 		else
 		{
@@ -324,11 +325,11 @@ bool SVShooter::GameLoop()
 		//卵と自機の衝突検出
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetRegion(), egg.GetRegion()))
 		{
-			if (egg.CheckAttribute(Inferno::GEAttribute::ge_draw))
+			if (egg.CheckAttribute(Inferno::GEAttribute::Draw))
 			{
 				m_score += 1000;
 				eggInterval.Restart();
-				egg.SetAttribute(Inferno::GEAttribute::ge_draw, false);
+				egg.SetAttribute(Inferno::GEAttribute::Draw, false);
 			}
 		}
 

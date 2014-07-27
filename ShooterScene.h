@@ -20,11 +20,13 @@ private:
 	{
 	public:
 		BaseTask(const int taskId) : m_id(taskId) {}
-		//new/deleteする予定がないので、仮想デストラクタは用意しない
-		//virtual ~BaseTask();
+
+		virtual ~BaseTask(){}
 
 		void SetDeployTiming(const Millisec& msec) { m_deployTiming = msec; }
 		Millisec GetDeployTiming() const { return m_deployTiming; }
+		
+		int GetID() const { return m_id; }
 
 	protected:
 		const int m_id = 0;
@@ -36,8 +38,12 @@ private:
 	public:
 		DeployTask(const int taskId): Base(taskId) {}
 
+		void SetDeployCor(const Vec2<int> c) { m_pos = c; }
+		const Vec2<int> GetDeployCor() const { return m_pos; }
+
 	private:
 		typedef BaseTask Base;
+		Vec2<int> m_pos;
 	};
 
 public:
@@ -60,8 +66,10 @@ public:
 
 	void Draw();
 
+	bool HasStarted() const;
+
 private:
-	void OnTaskStart(BaseTask* task);
+	void OnTaskStart(DeployTask* task);
 
 
 private:

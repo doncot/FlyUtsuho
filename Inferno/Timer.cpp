@@ -17,6 +17,7 @@ void Timer::Stop()
 
 Millisec Timer::GetElapsed() const
 {
+	if (!HasStarted()) return 0; //n‚Ü‚Á‚Ä‚È‚¢ê‡A0‚ğ•Ô‚·
 	return timeGetTime() - m_start;
 }
 

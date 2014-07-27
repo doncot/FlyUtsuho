@@ -182,6 +182,9 @@ bool SVShooter::GameLoop()
 		break;
 	case sn_main:
 		if (!sceneTimer.HasStarted()) sceneTimer.Start();
+		if (!scene.HasStarted()) scene.Start();
+		scene.Update();
+		scene.Draw();
 
 		//“ü—Í
 		const int utsuhoVel = 6;
@@ -340,7 +343,7 @@ bool SVShooter::GameLoop()
 			this->Exit();
 		}
 
-
+		/*
 		//•`‰æ
 		if (Base::m_graphics.BeginScene() && Base::m_graphics.BeginSprite())
 		{
@@ -373,6 +376,7 @@ bool SVShooter::GameLoop()
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();
+		*/
 
 		break;
 	}

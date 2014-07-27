@@ -80,10 +80,17 @@ namespace Inferno
 			{
 				auto newTask = new DeployTask(id);
 				newTask->SetDeployTiming(deployTime);
+				newTask->SetDeployCor(deployCor);
 
 				m_taskList.push_back(newTask);
 			}
 		}
+	}
+
+	void ShooterScene::Start()
+	{
+		m_sceneTimer.Start();
+		m_activeSceneTimer.Start();
 	}
 
 	void ShooterScene::Update()
@@ -92,17 +99,47 @@ namespace Inferno
 		for (auto e : m_taskList)
 		{
 			//タスクの開始で
+			if (m_activeSceneTimer.GetElapsed() > e->GetDeployTiming())
+			{
+				OnTaskStart( dynamic_cast<DeployTask*>(e));
+
+				//このタスクはここで消去
+			}
 
 		}
 
+	}
+
+	void ShooterScene::Draw()
+	{
+		if (m_graphics->BeginScene() && m_graphics->BeginSprite())
+		{
+			for (auto e : m_subList)
+			{
+				e->Draw(*m_graphics);
+			}
+		}
+		m_graphics->EndSprite();
+		m_graphics->EndScene();
+	}
+
+	bool ShooterScene::HasStarted() const
+	{
+		return m_sceneTimer.HasStarted();
 	}
 
 	//ShooterScene private
-	void ShooterScene::OnTaskStart(BaseTask* task)
+	void ShooterScene::OnTaskStart(DeployTask* task)
 	{
-		if (m_activeSceneTimer.GetElapsed() > task->GetDeployTiming())
+		//このサーチは後々IDを直接探せるように再実装
+		for (auto e : m_subList)
 		{
-
+			if (task->GetID() == e->GetID())
+			{
+				e->AMove(task->GetDeployCor());
+			}
 		}
 	}
+
+
 }

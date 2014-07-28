@@ -19,7 +19,6 @@ Substance::~Substance() {}
 void Substance::SetIdea(const Idea& idea)
 {
 	m_idea = &idea;
-	SetAttribute(GEAttribute::Draw, true);
 }
 
 void Substance::AMove(const int x, const int y)

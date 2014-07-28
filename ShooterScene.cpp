@@ -45,6 +45,7 @@ namespace Inferno
 	{
 		auto insert = new Substance();
 		insert->SetID(id);
+		insert->SetAttribute(GEAttribute::Draw, false);
 		m_subList.push_back(insert);
 	}
 
@@ -96,18 +97,22 @@ namespace Inferno
 	void ShooterScene::Update()
 	{
 		//全タスクを回す
-		for (auto e : m_taskList)
+		for (auto e = m_taskList.begin(); e != m_taskList.end();)
 		{
 			//タスクの開始で
-			if (m_activeSceneTimer.GetElapsed() > e->GetDeployTiming())
+			if (m_activeSceneTimer.GetElapsed() > (*e)->GetDeployTiming())
 			{
-				OnTaskStart( dynamic_cast<DeployTask*>(e));
+				OnTaskStart( dynamic_cast<DeployTask*>(*e) );
 
 				//このタスクはここで消去
-			}
+				e = m_taskList.erase(e);
 
+				continue;
+			}
+			e++;
 		}
 
+		//プレイヤーの移動
 	}
 
 	void ShooterScene::Draw()
@@ -137,6 +142,8 @@ namespace Inferno
 			if (task->GetID() == e->GetID())
 			{
 				e->AMove(task->GetDeployCor());
+				//表示
+				e->SetAttribute(GEAttribute::Draw, true);
 			}
 		}
 	}

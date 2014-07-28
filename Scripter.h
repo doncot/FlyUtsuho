@@ -107,7 +107,8 @@ public:
 			{
 				std::wregex pattern(L"encoding\\(.+\\)",
 					std::regex_constants::extended | std::regex_constants::icase);
-				if (std::regex_match(buff, pattern)) continue;
+				if (std::regex_match(buff, pattern))
+					continue;
 			}
 
 			//create–½—ß
@@ -147,6 +148,16 @@ public:
 					continue;
 				}
 			}
+
+			//move–½—ß
+			std::wregex pattern(L"^deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
+			if (std::regex_match(buff, match, pattern))
+			{
+
+
+				continue;
+			}
+
 		}
 
 		//ŒÃ‚¢ƒƒP[ƒ‹‚ğ“Ç‚İ–ß‚·

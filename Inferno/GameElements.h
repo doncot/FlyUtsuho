@@ -14,6 +14,7 @@ Rigidbody:剛体。「物理衝突」をするSubstance。
 #include"Common.h"
 #include<Timer.h>
 
+
 namespace Inferno
 {
 //ゲーム要素の状態（アクションゲーム用なので継承先に本来あるべき

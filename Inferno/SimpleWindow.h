@@ -6,11 +6,6 @@
 #include<tchar.h>
 #include<Input.h>
 
-//メモリリーク検出用。
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-
 namespace Inferno
 {
 class SimpleWindow

@@ -113,7 +113,7 @@ public:
 
 			//create–½—ß
 			{
-				std::wregex pattern(L"^create\\([[:s:]]*([^)]+)[[:s:]]*\\)$", std::regex_constants::extended);
+				std::wregex pattern(L"^create\\([[:s:]]*([[:d:]]+)[[:s:]]*\\)$", std::regex_constants::extended);
 				if (std::regex_match(buff, match, pattern))
 				{
 					//id

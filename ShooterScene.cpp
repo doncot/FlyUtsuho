@@ -105,6 +105,7 @@ namespace Inferno
 				OnTaskStart( dynamic_cast<DeployTask*>(*e) );
 
 				//Ç±ÇÃÉ^ÉXÉNÇÕÇ±Ç±Ç≈è¡ãé
+				SAFE_DELETE(*e);
 				e = m_taskList.erase(e);
 
 				continue;

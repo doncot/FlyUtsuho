@@ -61,6 +61,9 @@ public:
 
 	void DeployEnemy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 
+	void RegisterMove(const int id, const Millisec delay, const Millisec dur,
+		const Vec2<int> cor, const Animation::TransitType ttype);
+
 	//Move–½—ß
 	void MoveEntity(const int id, const Millisec moveTime, const Vec2<int> deployCor, const Animation::TransitType ttype);
 

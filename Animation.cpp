@@ -136,4 +136,22 @@ void Animation::KF_Clear()
 	m_endTime = 0;
 }
 
+const Animation::TransitType Animation::InterpretTransitType(const std::wstring str) const
+{
+	if (str == L"LINEAR")
+	{
+		return Animation::Linear;
+	}
+	if (str == L"EASEOUT")
+	{
+		return Animation::EaseOut;
+	}
+	if (str == L"EASEIN")
+	{
+		return Animation::EaseIn;
+	}
+
+	return Animation::Unknown;
+}
+
 }

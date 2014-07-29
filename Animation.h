@@ -18,6 +18,7 @@ public:
 	//TODOスペル確認
 	enum TransitType
 	{
+		Unknown,
 		Linear,
 		EaseIn,
 		EaseOut
@@ -40,6 +41,8 @@ public:
 	bool HasEnded() const;
 	//キーフレームを設定した場合、再び使う前にリセット
 	void KF_Clear();
+
+	const TransitType InterpretTransitType(const std::wstring str) const;
 
 private:
 	struct KeyFrameSet

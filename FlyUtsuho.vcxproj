@@ -98,6 +98,7 @@
     <ClInclude Include="Score.h" />
     <ClInclude Include="Scripter.h" />
     <ClInclude Include="ShooterElements.h" />
+    <ClInclude Include="ShooterScene.h" />
     <ClInclude Include="SVShooter.h" />
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +124,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyTypes.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ShooterScene.cpp" />
     <ClCompile Include="SVShooter.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@
 #include<list>
 #include<queue>
 #include"Inferno\Graphics.h"
+#include"Animation.h"
 
 namespace Inferno
 {
@@ -59,6 +60,9 @@ public:
 	void SetImageFromFile(const int id, const wstring& filename);
 
 	void DeployEnemy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
+
+	//Move命令
+	void MoveEntity(const int id, const Millisec moveTime, const Vec2<int> deployCor, const Animation::TransitType ttype);
 
 	//シーンをスタート
 	void Start();

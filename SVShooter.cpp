@@ -89,6 +89,7 @@ bool SVShooter::Initialize()
 		m_utsuho->SetIdea(m_utsuho_);
 		m_utsuho->AMove(200, 200);
 		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));
+		m_utsuho->SetAttribute(Inferno::GEAttribute::Draw,true);
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);
@@ -184,7 +185,7 @@ bool SVShooter::GameLoop()
 		if (!sceneTimer.HasStarted()) sceneTimer.Start();
 		if (!scene.HasStarted()) scene.Start();
 		scene.Update();
-		scene.Draw();
+
 
 		//入力
 		const int utsuhoVel = 6;
@@ -343,7 +344,7 @@ bool SVShooter::GameLoop()
 			this->Exit();
 		}
 
-		/*
+		
 		//描画
 		if (Base::m_graphics.BeginScene() && Base::m_graphics.BeginSprite())
 		{
@@ -368,6 +369,9 @@ bool SVShooter::GameLoop()
 
 			egg.Draw(m_graphics);
 
+			//シーン
+			scene.Draw();
+
 			//スコア
 			wstringstream ss;
 			ss << m_utsuho->GetPosition().x;
@@ -376,7 +380,7 @@ bool SVShooter::GameLoop()
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();
-		*/
+		
 
 		break;
 	}

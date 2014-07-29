@@ -20,7 +20,7 @@ public:
 	void Initialize(HWND hWnd);
 	void Finalize();
 
-	void ClearScreen(const int r,const int g,const int b) const;
+	void DisplayBlankScreen(const int r,const int g,const int b) const;
 	bool BeginScene() const;
 	void EndScene() const;
 	bool BeginSprite() const;

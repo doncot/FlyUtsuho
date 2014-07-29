@@ -117,16 +117,13 @@ namespace Inferno
 
 	void ShooterScene::Draw()
 	{
-		if (m_graphics->BeginScene() && m_graphics->BeginSprite())
+		for (auto e : m_subList)
 		{
-			for (auto e : m_subList)
-			{
-				e->Draw(*m_graphics);
-			}
+			e->Draw(*m_graphics);
+
 		}
-		m_graphics->EndSprite();
-		m_graphics->EndScene();
 	}
+
 
 	bool ShooterScene::HasStarted() const
 	{

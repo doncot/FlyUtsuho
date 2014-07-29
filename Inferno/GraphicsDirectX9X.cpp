@@ -40,7 +40,7 @@ void Graphics::Initialize(HWND hWnd)
 	}
 
 	//‰Šú‰»‚ªŠ®—¹‚µ‚½‚çÂƒNƒŠƒA‚ð‚·‚é
-	this->ClearScreen(0, 0, 128);
+	this->DisplayBlankScreen(0, 0, 128);
 }
 
 void Graphics::Finalize()
@@ -50,7 +50,7 @@ void Graphics::Finalize()
 	SAFE_RELEASE(m_d3d);
 }
 
-void Graphics::ClearScreen(const int r, const int g, const int b) const
+void Graphics::DisplayBlankScreen(const int r, const int g, const int b) const
 {
 	m_d3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(r, g, b), 1.0f, 0);
 	m_d3dDevice->Present(NULL, NULL, NULL, NULL);

@@ -136,7 +136,7 @@ void Animation::KF_Clear()
 	m_endTime = 0;
 }
 
-const Animation::TransitType Animation::InterpretTransitType(const std::wstring str) const
+const Animation::TransitType Animation::InterpretTransitType(const std::wstring str)
 {
 	if (str == L"LINEAR")
 	{

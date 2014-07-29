@@ -71,21 +71,28 @@ namespace Inferno
 		}
 	}
 
-	void ShooterScene::DeployEnemy(const int id, const Millisec deployTime, const Vec2<int> deployCor)
+	void ShooterScene::RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor)
 	{
-		//該当のidを持つSubstanceをデプロイ
-		for (auto e : m_subList)
-		{
-			//idが一致したら
-			if ( e->GetID() == id)
-			{
-				auto newTask = new DeployTask(id);
-				newTask->SetDeployTiming(deployTime);
-				newTask->SetDeployCor(deployCor);
+		//Deployタスクを生成
+		auto newTask = new DeployTask(id);
+		newTask->SetDeployTiming(deployTime);
+		newTask->SetDeployCor(deployCor);
 
-				m_taskList.push_back(newTask);
-			}
-		}
+		m_taskList.push_back(newTask);
+	}
+
+	void ShooterScene::RegisterRMove(const int id, const Millisec delay, const Millisec dur,
+		const Vec2<int> cor, const Animation::TransitType ttype)
+	{
+		//移動タスクを登録
+		/*
+		auto newTaskX = new MoveTask(id);
+		Animation::KeyFrameSet newKFSetX;
+		newKFSetX.delay = delay;
+		newKFSetX.dur = dur;
+		newKFSetX.start = cor.x;
+		*/
+		//TODO:RMoveなアニメーションの作成
 	}
 
 	void ShooterScene::Start()

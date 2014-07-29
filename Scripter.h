@@ -13,6 +13,7 @@ Scripter.h
 #include"Inferno\TString.h"
 #include"ShooterScene.h"
 #include"Inferno\MyException.h"
+#include"Animation.h"
 
 namespace
 {
@@ -140,7 +141,7 @@ public:
 				std::wregex pattern(L"^deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
 				if (std::regex_match(buff, match, pattern))
 				{
-					scene->DeployEnemy(std::atoi(TString(match.str(1)).GetStringA()),
+					scene->RegisterDeploy(std::atoi(TString(match.str(1)).GetStringA()),
 						std::atoi(TString(match.str(2)).GetStringA()),
 						Vec2<int>(std::atoi(TString(match.str(3)).GetStringA()),
 						std::atoi(TString(match.str(4)).GetStringA()))
@@ -153,14 +154,14 @@ public:
 			std::wregex pattern(L"^deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
 			if (std::regex_match(buff, match, pattern))
 			{
-				/*
-				scene->RegisterMove(std::atoi(TString(match.str(1)).GetStringA()),
+				scene->RegisterRMove(std::atoi(TString(match.str(1)).GetStringA()),
 					std::atoi(TString(match.str(2)).GetStringA()),
 					std::atoi(TString(match.str(3)).GetStringA()),
 					Vec2<int>(std::atoi(TString(match.str(4)).GetStringA()),
-					std::atoi(TString(match.str(5)).GetStringA()))
+						std::atoi(TString(match.str(5)).GetStringA())),
+						Animation::InterpretTransitType(match.str(6))
 					);
-				*/
+				
 				continue;
 			}
 

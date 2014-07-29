@@ -47,6 +47,31 @@ private:
 		Vec2<int> m_pos;
 	};
 
+	class MoveTask : public BaseTask
+	{
+	public:
+		enum class ValueType
+		{
+			trans_x,
+			trans_y
+		};
+
+	public:
+		MoveTask(const int taskId) : Base(taskId) {}
+		void SetKeyFrameSet(const Animation::KeyFrameSet set, const ValueType type, const Timer& gameTimer)
+		{
+			m_keyFrameSet = set;
+			m_valueType = type;
+			m_registeredTime = gameTimer.GetElapsed();
+		}
+
+	private:
+		typedef BaseTask Base;
+		Millisec m_registeredTime;
+		Animation::KeyFrameSet m_keyFrameSet;
+		ValueType m_valueType;
+	};
+
 public:
 	~ShooterScene();
 
@@ -59,13 +84,10 @@ public:
 
 	void SetImageFromFile(const int id, const wstring& filename);
 
-	void DeployEnemy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
+	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 
-	void RegisterMove(const int id, const Millisec delay, const Millisec dur,
+	void RegisterRMove(const int id, const Millisec delay, const Millisec dur,
 		const Vec2<int> cor, const Animation::TransitType ttype);
-
-	//Move命令
-	void MoveEntity(const int id, const Millisec moveTime, const Vec2<int> deployCor, const Animation::TransitType ttype);
 
 	//シーンをスタート
 	void Start();

@@ -6,6 +6,11 @@
 
 namespace
 {
+	/*
+	dx = (dst - x)/10.0;
+	x += dx;ÇÑÇ”ÇüÇÑ
+	*/
+
 	double LinearMove(double change, double base, double duration, double time)
 	{
 		return change * ( time / duration ) + base;
@@ -40,10 +45,38 @@ Animation::~Animation()
 {
 }
 
+void Animation::Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag = false)
+{
+	KF_Clear();
+	KF_Set(0, delay, dur, d, type, loopFlag);
+}
+
 void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
+}
+
+void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
+	const int d, const TransitType type = Linear, const bool loopFlag = false)
+{
+	if (static_cast<unsigned int>(key) >= m_kfset.size())
+		m_kfset.resize(key + 1);
+	m_kfset[key].delay = delay;
+	m_kfset[key].dur = dur;
+	m_kfset[key].end = d;
+	m_kfset[key].type = type;
+	m_kfset[key].movetype = MoveType::Relative;
+	m_kfset[key].loop = loopFlag;
+	if (key > m_endKey)
+	{
+		m_endKey = key;
+	}
+	//ç≈èIåoâﬂÇåvéZ
+	for (int i = 0; i <= m_endKey; i++)
+	{
+		m_endTime += m_kfset[i].delay + m_kfset[i].dur;
+	}
 }
 
 void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
@@ -56,6 +89,7 @@ void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	m_kfset[key].start = s;
 	m_kfset[key].end = e;
 	m_kfset[key].type = type;
+	m_kfset[key].movetype = MoveType::Absolute;
 	m_kfset[key].loop = loopFlag;
 	if (key > m_endKey)
 	{

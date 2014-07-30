@@ -22,6 +22,12 @@ public:
 		EaseIn,
 		EaseOut
 	};
+	enum class MoveType
+	{
+		Unknown,
+		Relative,
+		Absolute
+	};
 
 	struct KeyFrameSet
 	{
@@ -30,6 +36,7 @@ public:
 		Millisec delay;
 		Millisec dur;
 		TransitType type;
+		MoveType movetype;
 		bool loop;
 		int start;
 		int end;
@@ -39,7 +46,8 @@ public:
 			key = 0;
 			delay = 0;
 			dur = 0;
-			type = Unknown;
+			type = TransitType::Unknown;
+			movetype = MoveType::Unknown;
 			loop = false;
 			start = 0;
 			end = 0;
@@ -54,6 +62,8 @@ public:
 	//到達座標のみ-1で現在座標
 	void Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag = false);
 	void Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
+	void KF_Set(const int key, const Millisec delay, const Millisec dur,
+		const int d, const TransitType type = Linear, const bool loopFlag = false);
 	void KF_Set(const int key,const Millisec delay, const Millisec dur,
 		const int s, const int e, const TransitType type = Linear, const bool loopFlag = false);
 	//設定と同時にスタート（主にテスト用）

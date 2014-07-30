@@ -5,8 +5,8 @@
 
 namespace
 {
-	Inferno::Animation aTransX;
-	Inferno::Animation aRotate;
+	Inferno::Animation<Inferno::LocalTimer> aTransX;
+	Inferno::Animation<Inferno::LocalTimer> aRotate;
 }
 
 namespace Inferno
@@ -39,8 +39,10 @@ void Player::Hit()
 	if (m_curState == PState::Neutral)
 	{
 		m_curState = PState::Damaged;
+		/*
 		aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
 		aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
+		*/
 		SetAttribute(GEAttribute::UserLock, true);
 	}
 }

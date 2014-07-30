@@ -45,10 +45,10 @@ Animation::~Animation()
 {
 }
 
-void Animation::Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag)
+void Animation::Set(const Millisec delay, const float approachSpeed, const int d, const TransitType type, const bool loopFlag)
 {
 	KF_Clear();
-	KF_Set(0, delay, dur, d, type, loopFlag);
+	KF_Set(0, delay, approachSpeed, d, type, loopFlag);
 }
 
 void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag)
@@ -102,6 +102,7 @@ void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	}
 }
 
+/*
 void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
 		const Animation::TransitType type, const bool loopFlag)
 {
@@ -109,15 +110,17 @@ void Animation::Start(const Millisec delay, const Millisec dur, const int s, con
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
 	m_timer.Start();
 }
+*/
 
-void Animation::Start()
+void Animation::Start(const Timer& timer)
 {
-	m_timer.Start();
+	m_externalTimer = &timer;
+	//m_localTimer.Start();
 }
 
 int Animation::GetValue()
 {
-	Millisec etime = m_timer.GetElapsed();
+	Millisec etime = m_externalTimer->GetElapsed();
 	//Žž–ž‚½‚¸
 	if (etime < m_kfset[m_curKey].delay)
 	{
@@ -156,7 +159,7 @@ int Animation::GetValue()
 
 bool Animation::HasEnded() const
 {
-	return m_timer.GetElapsed() > m_endTime;
+	return m_externalTimer->GetElapsed() > m_endTime;
 }
 
 void Animation::KF_Clear()
@@ -184,8 +187,12 @@ const Animation::TransitType Animation::InterpretTransitType(const std::wstring 
 	{
 		return Animation::EaseIn;
 	}
+	if (str == L"EASEINOUT")
+	{
+		return Animation::EaseInOut;
+	}
 
-	return Animation::Unknown;
+	return Animation::TransitType::Unknown;
 }
 
 }

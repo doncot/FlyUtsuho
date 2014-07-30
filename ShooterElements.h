@@ -96,9 +96,9 @@ public:
 private:
 	Timer m_timer;
 	EState m_curState = EState::Standby;
-	Animation m_entryAnime[2];
-	Animation m_anime[2];
-	Animation m_exitAnime[2];
+	Animation<LocalTimer> m_entryAnime[2];
+	Animation<LocalTimer> m_anime[2];
+	Animation<LocalTimer> m_exitAnime[2];
 
 	//íËêî
 	const Millisec ShootInterval = 800;

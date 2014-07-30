@@ -18,7 +18,7 @@ namespace Inferno
 
 		void Start();
 		void Stop();
-		Millisec Timer::GetElapsed() const;
+		Millisec GetElapsed() const;
 		void Pause();
 		void UnPause();
 

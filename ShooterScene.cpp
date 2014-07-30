@@ -89,6 +89,7 @@ namespace Inferno
 		auto newTaskX = new MoveTask(id);
 		Animation::KeyFrameSet newKFSetX;
 		newKFSetX.delay = delay;
+
 		newKFSetX.dur = dur;
 		newKFSetX.start = cor.x;
 		*/

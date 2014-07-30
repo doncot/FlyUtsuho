@@ -45,7 +45,7 @@ Animation::~Animation()
 {
 }
 
-void Animation::Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag = false)
+void Animation::Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, d, type, loopFlag);
@@ -58,7 +58,7 @@ void Animation::Set(const Millisec delay, const Millisec dur, const int s, const
 }
 
 void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
-	const int d, const TransitType type = Linear, const bool loopFlag = false)
+	const int d, const TransitType type, const bool loopFlag)
 {
 	if (static_cast<unsigned int>(key) >= m_kfset.size())
 		m_kfset.resize(key + 1);

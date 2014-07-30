@@ -52,6 +52,7 @@ public:
 
 	//ディレイ時間、終了時間、開始点、到達点、ループ設定、（同期/非同期[待つか待たないか]）
 	//到達座標のみ-1で現在座標
+	void Set(const Millisec delay, const Millisec dur, const int d, const TransitType type, const bool loopFlag = false);
 	void Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
 	void KF_Set(const int key,const Millisec delay, const Millisec dur,
 		const int s, const int e, const TransitType type = Linear, const bool loopFlag = false);

@@ -5,8 +5,8 @@
 
 namespace
 {
-	Inferno::Animation<Inferno::LocalTimer> aTransX;
-	Inferno::Animation<Inferno::LocalTimer> aRotate;
+	Inferno::Animation aTransX;
+	Inferno::Animation aRotate;
 }
 
 namespace Inferno

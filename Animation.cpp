@@ -45,38 +45,10 @@ Animation::~Animation()
 {
 }
 
-void Animation::Set(const Millisec delay, const float approachSpeed, const int d, const TransitType type, const bool loopFlag)
-{
-	KF_Clear();
-	KF_Set(0, delay, approachSpeed, d, type, loopFlag);
-}
-
 void Animation::Set(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
-}
-
-void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
-	const int d, const TransitType type, const bool loopFlag)
-{
-	if (static_cast<unsigned int>(key) >= m_kfset.size())
-		m_kfset.resize(key + 1);
-	m_kfset[key].delay = delay;
-	m_kfset[key].dur = dur;
-	m_kfset[key].end = d;
-	m_kfset[key].type = type;
-	m_kfset[key].movetype = MoveType::Relative;
-	m_kfset[key].loop = loopFlag;
-	if (key > m_endKey)
-	{
-		m_endKey = key;
-	}
-	//ç≈èIåoâﬂÇåvéZ
-	for (int i = 0; i <= m_endKey; i++)
-	{
-		m_endTime += m_kfset[i].delay + m_kfset[i].dur;
-	}
 }
 
 void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
@@ -102,25 +74,22 @@ void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	}
 }
 
-/*
 void Animation::Start(const Millisec delay, const Millisec dur, const int s, const int e,
 		const Animation::TransitType type, const bool loopFlag)
 {
 	KF_Clear();
 	KF_Set(0, delay, dur, s, e, type, loopFlag);
-	m_timer.Start();
+	m_localTimer.Start();
 }
-*/
 
-void Animation::Start(const Timer& timer)
+void Animation::Start()
 {
-	m_externalTimer = &timer;
-	//m_localTimer.Start();
+	m_localTimer.Start();
 }
 
 int Animation::GetValue()
 {
-	Millisec etime = m_externalTimer->GetElapsed();
+	Millisec etime = m_localTimer.GetElapsed();
 	//éûñûÇΩÇ∏
 	if (etime < m_kfset[m_curKey].delay)
 	{
@@ -159,7 +128,7 @@ int Animation::GetValue()
 
 bool Animation::HasEnded() const
 {
-	return m_externalTimer->GetElapsed() > m_endTime;
+	return m_localTimer.GetElapsed() > m_endTime;
 }
 
 void Animation::KF_Clear()

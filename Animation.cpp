@@ -8,7 +8,7 @@ namespace
 {
 	/*
 	dx = (dst - x)/10.0;
-	x += dx;‚„‚Ó‚Ÿ‚„
+	x += dx;
 	*/
 
 	double LinearMove(double change, double base, double duration, double time)

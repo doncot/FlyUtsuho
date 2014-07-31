@@ -8,7 +8,7 @@ loadimage(1,"Sprites\\onryou.png")
 deploy(1,2500,[700,50])
 //move命令:move(id,delay,dur,rel-value[x,y],transitType)
 //entry
-move(1,2500,1000,[-220,100],EASEOUT)
+move(1,2500,[300,100],30.5,EASEOUT)
 //平常動作
 move(1,100,300,[-360,0],LINEAR)
 //leave

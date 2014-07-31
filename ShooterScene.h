@@ -86,8 +86,8 @@ public:
 
 	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 
-	void RegisterRMove(const int id, const Millisec delay, const Millisec dur,
-		const Vec2<int> cor, const Animation::TransitType ttype);
+	void RegisterMove(const int id, const Millisec delay,
+		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype);
 
 	//シーンをスタート
 	void Start();

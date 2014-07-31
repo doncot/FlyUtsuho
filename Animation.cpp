@@ -6,11 +6,6 @@
 
 namespace
 {
-	/*
-	dx = (dst - x)/10.0;
-	x += dx;
-	*/
-
 	double LinearMove(double change, double base, double duration, double time)
 	{
 		return change * ( time / duration ) + base;

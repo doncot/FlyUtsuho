@@ -12,8 +12,8 @@ Rigidbody:剛体。「物理衝突」をするSubstance。
 #include<Texture.h>
 #include"MyTypes.h"
 #include"Common.h"
-#include<Timer.h>
-
+#include"Timer.h"
+#include"..\Animation.h"
 
 namespace Inferno
 {
@@ -70,6 +70,10 @@ public:
 	//相対標指定移動
 	virtual void RMove(const int x, const int y);
 	virtual void RMove(const Vec2<int>& c);
+	//dstへ移動。approachScaleで接近する早さをコントロール（小さいほど早い）
+	//移動が完了したらtrueを返す
+	bool SmartMove(const Vec2<int>& dst, const double approachScale,
+		Animation::TransitType ttype);
 	//左上座標で位置を指定
 	void SetPosofULCorner(const int x, const int y);
 	//時計周りに回転（度数指定）

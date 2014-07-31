@@ -38,6 +38,21 @@ template<typename T> struct Vec2 //テンプレートはヘッダーに実装を書くのが正解
 	{
 		this->operator+=(vec);
 	}
+
+	bool operator==(const Vec2<T>& vec) const
+	{
+		//浮動小数点系は使わない
+		if (this->x == vec.x && this->y == vec.y)
+		{
+			return true;
+		}
+		else return false;
+	}
+
+	bool operator==(Vec2<T>& vec) const
+	{
+		this->operator==(vec);
+	}
 };
 
 class Matrix

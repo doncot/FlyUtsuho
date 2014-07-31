@@ -81,9 +81,10 @@ namespace Inferno
 		m_taskList.push_back(newTask);
 	}
 
-	void ShooterScene::RegisterRMove(const int id, const Millisec delay, const Millisec dur,
-		const Vec2<int> cor, const Animation::TransitType ttype)
+	void ShooterScene::RegisterMove(const int id, const Millisec delay,
+		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype)
 	{
+		int test = 0;
 		//ˆÚ“®ƒ^ƒXƒN‚ð“o˜^
 		/*
 		auto newTaskX = new MoveTask(id);

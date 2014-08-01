@@ -51,10 +51,6 @@ SVShooter::~SVShooter()
 {
 	SAFE_DELETE(m_utsuho);
 	SAFE_DELETE(m_fireball);
-	for (auto e : m_onryouList)
-	{
-		SAFE_DELETE(e);
-	}
 	for (auto i = purpleBullets.begin(); i != purpleBullets.end();)
 	{
 		SAFE_DELETE(*i);
@@ -90,15 +86,6 @@ bool SVShooter::Initialize()
 
 		purpleBulletTex.LoadImageFile(m_graphics, _T("Sprites\\purplebullet.png"));
 		purpleBullet_.SetTexture(purpleBulletTex);
-
-		m_onryouTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\onryou.png"));
-		m_onryou_.SetTexture(m_onryouTex);
-		auto tsub = new Inferno::Enemy(m_onryou_);
-		tsub->AMove(400, 300);
-		m_onryouList.push_back(tsub);
-		tsub = new Inferno::Enemy(m_onryou_);
-		tsub->AMove(600, 400);
-		m_onryouList.push_back(tsub);
 
 		bg_underground.resize(2);
 		for (auto e = bg_underground.begin(); e != bg_underground.end();e++)
@@ -230,21 +217,6 @@ bool SVShooter::GameLoop()
 			(*e)->Update();
 		}
 
-		//敵
-		if (sceneTimer.GetElapsed() > 500)
-		{
-			if (m_onryouList[0]) m_onryouList[0]->Entry();
-		}
-
-		if (m_onryouList[0])
-		{
-			m_onryouList[0]->Update();
-		}
-		if (m_onryouList[1])
-		{
-			m_onryouList[1]->Update();
-		}
-
 		static Inferno::Stopwatch eggInterval(6000);
 		//卵
 		if (eggInterval.HasFinished())
@@ -283,18 +255,6 @@ bool SVShooter::GameLoop()
 			i++;
 		}
 		
-		//怨霊と火弾の衝突判定
-		for (unsigned int i = 0; i < m_onryouList.size(); i++)
-		{
-			if (m_fireball && m_onryouList[i]
-				&& Inferno::IsPointInsideRect(m_fireball->GetPosition(), m_onryouList[i]->GetRegion()))
-			{
-				SAFE_DELETE(m_fireball);
-				SAFE_DELETE(m_onryouList[i]);
-				break;
-			}
-		}
-
 		//敵弾と自機の衝突判定
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
 		{
@@ -330,12 +290,14 @@ bool SVShooter::GameLoop()
 			}
 		}
 
+		/*
 		//シーン切り替え
 		if (!m_onryouList[0] && !m_onryouList[1])
 		{
 			MessageBox(nullptr, L"殲滅完了！", L"メッセージ", MB_OK);
 			this->Exit();
 		}
+		*/
 
 		
 		//描画
@@ -353,11 +315,6 @@ bool SVShooter::GameLoop()
 			for (auto& e: purpleBullets)
 			{
 				e->Draw(m_graphics);
-			}
-
-			for (auto& e : m_onryouList)
-			{
-				if(e) e->Draw(m_graphics);
 			}
 
 			egg.Draw(m_graphics);

@@ -1,15 +1,22 @@
 ﻿encoding(utf8)
 //最初に生成を行う。属性も指定
 create(1)
+create(2)
 //load命令-画像リソースをロード
 //第一引数は識別番号（同じ画像を使用する奴が来たら上で使いまわす）
 loadimage(1,"Sprites\\onryou.png")
+loadimage(2,"Sprites\\onryou.png")
 //deploy命令(設置するだけ):entry(id,deploytiming(シーン開始からの時刻), deployCordinet[x,y])
-deploy(1,2500,[850,50])
-//move命令:move(id,delay,dur,rel-value[x,y],transitType)
-//entry
-move(1,2500,[500,100],30.5,EASEOUT)
+deploy(1,500,[850,50])
+deploy(2,900,[850,500])
+//stepmove(id,delay,absolute[x,y],transitType)
+stepmove(1,500,[500,100],30.5,EASEOUT)
+stepmove(2,900,[500,450],30.5,EASEOUT)
 //平常動作
+stepmove(1,2000,[200,100],2,LINEAR)
+//stepmove(2,900,[500,450],30.5,EASEOUT)
+
+//move(id,delay,dur,rel-value[x,y],transitType)
 move(1,100,300,[-360,0],LINEAR)
 //leave
 move(1,50,120,[-400,-200],EASEIN)

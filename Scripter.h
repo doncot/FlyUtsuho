@@ -150,9 +150,9 @@ public:
 				}
 			}
 
-			//move–½—ß
+			//stepmove–½—ß
 			{
-				std::wregex pattern(L"^move\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\],([0-9]*\\.?[0-9]),([[:upper:]]+)[[:s:]]*\\)$");
+				std::wregex pattern(L"^stepmove\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\],([0-9]*\\.?[0-9]),([[:upper:]]+)[[:s:]]*\\)$");
 				if (std::regex_match(buff, match, pattern))
 				{
 					scene->RegisterMove(std::atoi(TString(match.str(1)).GetStringA()),

@@ -49,8 +49,31 @@ bool Substance::SmartMove(const Vec2<int>& dst, const double approachScale,
 	Animation::TransitType ttype)
 {
 	Vec2<double> d;
+	bool xhasfinished = false;
+	bool yhasfinished = false;
+
 	switch (ttype)
 	{
+	case Animation::Linear:
+		//x軸付近だった場合、ジャストに（なんと汚いフラグか）
+		if ( (dst.x - approachScale) < m_pos.x &&  m_pos.x < (dst.x + approachScale))
+		{
+			m_pos.x = dst.x;
+			xhasfinished = true;
+		}
+		if ( (dst.y - approachScale) < m_pos.y &&  m_pos.y < (dst.y + approachScale))
+		{
+			m_pos.y = dst.y;
+			yhasfinished = true;
+		}
+		if (xhasfinished && yhasfinished) return true;
+
+		//approachScaleだけ近づく
+		m_pos.x > dst.x ? m_pos.x -= approachScale : m_pos.x += approachScale;
+		m_pos.y > dst.y ? m_pos.y -= approachScale : m_pos.y += approachScale;
+
+		break;
+
 	case Animation::EaseOut:
 		d.x = (dst.x - m_pos.x) / approachScale;
 		d.y = (dst.y - m_pos.y) / approachScale;

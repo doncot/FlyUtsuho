@@ -39,9 +39,5 @@ private:
 	Inferno::Idea m_fireball_;
 	Inferno::Bullet* m_fireball;
 
-	Inferno::Texture m_onryouTex;
-	Inferno::Idea m_onryou_;
-	std::vector<Inferno::Enemy*> m_onryouList;
-
 	Inferno::Score<int> m_score;
 };

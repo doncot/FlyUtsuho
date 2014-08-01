@@ -121,12 +121,14 @@ namespace Inferno
 				if (targetSub == (*e_s)->GetID())
 				{
 					//実行（だいぶネストがひどい……）
-					if ( (*e_t)->Do(*(*e_s)) )
+					bool result = (*e_t)->Do((*e_s));
+					if ( result )
 					{
 						//終了したらタスクを消す
 						SAFE_DELETE(*e_t);
 						e_t = m_taskList.erase(e_t);
 					}
+					//この時点でタスクは必ず実行されているので、次以降のSubに処理が渡ることはない
 					break;
 				}
 				e_s++;
@@ -143,7 +145,6 @@ namespace Inferno
 		for (auto e : m_subList)
 		{
 			e->Draw(*m_graphics);
-
 		}
 	}
 
@@ -152,21 +153,4 @@ namespace Inferno
 	{
 		return m_sceneTimer.HasStarted();
 	}
-
-	//ShooterScene private
-	void ShooterScene::OnTaskStart(DeployTask* task)
-	{
-		//このサーチは後々IDを直接探せるように再実装
-		for (auto e : m_subList)
-		{
-			if (task->GetID() == e->GetID())
-			{
-				e->AMove(task->GetDeployCor());
-				//表示
-				e->SetAttribute(GEAttribute::Draw, true);
-			}
-		}
-	}
-
-
 }

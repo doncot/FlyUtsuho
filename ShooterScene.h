@@ -31,7 +31,7 @@ private:
 
 		//タスクを実行する
 		//終了したらtrueを返す
-		virtual bool Do(const Substance& sub) = 0;
+		virtual bool Do(Substance* sub) = 0;
 
 	protected:
 		const int m_id = 0;
@@ -46,8 +46,10 @@ private:
 		void SetDeployCor(const Vec2<int> c) { m_pos = c; }
 		const Vec2<int> GetDeployCor() const { return m_pos; }
 
-		bool Do(const Substance& sub)
+		bool Do(Substance* sub)
 		{
+			sub->AMove(m_pos);
+			sub->SetAttribute(GEAttribute::Draw, true);
 			return true;
 		}
 
@@ -67,9 +69,9 @@ private:
 			m_ttype = ttype;
 		}
 
-		bool Do(const Substance& sub)
+		bool Do(Substance* sub)
 		{
-			return true;
+			return sub->SmartMove(m_dst, m_approachScale, m_ttype);
 		}
 
 	private:
@@ -103,10 +105,6 @@ public:
 	void Draw();
 
 	bool HasStarted() const;
-
-private:
-	void OnTaskStart(DeployTask* task);
-
 
 private:
 	const Graphics* m_graphics;

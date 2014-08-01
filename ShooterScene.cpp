@@ -1,4 +1,5 @@
 #include"ShooterScene.h"
+#include"ShooterElements.h"
 
 namespace Inferno
 {
@@ -43,7 +44,7 @@ namespace Inferno
 
 	void ShooterScene::CreateEnemy(const int id)
 	{
-		auto insert = new Substance();
+		auto insert = new Enemy();
 		insert->SetID(id);
 		insert->SetAttribute(GEAttribute::Draw, false);
 		m_subList.push_back(insert);

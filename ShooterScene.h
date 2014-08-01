@@ -98,6 +98,7 @@ public:
 	void RegisterMove(const int id, const Millisec delay,
 		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype);
 
+
 	//シーンをスタート
 	void Start();
 	void Update();

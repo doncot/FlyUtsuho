@@ -84,17 +84,11 @@ namespace Inferno
 	void ShooterScene::RegisterMove(const int id, const Millisec delay,
 		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype)
 	{
-		int test = 0;
 		//移動タスクを登録
-		/*
-		auto newTaskX = new MoveTask(id);
-		Animation::KeyFrameSet newKFSetX;
-		newKFSetX.delay = delay;
-
-		newKFSetX.dur = dur;
-		newKFSetX.start = cor.x;
-		*/
-		//TODO:RMoveなアニメーションの作成
+		auto newTask = new MoveTask(id);
+		newTask->SetDeployTiming(delay);
+		newTask->SetMove(dst, approachScale,ttype);
+		m_taskList.push_back(newTask);
 	}
 
 	void ShooterScene::Start()
@@ -106,20 +100,39 @@ namespace Inferno
 	void ShooterScene::Update()
 	{
 		//全タスクを回す
-		for (auto e = m_taskList.begin(); e != m_taskList.end();)
+		for (auto e_t = m_taskList.begin(); e_t != m_taskList.end();)
 		{
-			//タスクの開始で
-			if (m_activeSceneTimer.GetElapsed() > (*e)->GetDeployTiming())
+			//タスク開始時間でない場合（ここで切る事によりだいぶパフォーマンスが変わる）
+			if (m_activeSceneTimer.GetElapsed() < (*e_t)->GetDeployTiming())
 			{
-				OnTaskStart( dynamic_cast<DeployTask*>(*e) );
-
-				//このタスクはここで消去
-				SAFE_DELETE(*e);
-				e = m_taskList.erase(e);
-
+				e_t++; //これがないと開始時間になるまでループし続ける
 				continue;
 			}
-			e++;
+
+			//ここら辺は全部Task->DoTaskで
+			//TODO:taskのlistは全部substanceが持つべき？
+			//暫定処理としてm_subListをtaskに渡すか？
+			int targetSub = (*e_t)->GetID();
+			//ここでSubListを探索
+			//非常によくないO(n^2)
+			for (auto e_s = m_subList.begin(); e_s != m_subList.end();)
+			{
+				//該当タスクの場合
+				if (targetSub == (*e_s)->GetID())
+				{
+					//実行（だいぶネストがひどい……）
+					if ( (*e_t)->Do(*(*e_s)) )
+					{
+						//終了したらタスクを消す
+						SAFE_DELETE(*e_t);
+						e_t = m_taskList.erase(e_t);
+					}
+					break;
+				}
+				e_s++;
+			}
+			//タスクリストが終わってるのにまだ消そうとしてはいけない（2重ループが分かりにくさせている）
+			if ( e_t != m_taskList.end() ) e_t++;
 		}
 
 		//プレイヤーの移動

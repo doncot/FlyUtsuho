@@ -29,6 +29,10 @@ private:
 		
 		int GetID() const { return m_id; }
 
+		//タスクを実行する
+		//終了したらtrueを返す
+		virtual bool Do(const Substance& sub) = 0;
+
 	protected:
 		const int m_id = 0;
 		Millisec m_deployTiming = 0;
@@ -42,6 +46,11 @@ private:
 		void SetDeployCor(const Vec2<int> c) { m_pos = c; }
 		const Vec2<int> GetDeployCor() const { return m_pos; }
 
+		bool Do(const Substance& sub)
+		{
+			return true;
+		}
+
 	private:
 		typedef BaseTask Base;
 		Vec2<int> m_pos;
@@ -50,26 +59,24 @@ private:
 	class MoveTask : public BaseTask
 	{
 	public:
-		enum class ValueType
-		{
-			trans_x,
-			trans_y
-		};
-
-	public:
 		MoveTask(const int taskId) : Base(taskId) {}
-		void SetKeyFrameSet(const Animation::KeyFrameSet set, const ValueType type, const Timer& gameTimer)
+		void SetMove(const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype)
 		{
-			m_keyFrameSet = set;
-			m_valueType = type;
-			m_registeredTime = gameTimer.GetElapsed();
+			m_dst = dst;
+			m_approachScale = approachScale;
+			m_ttype = ttype;
+		}
+
+		bool Do(const Substance& sub)
+		{
+			return true;
 		}
 
 	private:
 		typedef BaseTask Base;
-		Millisec m_registeredTime;
-		Animation::KeyFrameSet m_keyFrameSet;
-		ValueType m_valueType;
+		Vec2<int> m_dst;
+		double m_approachScale;
+		Animation::TransitType m_ttype;
 	};
 
 public:

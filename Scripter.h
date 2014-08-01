@@ -151,18 +151,19 @@ public:
 			}
 
 			//move–½—ß
-			std::wregex pattern(L"^move\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\],([0-9]*\\.?[0-9]),([[:upper:]]+)[[:s:]]*\\)$");
-			if (std::regex_match(buff, match, pattern))
 			{
-				scene->RegisterMove(std::atoi(TString(match.str(1)).GetStringA()),
-					std::atoi(TString(match.str(2)).GetStringA()),
-					Vec2<int>(std::atoi(TString(match.str(3)).GetStringA()),
+				std::wregex pattern(L"^move\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*\\],([0-9]*\\.?[0-9]),([[:upper:]]+)[[:s:]]*\\)$");
+				if (std::regex_match(buff, match, pattern))
+				{
+					scene->RegisterMove(std::atoi(TString(match.str(1)).GetStringA()),
+						std::atoi(TString(match.str(2)).GetStringA()),
+						Vec2<int>(std::atoi(TString(match.str(3)).GetStringA()),
 						std::atoi(TString(match.str(4)).GetStringA())),
 						std::atof(TString(match.str(5)).GetStringA()),
 						Animation::InterpretTransitType(match.str(6))
-					);
-				
-				continue;
+						);
+					continue;
+				}
 			}
 
 		}

@@ -49,10 +49,18 @@ bool Substance::SmartMove(const Vec2<int>& dst, const double approachScale,
 	Animation::TransitType ttype)
 {
 	Vec2<double> d;
-	d.x = (dst.x - m_pos.x) / approachScale;
-	d.y = (dst.y - m_pos.y) / approachScale;
-	m_pos.x += d.x;
-	m_pos.y += d.y;
+	switch (ttype)
+	{
+	case Animation::EaseOut:
+		d.x = (dst.x - m_pos.x) / approachScale;
+		d.y = (dst.y - m_pos.y) / approachScale;
+		m_pos.x += d.x;
+		m_pos.y += d.y;
+		break;
+
+	default:
+		return false;
+	}
 
 	if (m_pos == dst) return true;
 	else return false;

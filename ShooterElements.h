@@ -1,5 +1,6 @@
 #pragma once
 
+#include<list>
 #include<GameElements.h>
 #include"MyTypes.h"
 #include<Timer.h>
@@ -12,6 +13,7 @@ class Bullet : public Substance
 public:
 	Bullet(const Inferno::Idea& idea) : Substance(idea) {}
 
+	/*
 	void Fire(const Inferno::Vec2<int>& bornPos, const int x, const int y)
 	{
 		this->AMove(bornPos.x + m_idea->GetWidth(), bornPos.y + m_idea->GetHeight() / 2);
@@ -24,9 +26,7 @@ public:
 	{
 		this->Fire(bornPos, vel.x, vel.y);
 	}
-
-	//Nway弾を放射
-	void Nway(const Inferno::Vec2<int>& bornPos, const int angle);
+	*/
 
 	//アニメーションとか移動とか
 	void Update()
@@ -53,12 +53,17 @@ public:
 	typedef Substance Base;
 
 	Player() : m_curState(PState::Neutral),m_moveLimit(0,0) {}
+	~Player();
 
 	//相対標指定移動（将来的には自身で移動を管理したい）
 	void RMove(const int x, const int y);
 	void RMove(const Vec2<int>& c);
 
 	void SetMoveLimit(const Rect& rect);
+
+	//弾を一発発射する
+	//角度を指定
+	void Shoot(const float degree);
 
 	void Hit();
 	void Update();
@@ -73,6 +78,8 @@ private:
 	//定数
 	const int HitBlowDistance = 20;
 	Inferno::Vec2<int> hitStartPoint;
+	//自身が管理する弾のリスト
+	std::list<Bullet*> m_bullets;
 };
 
 enum class EState

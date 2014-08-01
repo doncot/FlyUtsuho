@@ -11,6 +11,16 @@ namespace
 
 namespace Inferno
 {
+Player::~Player()
+{
+	for (auto i = m_bullets.begin(); i != m_bullets.end(); )
+	{
+		SAFE_DELETE((*i));
+		i = m_bullets.erase(i);
+		i++;
+	}
+}
+
 void Player::RMove(const int x, const int y)
 {
 	Base::RMove(x, y);
@@ -32,6 +42,11 @@ void Player::SetMoveLimit(const Rect& rect)
 	Rect temp = rect;
 	temp.SetPosofULCorner(0, 0);
 	m_moveLimit = temp;
+}
+
+void Player::Shoot(const float degree)
+{
+
 }
 
 void Player::Hit()

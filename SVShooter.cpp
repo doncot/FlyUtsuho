@@ -190,7 +190,7 @@ bool SVShooter::GameLoop()
 			if (m_fireball == nullptr)
 			{
 				m_fireball = new Inferno::Bullet(m_fireball_);
-				m_fireball->Fire(m_utsuho->GetPosition(), 5, 0);
+				//m_fireball->Fire(m_utsuho->GetPosition(), 5, 0);
 
 				fire.Stop();
 				fire.Play();

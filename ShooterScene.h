@@ -4,6 +4,7 @@
 #include<queue>
 #include"Inferno\Graphics.h"
 #include"Animation.h"
+#include"Inferno\MyException.h"
 
 namespace Inferno
 {
@@ -62,22 +63,33 @@ private:
 	{
 	public:
 		MoveTask(const int taskId) : Base(taskId) {}
-		void SetMove(const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype)
+		void SetMove(const Millisec dur, const Vec2<int> from, const Vec2<int> to,
+			const Animation::TransitType ttype)
 		{
-			m_dst = dst;
-			m_approachScale = approachScale;
-			m_ttype = ttype;
+			m_xmove.Set(this->GetDeployTiming(),
+				dur, from.x, to.x, ttype);
+			m_ymove.Set(this->GetDeployTiming(),
+				dur, from.y, to.y, ttype);
 		}
+
+		void SetTimer(const Timer& timer) { m_timer = &timer; }
 
 		bool Do(Substance* sub)
 		{
-			return sub->SmartMove(m_dst, m_approachScale, m_ttype);
+			if (m_timer == nullptr) throw L"Timer is not set.";
+			sub->AMove(m_xmove.GetValue(*m_timer), sub->GetPosition().y);
+			sub->AMove(sub->GetPosition().x, m_ymove.GetValue(*m_timer));
+			return m_xmove.HasEnded(*m_timer);
 		}
 
 	private:
 		typedef BaseTask Base;
-		Vec2<int> m_dst;
-		double m_approachScale;
+		const Timer* m_timer = nullptr;
+		Millisec m_dur;
+		Animation m_xmove;
+		Animation m_ymove;
+		Vec2<int> m_from;
+		Vec2<int> m_to;
 		Animation::TransitType m_ttype;
 	};
 
@@ -95,8 +107,8 @@ public:
 
 	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 
-	void RegisterMove(const int id, const Millisec delay,
-		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype);
+	void RegisterMove(const int id, const Millisec delay, const Millisec dur,
+		const Vec2<int> from, const Vec2<int> to, const Animation::TransitType ttype);
 
 
 	//シーンをスタート

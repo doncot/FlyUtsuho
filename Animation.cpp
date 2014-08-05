@@ -56,7 +56,6 @@ void Animation::KF_Set(const int key, const Millisec delay, const Millisec dur,
 	m_kfset[key].start = s;
 	m_kfset[key].end = e;
 	m_kfset[key].type = type;
-	m_kfset[key].movetype = MoveType::Absolute;
 	m_kfset[key].loop = loopFlag;
 	if (key > m_endKey)
 	{
@@ -85,6 +84,60 @@ void Animation::Start()
 int Animation::GetValue()
 {
 	Millisec etime = m_localTimer.GetElapsed();
+	return GetValueInternal(etime);
+}
+
+int Animation::GetValue(const Timer& timer)
+{
+	Millisec etime = timer.GetElapsed();
+	return GetValueInternal(etime);
+}
+
+bool Animation::HasEnded() const
+{
+	return m_localTimer.GetElapsed() > m_endTime;
+}
+
+bool Animation::HasEnded(const Timer& timer) const
+{
+	return timer.GetElapsed() > m_endTime;
+}
+
+void Animation::KF_Clear()
+{
+	for (int i = 0; i < m_endKey; i++)
+	{
+		m_kfset[i].Clear();
+	}
+	m_curKey = 0;
+	m_endKey = 0;
+	m_endTime = 0;
+}
+
+const Animation::TransitType Animation::InterpretTransitType(const std::wstring str)
+{
+	if (str == L"LINEAR")
+	{
+		return Animation::Linear;
+	}
+	if (str == L"EASEOUT")
+	{
+		return Animation::EaseOut;
+	}
+	if (str == L"EASEIN")
+	{
+		return Animation::EaseIn;
+	}
+	if (str == L"EASEINOUT")
+	{
+		return Animation::EaseInOut;
+	}
+
+	return Animation::TransitType::Unknown;
+}
+
+int Animation::GetValueInternal(const Millisec etime)
+{
 	//Žž–ž‚½‚¸
 	if (etime < m_kfset[m_curKey].delay)
 	{
@@ -119,44 +172,6 @@ int Animation::GetValue()
 	//‚±‚±‚É—ˆ‚é‚±‚Æ‚Í‚È‚¢
 	assert(0);
 	return 0;
-}
-
-bool Animation::HasEnded() const
-{
-	return m_localTimer.GetElapsed() > m_endTime;
-}
-
-void Animation::KF_Clear()
-{
-	for (int i = 0; i < m_endKey; i++)
-	{
-		m_kfset[i].Clear();
-	}
-	m_curKey = 0;
-	m_endKey = 0;
-	m_endTime = 0;
-}
-
-const Animation::TransitType Animation::InterpretTransitType(const std::wstring str)
-{
-	if (str == L"LINEAR")
-	{
-		return Animation::Linear;
-	}
-	if (str == L"EASEOUT")
-	{
-		return Animation::EaseOut;
-	}
-	if (str == L"EASEIN")
-	{
-		return Animation::EaseIn;
-	}
-	if (str == L"EASEINOUT")
-	{
-		return Animation::EaseInOut;
-	}
-
-	return Animation::TransitType::Unknown;
 }
 
 }

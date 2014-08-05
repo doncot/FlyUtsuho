@@ -24,12 +24,6 @@ public:
 		EaseOut,
 		EaseInOut,
 	};
-	enum class MoveType
-	{
-		Unknown,
-		Relative,
-		Absolute
-	};
 
 	struct KeyFrameSet
 	{
@@ -38,7 +32,6 @@ public:
 		Millisec delay;
 		Millisec dur;
 		TransitType type;
-		MoveType movetype;
 		bool loop;
 		int start;
 		int end;
@@ -49,7 +42,6 @@ public:
 			delay = 0;
 			dur = 0;
 			type = TransitType::Unknown;
-			movetype = MoveType::Unknown;
 			loop = false;
 			start = 0;
 			end = 0;
@@ -68,9 +60,16 @@ public:
 	//設定と同時にスタート（主にテスト用）
 	void Start(const Millisec delay, const Millisec dur, const int s, const int e, const TransitType type, const bool loopFlag = false);
 	void Start();
+	
+	//シーンタイマーを指定
 
+	//ローカルタイマーを使う場合
 	int GetValue();
+	//外部タイマーを入れる場合
+	int GetValue(const Timer& timer);
+
 	bool HasEnded() const;
+	bool HasEnded(const Timer& timer) const;
 	//キーフレームを設定した場合、再び使う前にリセット
 	void KF_Clear();
 
@@ -82,6 +81,10 @@ private:
 	int m_curKey;
 	int m_endKey;
 	Millisec m_endTime;
+
+//内部関数
+private:
+	int GetValueInternal(const Millisec etime);
 };
 
 

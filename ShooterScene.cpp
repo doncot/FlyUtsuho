@@ -82,13 +82,15 @@ namespace Inferno
 		m_taskList.push_back(newTask);
 	}
 
-	void ShooterScene::RegisterMove(const int id, const Millisec delay,
-		const Vec2<int> dst, const double approachScale, const Animation::TransitType ttype)
+	void ShooterScene::RegisterMove(const int id, const Millisec delay, const Millisec dur,
+		const Vec2<int> from, const Vec2<int> to, const Animation::TransitType ttype)
 	{
 		//ˆÚ“®ƒ^ƒXƒN‚ð“o˜^
 		auto newTask = new MoveTask(id);
 		newTask->SetDeployTiming(delay);
-		newTask->SetMove(dst, approachScale,ttype);
+		newTask->SetTimer(m_activeSceneTimer);
+		newTask->SetMove(dur, from, to, ttype);
+
 		m_taskList.push_back(newTask);
 	}
 

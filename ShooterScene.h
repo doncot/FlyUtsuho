@@ -72,6 +72,7 @@ private:
 				dur, from.y, to.y, ttype);
 		}
 
+		//‚±‚±‚È‚ñ‚Æ‚©‚È‚ç‚ñ‚©‚È
 		void SetTimer(const Timer& timer) { m_timer = &timer; }
 
 		bool Do(Substance* sub)
@@ -86,6 +87,7 @@ private:
 		typedef BaseTask Base;
 		const Timer* m_timer = nullptr;
 		Millisec m_dur;
+		//”Ä—p«‚ª‚È‚¢‚â‚è•û‚¾
 		Animation m_xmove;
 		Animation m_ymove;
 		Vec2<int> m_from;

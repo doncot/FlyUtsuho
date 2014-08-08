@@ -27,17 +27,12 @@ public:
 		this->Fire(bornPos, vel.x, vel.y);
 	}
 	
-
 	//アニメーションとか移動とか
-	void Update()
-	{
-		this->RMove(m_vel);
-	}
+	void Update();
 
 private:
 	typedef Inferno::Substance Base;
 	Inferno::Vec2<int> m_vel;
-
 };
 
 enum class PState

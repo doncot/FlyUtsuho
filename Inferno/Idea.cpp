@@ -41,4 +41,14 @@ int Idea::GetHeight() const
 	return m_height;
 }
 
+void Idea::SetActiveRange(const Rect& screen, int margin)
+{
+	//少し行って戻るケースもあるので、少し多めに画面外にはみ出したら検出
+	Rect tempRect;
+	tempRect.SetSize(screen.Width() + margin * 2, screen.Height() + margin * 2);
+	//右上にセット
+	tempRect.SetPosofULCorner(0, 0);
+	m_activeRange = tempRect;
+}
+
 }

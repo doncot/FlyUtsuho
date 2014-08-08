@@ -68,12 +68,12 @@ bool SVShooter::Initialize()
 	try
 	{
 		Base::Initialize();
-		m_screenRect.SetSize(GetClientHeight(),GetClientWidth());
+		m_screenRect.SetSize(GetClientWidth(),GetClientHeight());
 		m_screenRect.SetPosofULCorner(0, 0);
 
 		//ƒQ[ƒ€—v‘f‚Ì‰Šú‰»
 		resourceMan = new Inferno::ResourceManager(m_graphics);
-		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png");
+		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png",this->m_screenRect,50);
 
 		m_titleImage.Initialize();
 		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));

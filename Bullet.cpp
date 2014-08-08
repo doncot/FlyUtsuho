@@ -1,10 +1,14 @@
 #include"ShooterElements.h"
 
-#include<cmath>
-#define PI       3.14159265358979323846
-
 namespace Inferno
 {
+	typedef Substance Base;
 
+	void Bullet::Update()
+	{
+		Base::Update();
 
+		//ˆÚ“®
+		this->RMove(m_vel);
+	}
 }

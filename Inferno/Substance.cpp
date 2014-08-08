@@ -3,6 +3,7 @@
 
 #include<GameElements.h>
 #include"Graphics.h"
+#include"Collision.h"
 
 namespace Inferno
 {
@@ -140,7 +141,13 @@ void Substance::SetID(const int id) { m_id = id; }
 
 int Substance::GetID() const { return m_id; }
 
-void Substance::Update() {}
+void Substance::Update()
+{
+	if (this->AmIOutOfRange())
+	{
+		this->SetAttribute(GEAttribute::KillMe, true);
+	}
+}
 
 void Substance::Draw(const Graphics& g) const
 {
@@ -178,6 +185,19 @@ Substance& Substance::operator=(const Substance& s)
 		//イデアは同じ（定数なのに注意）
 	}
 	return *this;
+}
+
+//private
+bool Substance::AmIOutOfRange() const
+{
+	//範囲が設定されてないなら無視
+	if (m_idea->m_activeRange.Width() == 0) return false;
+	//画面外なら
+	if (!IsPointInsideRect(m_pos, m_idea->m_activeRange))
+	{
+		return true;
+	}
+	else return false;
 }
 
 }

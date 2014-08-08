@@ -23,11 +23,14 @@ enum GEAttribute
 	UserLock = 1, //ユーザーからの操作をロック
 	Visible = 2, //描画するか否か
 	NoHit = 4, //衝突判定をするか否か
+	KillMe = 8,
 };
 
 class Idea
 {
 public:
+	friend class Substance;
+
 	Idea();
 	~Idea();
 
@@ -42,6 +45,8 @@ public:
 	void SetName(const wstring& name) { m_name = name; }
 	bool CheckName(const wstring& name) { return m_name == name; }
 
+	void SetActiveRange(const Rect& screen, int margin);
+
 private:
 	std::wstring m_name; //リソースの名前（リソースはこれで検索する）
 	const Texture* m_tex;
@@ -49,6 +54,7 @@ private:
 	Vec2<int> m_drawBase; //描画基準（ここでは絵の中心）
 	int m_width;
 	int m_height;
+	Rect m_activeRange;
 
 private:
 	//コピーコンストラクタ＆代入演算子は不必要
@@ -107,6 +113,10 @@ public:
 
 	//コピーコンストラクタ＆代入演算子必要
 	Substance& operator=(const Substance& s);
+
+private:
+	//画面外にいるか探知
+	bool AmIOutOfRange() const;
 
 protected:
 	int m_id;

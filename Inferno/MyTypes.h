@@ -70,7 +70,7 @@ private:
 class Rect
 {
 public:
-	Rect();
+	Rect() : m_center(0, 0), m_height(0), m_width(0) {}
 	Rect(const int width, const int height);
 	Rect(const Vec2<int>& p, const int width, const int height);
 

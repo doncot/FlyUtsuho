@@ -25,7 +25,8 @@ public:
 	//Set系は直接パラメーターを設定する。Load系はXMLファイル書いてあるパラを読み込む
 
 	//void LoadEnemy();
-	void SetBullet(const std::wstring& resourceName, const std::wstring& imageFile);
+	void SetBullet(const std::wstring& resourceName, const std::wstring& imageFile,
+		const Rect& screen, const int margin);
 	//void LoadBullet(const wstring name, const wstring imageFile);
 
 	//弾のインスタンスを渡す

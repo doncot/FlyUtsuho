@@ -25,7 +25,8 @@ namespace Inferno
 		}
 	}
 
-	void ResourceManager::SetBullet(const wstring& resourceName, const wstring& imageName)
+	void ResourceManager::SetBullet(const wstring& resourceName, const wstring& imageName,
+		const Rect& screen, const int margin)
 	{
 		//テクスチャ
 		auto newTex = new Texture();
@@ -35,8 +36,14 @@ namespace Inferno
 		auto newResource = new Idea();
 		newResource->SetName(resourceName);
 		newResource->SetTexture(*newTex);
-		m_bulletResources.push_back(newResource);
+
 		//当たり判定の設定
+
+		//画面外の設定
+		newResource->SetActiveRange(screen, margin);
+
+		//セット
+		m_bulletResources.push_back(newResource);
 	}
 
 	Bullet* ResourceManager::CreateBulletInstance(const wstring& resourceName)

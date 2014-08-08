@@ -118,10 +118,22 @@ void Player::Update()
 		}
 	}
 
-	//’e‚ÌˆÚ“®
-	for (auto e : m_bullets)
+	//’eŠÖ˜A
+	for (auto i = m_bullets.begin(); i != m_bullets.end();)
 	{
-		e->Update();
+		//ŽE‚µ‚Ä—~‚µ‚¢“z‚ÍŽE‚·
+		if ((*i)->CheckAttribute(GEAttribute::KillMe))
+		{
+			SAFE_DELETE(*i);
+			i = m_bullets.erase(i);
+			continue;
+		}
+
+		//ˆÚ“®
+		(*i)->Update();
+		
+
+		i++;
 	}
 }
 

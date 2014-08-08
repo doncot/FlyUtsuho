@@ -37,8 +37,6 @@ const D3DMATRIX Matrix::GetD3DMatrix() const
 	return dm;
 }
 
-Rect::Rect() :m_height(0),m_width(0){}
-
 Rect::Rect(const int width, const int height)
 {
 	SetSize(width, height);

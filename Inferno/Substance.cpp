@@ -36,6 +36,7 @@ void Substance::AMove(const Vec2<int>& c)
 void Substance::RMove(const int x, const int y)
 {
 	if (CheckAttribute(GEAttribute::UserLock)) return;
+
 	m_pos.x += x;
 	m_pos.y += y;
 }

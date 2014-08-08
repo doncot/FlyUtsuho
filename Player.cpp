@@ -28,7 +28,16 @@ Player::~Player()
 
 void Player::RMove(const int x, const int y)
 {
-	Base::RMove(x, y);
+	//Î‚ßˆÚ“®‚Ìê‡A‘Îˆ
+	if (x == 0 || y == 0)
+	{
+		Base::RMove(x, y);
+	}
+	else
+	{
+		Base::RMove(x*0.71, y*0.71);
+	}
+
 	Vec2<int> d;
 	if (m_moveLimit.Height() != 0 && m_moveLimit.Width() != 0)
 	{

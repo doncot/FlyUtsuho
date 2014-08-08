@@ -51,16 +51,9 @@ void Player::SetMoveLimit(const Rect& rect)
 
 void Player::Shoot(const float degree, const int speed)
 {
-	//Šp“x‚ª•‰‚Ìê‡³‚É’¼‚·
-	float deg = degree;
-	while (deg < 0)
-	{
-		deg = 360 + deg;
-	}
-
-	float x = std::cos(deg * pi / 180.0);
+	float x = std::cos(degree * pi / 180.0);
 	x *= speed;
-	float y = std::sin(deg * pi / 180.0);
+	float y = std::sin(degree * pi / 180.0);
 	y *= speed;
 
 	//’e¶¬

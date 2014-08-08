@@ -38,6 +38,7 @@ void Player::RMove(const int x, const int y)
 		Base::RMove(x*0.71, y*0.71);
 	}
 
+	//”ÍˆÍ“à‚É‚¢‚é‚æ‚¤‚É’²®
 	Vec2<int> d;
 	if (m_moveLimit.Height() != 0 && m_moveLimit.Width() != 0)
 	{

@@ -12,7 +12,7 @@ Substance::Substance()
 Substance::Substance(const Idea& idea) 
 	: m_idea(&idea), m_pos(Vec2<int>(0, 0)), m_attribute(0), m_angle(0), m_alpha(0xff)
 {
-	SetAttribute(GEAttribute::Draw, true);
+	SetAttribute(GEAttribute::Visible, true);
 }
 Substance::~Substance() {}
 
@@ -144,7 +144,7 @@ void Substance::Update() {}
 void Substance::Draw(const Graphics& g) const
 {
 	//•`‰æó‘Ô‚Å‚È‚¢ê‡A‹A‚é
-	if (!CheckAttribute(GEAttribute::Draw)) return;
+	if (!CheckAttribute(GEAttribute::Visible)) return;
 
 	D3DXMATRIX matWorld; //‚±‚ê‚ğƒƒ“ƒo‚É‚·‚ê‚ÎÈ—ª‚Å‚«‚é‚ª‚³‚Ä‚³‚Ä
 	D3DXMatrixIdentity(&matWorld);

@@ -18,7 +18,7 @@ Texture::~Texture()
 
 void Texture::LoadImageFile(const Graphics& g, const wstring& filename)
 {
-	m_texName = filename;
+	m_name = filename;
 	g.LoadTexture(filename, &m_width, &m_height, &m_tex);
 }
 /*
@@ -108,11 +108,17 @@ LP_TEXTURE Texture::GetTexture() const
 	return m_tex;
 }
 
+const wstring Texture::GetName() const
+{
+	return m_name;
+}
 
+/*
 Rect Texture::GetSubRegion(const int n) const
 {
 	return m_subRegions.at(n).rect;
 }
+*/
 
 Texture& Texture::operator=(const Texture& tex)
 {
@@ -124,10 +130,10 @@ Texture& Texture::operator=(const Texture& tex)
 	m_tex->AddRef();
 
 	//スタックオブジェクトをそのままコピー
-	this->m_texName = tex.m_texName;
+	this->m_name = tex.m_name;
 	this->m_width = tex.m_width;
 	this->m_height = tex.m_height;
-	this->m_subRegions = tex.m_subRegions;
+	//this->m_subRegions = tex.m_subRegions;
 
 	return *this;
 }

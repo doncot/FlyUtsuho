@@ -94,6 +94,7 @@
     <ClInclude Include="Inferno\Texture.h" />
     <ClInclude Include="Inferno\Timer.h" />
     <ClInclude Include="Inferno\TString.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Scripter.h" />
@@ -124,6 +125,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyTypes.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="ShooterScene.cpp" />
     <ClCompile Include="SVShooter.cpp" />
   </ItemGroup>

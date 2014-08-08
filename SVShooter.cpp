@@ -14,6 +14,7 @@
 #include<sstream>
 #include"ShooterElements.h"
 #include"Scripter.h"
+#include"ResourceManager.h"
 
 #define PI 3.14159265358979323846
 
@@ -30,6 +31,8 @@ namespace
 	Inferno::Texture eggTex;
 	Inferno::Idea egg_;
 	Inferno::Substance egg;
+
+	Inferno::ResourceManager* resourceMan;
 
 	//Audio
 	Inferno::AudioMaster audio;
@@ -57,6 +60,7 @@ SVShooter::~SVShooter()
 		i = purpleBullets.erase(i);
 	}
 
+	SAFE_DELETE(resourceMan);
 }
 
 bool SVShooter::Initialize()
@@ -68,6 +72,9 @@ bool SVShooter::Initialize()
 		m_screenRect.SetPosofULCorner(0, 0);
 
 		//ゲーム要素の初期化
+		resourceMan = new Inferno::ResourceManager(m_graphics);
+		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png");
+
 		m_titleImage.Initialize();
 		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));
 		m_titleImage.SetPosofULCorner(0, 0);
@@ -78,7 +85,7 @@ bool SVShooter::Initialize()
 		m_utsuho->SetIdea(m_utsuho_);
 		m_utsuho->AMove(200, 200);
 		m_utsuho->SetMoveLimit(Inferno::Rect(700, 600));
-		m_utsuho->SetAttribute(Inferno::GEAttribute::Draw,true);
+		m_utsuho->SetAttribute(Inferno::GEAttribute::Visible,true);
 
 		m_fireballTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\fireball.png"));
 		m_fireball_.SetTexture(m_fireballTex);
@@ -187,14 +194,9 @@ bool SVShooter::GameLoop()
 		}
 		if (m_input.IsKeyPressed('Z'))
 		{
-			if (m_fireball == nullptr)
-			{
-				m_fireball = new Inferno::Bullet(m_fireball_);
-				//m_fireball->Fire(m_utsuho->GetPosition(), 5, 0);
-
-				fire.Stop();
-				fire.Play();
-			}
+			m_utsuho->Shoot(0,8);
+			//fire.Stop();
+			//fire.Play();
 		}
 
 		//更新処理（移動・アニメーション）
@@ -223,7 +225,7 @@ bool SVShooter::GameLoop()
 		{
 			egg.AMove(800, 300);
 			eggInterval.Restart();
-			egg.SetAttribute(Inferno::GEAttribute::Draw,true);
+			egg.SetAttribute(Inferno::GEAttribute::Visible,true);
 		}
 		else
 		{
@@ -282,11 +284,11 @@ bool SVShooter::GameLoop()
 		//卵と自機の衝突検出
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetRegion(), egg.GetRegion()))
 		{
-			if (egg.CheckAttribute(Inferno::GEAttribute::Draw))
+			if (egg.CheckAttribute(Inferno::GEAttribute::Visible))
 			{
 				m_score += 1000;
 				eggInterval.Restart();
-				egg.SetAttribute(Inferno::GEAttribute::Draw, false);
+				egg.SetAttribute(Inferno::GEAttribute::Visible, false);
 			}
 		}
 

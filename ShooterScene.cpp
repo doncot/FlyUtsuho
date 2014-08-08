@@ -46,7 +46,7 @@ namespace Inferno
 	{
 		auto insert = new Enemy();
 		insert->SetID(id);
-		insert->SetAttribute(GEAttribute::Draw, false);
+		insert->SetAttribute(GEAttribute::Visible, false);
 		m_subList.push_back(insert);
 	}
 

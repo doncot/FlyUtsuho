@@ -2,6 +2,10 @@
 #include"Animation.h"
 #include"Inferno\Collision.h"
 #include"GameCommon.h"
+#include<cmath>
+#include"ResourceManager.h"
+
+const double pi = std::acos(-1);
 
 namespace
 {
@@ -11,13 +15,14 @@ namespace
 
 namespace Inferno
 {
+	typedef Substance Base;
+
 Player::~Player()
 {
 	for (auto i = m_bullets.begin(); i != m_bullets.end(); )
 	{
 		SAFE_DELETE((*i));
 		i = m_bullets.erase(i);
-		i++;
 	}
 }
 
@@ -44,9 +49,24 @@ void Player::SetMoveLimit(const Rect& rect)
 	m_moveLimit = temp;
 }
 
-void Player::Shoot(const float degree)
+void Player::Shoot(const float degree, const int speed)
 {
+	//角度が負の場合正に直す
+	float deg = degree;
+	while (deg < 0)
+	{
+		deg = 360 + deg;
+	}
 
+	float x = std::cos(deg * pi / 180.0);
+	x *= speed;
+	float y = std::sin(deg * pi / 180.0);
+	y *= speed;
+
+	//弾生成
+	auto newBullet = ResourceManager::CreateBulletInstance(L"redbullet");
+	newBullet->Fire(m_pos, Vec2<int>(x,y));
+	m_bullets.push_back(newBullet);
 }
 
 void Player::Hit()
@@ -64,6 +84,7 @@ void Player::Hit()
 
 void Player::Update()
 {
+	//自分へのダメージ
 	if (m_curState == PState::Damaged)
 	{
 		//ダメージフェーズが終わったら
@@ -93,6 +114,24 @@ void Player::Update()
 			SetAlpha(Inferno::Blink(count++, 0xff, 25));
 		}
 	}
+
+	//弾の移動
+	for (auto e : m_bullets)
+	{
+		e->Update();
+	}
 }
+
+void Player::Draw(const Graphics& g) const
+{
+	//自分自身を描画
+	Base::Draw(g);
+	//弾の描画
+	for (auto e : m_bullets)
+	{
+		e->Draw(g);
+	}
+}
+
 
 }

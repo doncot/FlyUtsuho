@@ -16,13 +16,13 @@ namespace Inferno
 {
 	Enemy::Enemy()
 	{
-		this->SetAttribute(GEAttribute::Draw, false);
+		this->SetAttribute(GEAttribute::Visible, false);
 	}
 
 	Enemy::Enemy(const Idea& idea)
 	{
 		this->SetIdea(idea);
-		this->SetAttribute(GEAttribute::Draw, false);
+		this->SetAttribute(GEAttribute::Visible, false);
 	}
 
 	void Enemy::Entry()
@@ -31,7 +31,7 @@ namespace Inferno
 		if (m_curState != EState::Standby) return;
 
 		m_curState = EState:: Entry;
-		this->SetAttribute(GEAttribute::Draw, true);
+		this->SetAttribute(GEAttribute::Visible, true);
 		m_timer.Start();
 		SetPosofULCorner(700, 100);
 		m_entryAnime[0].Start(0, 1000, 900, 680, Animation::EaseOut);

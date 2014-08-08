@@ -12,6 +12,7 @@ namespace Inferno
 class ShooterScene
 {
 private:
+	//これはリソースマネージャーが管理するので将来的にはいらない
 	struct EnemyBase
 	{
 		Inferno::Idea m_idea;
@@ -50,7 +51,7 @@ private:
 		bool Do(Substance* sub)
 		{
 			sub->AMove(m_pos);
-			sub->SetAttribute(GEAttribute::Draw, true);
+			sub->SetAttribute(GEAttribute::Visible, true);
 			return true;
 		}
 

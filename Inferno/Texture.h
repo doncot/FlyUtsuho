@@ -32,16 +32,17 @@ public:
 	unsigned GetWidth() const;
 	unsigned GetHeight() const;
 	LP_TEXTURE GetTexture() const;
-	Rect GetSubRegion(const int n) const;
+	const wstring GetName() const;
+	//Rect GetSubRegion(const int n) const;
 
 	//LP_TEXTUREがあるから、deepcopyが必要
 	Texture& operator=(const Texture& tex);
 
 private:
 	LP_TEXTURE m_tex; //LP_TEXTURE自体がItextureインターフェイスへのポインタ
-	TString m_texName;
+	wstring m_name;
 	unsigned m_width;	//結局これ使うんかい！！
 	unsigned m_height; 
-	vector<SubRegion> m_subRegions; //テクスチャの中の分割したやつを記憶
+	//vector<SubRegion> m_subRegions; //テクスチャの中の分割したやつを記憶
 };
 }

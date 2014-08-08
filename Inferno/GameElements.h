@@ -21,7 +21,7 @@ namespace Inferno
 enum GEAttribute
 {
 	UserLock = 1, //ユーザーからの操作をロック
-	Draw = 2, //描画するか否か
+	Visible = 2, //描画するか否か
 	NoHit = 4, //衝突判定をするか否か
 };
 
@@ -39,7 +39,11 @@ public:
 	void SetTexture(const Texture& tex);
 	const Texture* GetTexture() const;
 
+	void SetName(const wstring& name) { m_name = name; }
+	bool CheckName(const wstring& name) { return m_name == name; }
+
 private:
+	std::wstring m_name; //リソースの名前（リソースはこれで検索する）
 	const Texture* m_tex;
 
 	Vec2<int> m_drawBase; //描画基準（ここでは絵の中心）
@@ -129,7 +133,7 @@ public:
 	{
 		m_tex = new Texture();
 		m_idea = new Idea();
-		SetAttribute(GEAttribute::Draw, true);
+		SetAttribute(GEAttribute::Visible, true);
 	}
 	void LoadTextureFromFile(const Graphics& g, const wstring& str)
 	{

@@ -5,6 +5,7 @@
 #include"MyTypes.h"
 #include<Timer.h>
 #include"Animation.h"
+#include"ResourceManager.h"
 
 namespace Inferno
 {
@@ -13,20 +14,19 @@ class Bullet : public Substance
 public:
 	Bullet(const Inferno::Idea& idea) : Substance(idea) {}
 
-	/*
-	void Fire(const Inferno::Vec2<int>& bornPos, const int x, const int y)
+	void Fire(const Inferno::Vec2<int>& bornPos, const int vel_x, const int vel_y)
 	{
 		this->AMove(bornPos.x + m_idea->GetWidth(), bornPos.y + m_idea->GetHeight() / 2);
 
-		m_vel.x = x;
-		m_vel.y = y;
+		m_vel.x = vel_x;
+		m_vel.y = vel_y;
 	}
 
 	void Fire(const Inferno::Vec2<int>& bornPos, const Inferno::Vec2<int>& vel)
 	{
 		this->Fire(bornPos, vel.x, vel.y);
 	}
-	*/
+	
 
 	//アニメーションとか移動とか
 	void Update()
@@ -63,10 +63,11 @@ public:
 
 	//弾を一発発射する
 	//角度を指定
-	void Shoot(const float degree);
+	void Shoot(const float degree, const int speed);
 
 	void Hit();
 	void Update();
+	void Draw(const Graphics& g) const;
 
 private:
 	//アニメーション用の状態

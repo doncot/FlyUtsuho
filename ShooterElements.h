@@ -9,6 +9,9 @@
 
 namespace Inferno
 {
+//後ろにあるので
+class Enemy;
+
 class Bullet : public Substance
 {
 public:
@@ -60,7 +63,12 @@ public:
 	//角度を指定
 	void Shoot(const float degree, const int speed);
 
+	//弾に当たったら（要改修）
 	void Hit();
+
+	//自身が管理する弾が、敵に当たったか判定
+	bool CheckBulletHit(const Enemy& enemy) const;
+
 	void Update();
 	void Draw(const Graphics& g) const;
 

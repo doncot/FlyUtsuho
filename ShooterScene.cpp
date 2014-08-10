@@ -38,9 +38,20 @@ namespace Inferno
 			std::swap(m_taskQueue, emptyTaskQueue);
 			*/
 		}
+
+		SAFE_DELETE(resourceMan);
 	}
 
-	void ShooterScene::SetGraphics(const Graphics& g) {	m_graphics = &g; }
+	void ShooterScene::InitializeScene(const Graphics& g, const Rect& clientSize)
+	{
+		//Graphicsはここでキープ
+		m_graphics = &g;
+
+		//ゲーム要素の初期化
+		resourceMan = new Inferno::ResourceManager(g);
+		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png", clientSize, 50);
+
+	}
 
 	void ShooterScene::CreateEnemy(const int id)
 	{
@@ -141,6 +152,9 @@ namespace Inferno
 		}
 
 		//プレイヤーの移動
+
+		//衝突処理******************************************
+		//自機の発射弾と敵の衝突処理
 	}
 
 	void ShooterScene::Draw()

@@ -85,6 +85,19 @@ void Player::Hit()
 	}
 }
 
+bool Player::CheckBulletHit(const Enemy& enemy) const
+{
+	//どれか1つの弾に当たったら、そのフレームでは処理を終える
+	for (auto bullet : m_bullets)
+	{
+		if (IsRect1HittingRect2(bullet->GetRegion(), enemy.GetRegion()))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void Player::Update()
 {
 	//自分へのダメージ

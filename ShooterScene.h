@@ -8,6 +8,9 @@
 
 namespace Inferno
 {
+//前方宣言
+class Game;
+class ResourceManager;
 
 class ShooterScene
 {
@@ -100,7 +103,8 @@ public:
 	~ShooterScene();
 
 	//描画はこのクラスが担当するので、Graphicsを持つのは自然
-	void SetGraphics(const Graphics& g);
+	//当面はこの中で自機の設定をする（敵と違ってこれはあんま変わらんだろう）
+	void InitializeScene(const Graphics& g, const Rect& clientSize);
 
 	//登録関数（シーンがスタートする前に使う。命令によってはスタート後にも使える）
 	void CreateEnemy(const int id);
@@ -124,6 +128,7 @@ public:
 
 private:
 	const Graphics* m_graphics;
+	Inferno::ResourceManager* resourceMan;
 
 	std::list<Substance*> m_subList;
 	std::list<EnemyBase*> m_baseList;

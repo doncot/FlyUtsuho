@@ -14,7 +14,6 @@
 #include<sstream>
 #include"ShooterElements.h"
 #include"Scripter.h"
-#include"ResourceManager.h"
 
 #define PI 3.14159265358979323846
 
@@ -31,8 +30,6 @@ namespace
 	Inferno::Texture eggTex;
 	Inferno::Idea egg_;
 	Inferno::Substance egg;
-
-	Inferno::ResourceManager* resourceMan;
 
 	//Audio
 	Inferno::AudioMaster audio;
@@ -60,7 +57,7 @@ SVShooter::~SVShooter()
 		i = purpleBullets.erase(i);
 	}
 
-	SAFE_DELETE(resourceMan);
+
 }
 
 bool SVShooter::Initialize()
@@ -70,10 +67,6 @@ bool SVShooter::Initialize()
 		Base::Initialize();
 		m_screenRect.SetSize(GetClientWidth(),GetClientHeight());
 		m_screenRect.SetPosofULCorner(0, 0);
-
-		//ƒQ[ƒ€—v‘f‚Ì‰Šú‰»
-		resourceMan = new Inferno::ResourceManager(m_graphics);
-		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png",this->m_screenRect,50);
 
 		m_titleImage.Initialize();
 		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));
@@ -126,7 +119,7 @@ bool SVShooter::Initialize()
 		dLight.Initialize(m_graphics);
 
 		//ƒXƒNƒŠƒvƒg
-		scene.SetGraphics(m_graphics);
+		scene.InitializeScene(m_graphics,this->m_screenRect);
 		Inferno::Scripter::LoadSceneFromScript(&scene,_T("Script\\TestScene.script"));
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
@@ -211,8 +204,6 @@ bool SVShooter::GameLoop()
 		{
 			e->RMove(-1, 0);
 		}
-		//©‹@‚Ì’e
-		if (m_fireball) m_fireball->Update();
 		//“G‚Ì’e
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end(); e++)
 		{
@@ -234,29 +225,7 @@ bool SVShooter::GameLoop()
 			egg.Rotate(angle += 3);
 		}
 
-		//Õ“Ë”»’è
-		//’e
-		if (m_fireball)
-		{
-			//‰æ–ÊŠO‚Éo‚½‚ç
-			if (m_fireball->GetPosition().x > 750)
-			{
-				SAFE_DELETE(m_fireball);
-			}
-		}
-
-		//“G’e‚ª‰æ–ÊŠO‚Éo‚½‚Æ‚«‚Éíœ
-		for (auto i = purpleBullets.begin(); i != purpleBullets.end(); )
-		{
-			if (!Inferno::IsPointInsideRect((*i)->GetPosition(), m_screenRect))
-			{
-				SAFE_DELETE(*i);
-				i = purpleBullets.erase(i);
-				continue;
-			}
-			i++;
-		}
-		
+		//Õ“Ë”»’è**************************************************************
 		//“G’e‚Æ©‹@‚ÌÕ“Ë”»’è
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
 		{

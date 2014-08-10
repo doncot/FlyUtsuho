@@ -26,7 +26,7 @@ public:
 
 	//void LoadEnemy();
 	void SetBullet(const std::wstring& resourceName, const std::wstring& imageFile,
-		const Rect& screen, const int margin);
+		const Rect& moveLimitScreen, const int moveLimitMargin);
 	//void LoadBullet(const wstring name, const wstring imageFile);
 
 	//弾のインスタンスを渡す

@@ -39,18 +39,12 @@ namespace Inferno
 			*/
 		}
 
-		SAFE_DELETE(resourceMan);
 	}
 
 	void ShooterScene::InitializeScene(const Graphics& g, const Rect& clientSize)
 	{
 		//Graphicsはここでキープ
 		m_graphics = &g;
-
-		//ゲーム要素の初期化
-		resourceMan = new Inferno::ResourceManager(g);
-		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png", clientSize, 50);
-
 	}
 
 	void ShooterScene::CreateEnemy(const int id)

@@ -22,6 +22,9 @@ namespace
 	//scene
 	Inferno::ShooterScene scene;
 
+	//リソースマネージャー（今の所シングルトン[つまりグローバル]）
+	Inferno::ResourceManager* resourceMan;
+
 	//image
 	std::vector<Inferno::Instant> bg_underground;
 	Inferno::Texture purpleBulletTex;
@@ -57,7 +60,7 @@ SVShooter::~SVShooter()
 		i = purpleBullets.erase(i);
 	}
 
-
+	SAFE_DELETE(resourceMan);
 }
 
 bool SVShooter::Initialize()
@@ -71,6 +74,10 @@ bool SVShooter::Initialize()
 		m_titleImage.Initialize();
 		m_titleImage.LoadTextureFromFile(Base::m_graphics, TEXT("Sprites\\intro.png"));
 		m_titleImage.SetPosofULCorner(0, 0);
+
+		//ゲーム要素の初期化
+		resourceMan = new Inferno::ResourceManager(m_graphics);
+		resourceMan->SetBullet(L"redbullet", L"Sprites\\fireball.png", this->m_screenRect, 50);
 
 		m_utsuhoTex.LoadImageFile(Base::m_graphics, TEXT("Sprites\\utsuho.png"));
 		m_utsuho_.SetTexture(m_utsuhoTex);

@@ -8,10 +8,6 @@
 
 namespace Inferno
 {
-//‘O•ûéŒ¾
-class Game;
-class ResourceManager;
-
 class ShooterScene
 {
 private:
@@ -128,7 +124,6 @@ public:
 
 private:
 	const Graphics* m_graphics;
-	Inferno::ResourceManager* resourceMan;
 
 	std::list<Substance*> m_subList;
 	std::list<EnemyBase*> m_baseList;

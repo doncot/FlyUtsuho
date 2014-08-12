@@ -99,7 +99,7 @@ namespace Inferno
 		m_taskList.push_back(newTask);
 	}
 
-	bool ShooterScene::ProcessBulletToEnemyHit(const Bullet& bullet)
+	bool ShooterScene::ProcessPlayerBulletToEnemyHit(const Bullet& bullet)
 	{
 		for (auto sub_i = m_subList.begin(); sub_i != m_subList.end();)
 		{
@@ -116,6 +116,11 @@ namespace Inferno
 			}
 			sub_i++;
 		}
+		return false;
+	}
+
+	bool ShooterScene::ProcessEnemyBulletToPlayerHit(const Rect& rect)
+	{
 		return false;
 	}
 

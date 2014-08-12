@@ -38,6 +38,21 @@ private:
 	Inferno::Vec2<int> m_vel;
 };
 
+//弾を持つクラス用に関数を提供
+class BulletOwner
+{
+public:
+	//自身が管理する弾が、敵に当たったか判定
+	bool CheckBulletHit(const Enemy& enemy) const;
+	//自分が撃った弾を渡す（読み取り専用） (死んだとき委譲する奴も別に作る必要があるな)
+	list<Bullet*> GetBulletList() const { return BulletOwner::m_bullets; }
+	void EraseGivenBullet(const Bullet& bullet);
+
+protected:
+	//自身が管理する弾のリスト
+	std::list<Bullet*> m_bullets;
+};
+
 enum class PState
 {
 	Neutral,
@@ -45,7 +60,7 @@ enum class PState
 };
 //enum class SEAnimeState;
 
-class Player : public Substance
+class Player : public Substance, public BulletOwner
 {
 public:
 	typedef Substance Base;
@@ -66,12 +81,6 @@ public:
 	//弾に当たったら（要改修）
 	void Hit();
 
-	//自身が管理する弾が、敵に当たったか判定
-	bool CheckBulletHit(const Enemy& enemy) const;
-	//自分が撃った弾を渡す（読み取り専用） (死んだとき委譲する奴も別に作る必要があるな)
-	list<Bullet*> GetBulletList() const { return m_bullets; }
-	void EraseGivenBullet(const Bullet& bullet);
-
 	void Update();
 	void Draw(const Graphics& g) const;
 
@@ -85,8 +94,6 @@ private:
 	//定数
 	const int HitBlowDistance = 20;
 	Inferno::Vec2<int> hitStartPoint;
-	//自身が管理する弾のリスト
-	std::list<Bullet*> m_bullets;
 };
 
 enum class EState

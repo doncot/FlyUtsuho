@@ -105,6 +105,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletOwner.cpp" />
     <ClCompile Include="CollisionReactor.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Inferno\CollisionDetector.cpp" />

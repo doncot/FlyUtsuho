@@ -117,7 +117,9 @@ public:
 
 	//自機弾と敵の衝突処理（この中で敵が死ぬとこまでやる）
 	//※本来この処理はシーン内でやるため、playerをsceneに移した後はいらない関数
-	bool ProcessBulletToEnemyHit(const Bullet& bullet);
+	bool ProcessPlayerBulletToEnemyHit(const Bullet& bullet);
+	//敵弾と指定の物体との衝突判定（ここで来るのはplayer）
+	bool ProcessEnemyBulletToPlayerHit(const Rect& player);
 
 	//シーンをスタート
 	void Start();

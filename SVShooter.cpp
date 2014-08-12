@@ -273,7 +273,7 @@ bool SVShooter::GameLoop()
 			auto bulletList = m_utsuho->GetBulletList();
 			for (auto bullet_i = bulletList.begin(); bullet_i != bulletList.end();)
 			{
-				if (scene.ProcessBulletToEnemyHit(**bullet_i))
+				if (scene.ProcessPlayerBulletToEnemyHit(**bullet_i))
 				{
 					//当たっていた場合
 					//弾を管理するplayerに該当の弾を渡し、消してもらう
@@ -282,6 +282,7 @@ bool SVShooter::GameLoop()
 					nextBullet++;
 					m_utsuho->EraseGivenBullet(**bullet_i);
 					//!!!!注意!!!!:この時点でこのbulletは無効。
+					//TODO:こういうときこそmoveでは？
 					bullet_i = nextBullet;
 					continue;
 				}
@@ -323,9 +324,9 @@ bool SVShooter::GameLoop()
 
 			//スコア
 			wstringstream ss;
-			ss << L"Current Bullet Count: " << m_utsuho->GetBulletList().size();
+			//ss << L"Existing enemy count: " << m_.size();
 			scoreText.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);
-			dLight.Print(m_graphics, ss.str() , 500, 30);
+			//dLight.Print(m_graphics, ss.str() , 500, 30);
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();

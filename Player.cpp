@@ -85,34 +85,6 @@ void Player::Hit()
 	}
 }
 
-bool Player::CheckBulletHit(const Enemy& enemy) const
-{
-	//どれか1つの弾に当たったら、そのフレームでは処理を終える
-	for (auto bullet : m_bullets)
-	{
-		if (IsRect1HittingRect2(bullet->GetHitBox(), enemy.GetHitBox()))
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
-void Player::EraseGivenBullet(const Bullet& bullet)
-{
-	for (auto i = m_bullets.begin(); i != m_bullets.end();)
-	{
-		//指定された弾を処分する
-		if (*i == &bullet)
-		{
-			SAFE_DELETE(*i);
-			i = m_bullets.erase(i);
-			return;
-		}
-		i++;
-	}
-}
-
 void Player::Update()
 {
 	//自分へのダメージ

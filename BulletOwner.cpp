@@ -3,12 +3,12 @@
 
 namespace Inferno
 {
-	bool BulletOwner::CheckBulletHit(const Enemy& enemy) const
+	bool BulletOwner::CheckBulletHit(const Rect& hitbox) const
 	{
 		//どれか1つの弾に当たったら、そのフレームでは処理を終える
 		for (auto bullet : m_bullets)
 		{
-			if (IsRect1HittingRect2(bullet->GetHitBox(), enemy.GetHitBox()))
+			if (IsRect1HittingRect2(bullet->GetHitBox(), hitbox))
 			{
 				return true;
 			}

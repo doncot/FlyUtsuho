@@ -121,6 +121,10 @@ namespace Inferno
 
 	bool ShooterScene::ProcessEnemyBulletToPlayerHit(const Rect& rect)
 	{
+		for (auto sub_i = m_subList.begin(); sub_i != m_subList.end();)
+		{
+
+		}
 		return false;
 	}
 

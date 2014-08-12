@@ -42,8 +42,8 @@ private:
 class BulletOwner
 {
 public:
-	//自身が管理する弾が、敵に当たったか判定
-	bool CheckBulletHit(const Enemy& enemy) const;
+	//自身が管理する弾が、指定対象に当たったか判定
+	bool CheckBulletHit(const Rect& hitbox) const;
 	//自分が撃った弾を渡す（読み取り専用） (死んだとき委譲する奴も別に作る必要があるな)
 	list<Bullet*> GetBulletList() const { return BulletOwner::m_bullets; }
 	void EraseGivenBullet(const Bullet& bullet);
@@ -105,7 +105,7 @@ enum class EState
 	Leave,
 };
 
-class Enemy : public Substance
+class Enemy : public Substance, public BulletOwner
 {
 public:
 	Enemy();

@@ -1,5 +1,5 @@
 #include"ShooterScene.h"
-#include"ShooterElements.h"
+#include"Inferno\Collision.h"
 
 namespace Inferno
 {
@@ -99,6 +99,26 @@ namespace Inferno
 		m_taskList.push_back(newTask);
 	}
 
+	bool ShooterScene::ProcessBulletToEnemyHit(const Bullet& bullet)
+	{
+		for (auto sub_i = m_subList.begin(); sub_i != m_subList.end();)
+		{
+			if (IsRect1HittingRect2((*sub_i)->GetHitBox(),bullet.GetHitBox()))
+			{
+				//当たっていたら
+				//体力とか減らすのかな本当は
+				//（ここままじゃ死亡時のアニメがないな、どう伝えよう）
+				SAFE_DELETE(*sub_i);
+				sub_i = m_subList.erase(sub_i);
+
+				//上の層で処理するために当たった事を知らせる
+				return true;
+			}
+			sub_i++;
+		}
+		return false;
+	}
+
 	void ShooterScene::Start()
 	{
 		m_sceneTimer.Start();
@@ -147,8 +167,6 @@ namespace Inferno
 
 		//プレイヤーの移動
 
-		//衝突処理******************************************
-		//自機の発射弾と敵の衝突処理
 	}
 
 	void ShooterScene::Draw()

@@ -68,6 +68,9 @@ public:
 
 	//自身が管理する弾が、敵に当たったか判定
 	bool CheckBulletHit(const Enemy& enemy) const;
+	//自分が撃った弾を渡す（読み取り専用） (死んだとき委譲する奴も別に作る必要があるな)
+	list<Bullet*> GetBulletList() const { return m_bullets; }
+	void EraseGivenBullet(const Bullet& bullet);
 
 	void Update();
 	void Draw(const Graphics& g) const;

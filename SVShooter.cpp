@@ -237,7 +237,7 @@ bool SVShooter::GameLoop()
 		for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
 		{
 			//直撃
-			if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetRegion()) )
+			if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetHitBox()) )
 			{
 				//弾を削除
 				SAFE_DELETE(*e);
@@ -258,13 +258,34 @@ bool SVShooter::GameLoop()
 		}
 
 		//卵と自機の衝突検出
-		if (Inferno::IsRect1HittingRect2(m_utsuho->GetRegion(), egg.GetRegion()))
+		if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), egg.GetHitBox()))
 		{
 			if (egg.CheckAttribute(Inferno::GEAttribute::Visible))
 			{
 				m_score += 1000;
 				eggInterval.Restart();
 				egg.SetAttribute(Inferno::GEAttribute::Visible, false);
+			}
+		}
+
+		//自機弾と敵の衝突処理
+		{
+			auto bulletList = m_utsuho->GetBulletList();
+			for (auto bullet_i = bulletList.begin(); bullet_i != bulletList.end();)
+			{
+				if (scene.ProcessBulletToEnemyHit(**bullet_i))
+				{
+					//当たっていた場合
+					//弾を管理するplayerに該当の弾を渡し、消してもらう
+					//消す前に次弾をキープ
+					auto nextBullet = bullet_i;
+					nextBullet++;
+					m_utsuho->EraseGivenBullet(**bullet_i);
+					//!!!!注意!!!!:この時点でこのbulletは無効。
+					bullet_i = nextBullet;
+					continue;
+				}
+				bullet_i++;
 			}
 		}
 
@@ -302,9 +323,9 @@ bool SVShooter::GameLoop()
 
 			//スコア
 			wstringstream ss;
-			ss << m_utsuho->GetPosition().x;
+			ss << L"Current Bullet Count: " << m_utsuho->GetBulletList().size();
 			scoreText.Print(m_graphics, _T("スコア：") + m_score.DisplayScore() , 50, 540);
-			//dLight.Print(m_graphics, ss.str() , 650, 30);
+			dLight.Print(m_graphics, ss.str() , 500, 30);
 		}
 		Base::m_graphics.EndSprite();
 		Base::m_graphics.EndScene();

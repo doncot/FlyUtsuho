@@ -93,7 +93,9 @@ public:
 	Vec2<int> GetPosition() const;
 
 	//位置座標とサイズから現在領域を求める
-	Rect GetRegion() const;
+	//Rect GetRegion() const;
+	Rect GetHitBox() const;
+
 
 	//属性（描画可能など）を指定
 	void SetAttribute(GEAttribute attr, bool value);

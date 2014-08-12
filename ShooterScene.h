@@ -1,10 +1,12 @@
 #pragma once
 #include"Inferno\GameElements.h"
+#include"ShooterElements.h"
 #include<list>
 #include<queue>
-#include"Inferno\Graphics.h"
 #include"Animation.h"
 #include"Inferno\MyException.h"
+
+class Graphics;
 
 namespace Inferno
 {
@@ -113,6 +115,9 @@ public:
 	void RegisterMove(const int id, const Millisec delay, const Millisec dur,
 		const Vec2<int> from, const Vec2<int> to, const Animation::TransitType ttype);
 
+	//自機弾と敵の衝突処理（この中で敵が死ぬとこまでやる）
+	//※本来この処理はシーン内でやるため、playerをsceneに移した後はいらない関数
+	bool ProcessBulletToEnemyHit(const Bullet& bullet);
 
 	//シーンをスタート
 	void Start();

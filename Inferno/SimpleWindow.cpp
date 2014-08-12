@@ -6,8 +6,6 @@
 #include"TString.h"
 #include"MyTypes.h"
 
-//extern Inferno::Input* g_GlobalInput; //Ç∆ÇËÇ†Ç¶Ç∏
-
 LPCTSTR className = TEXT("SimpleWindow");
 
 namespace
@@ -31,7 +29,7 @@ SimpleWindow::~SimpleWindow()
 
 bool SimpleWindow::Initialize()
 {
-	//::SetProcessDPIAware();
+	::SetProcessDPIAware();
 
 	//WindowClassê›íË
 	m_wc.cbSize = sizeof(WNDCLASSEX);

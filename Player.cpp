@@ -42,7 +42,7 @@ void Player::RMove(const int x, const int y)
 	Vec2<int> d;
 	if (m_moveLimit.Height() != 0 && m_moveLimit.Width() != 0)
 	{
-		d = KeepSubInsideRect(this->GetRegion(), m_moveLimit);
+		d = KeepSubInsideRect(this->GetHitBox(), m_moveLimit);
 		Base::AMove(d.x, d.y);
 	}
 }
@@ -90,12 +90,27 @@ bool Player::CheckBulletHit(const Enemy& enemy) const
 	//‚Ç‚ê‚©1‚Â‚Ì’e‚É“–‚½‚Á‚½‚çA‚»‚ÌƒtƒŒ[ƒ€‚Å‚Íˆ—‚ðI‚¦‚é
 	for (auto bullet : m_bullets)
 	{
-		if (IsRect1HittingRect2(bullet->GetRegion(), enemy.GetRegion()))
+		if (IsRect1HittingRect2(bullet->GetHitBox(), enemy.GetHitBox()))
 		{
 			return true;
 		}
 	}
 	return false;
+}
+
+void Player::EraseGivenBullet(const Bullet& bullet)
+{
+	for (auto i = m_bullets.begin(); i != m_bullets.end();)
+	{
+		//Žw’è‚³‚ê‚½’e‚ðˆ•ª‚·‚é
+		if (*i == &bullet)
+		{
+			SAFE_DELETE(*i);
+			i = m_bullets.erase(i);
+			return;
+		}
+		i++;
+	}
 }
 
 void Player::Update()
@@ -119,7 +134,7 @@ void Player::Update()
 			//ŠÈˆÕ”Å
 			//double dx = (120 - m_pos.x) / 30.0;
 			//m_pos.x += dx;
-			m_pos = KeepSubInsideRect(this->GetRegion(), m_moveLimit);
+			m_pos = KeepSubInsideRect(this->GetHitBox(), m_moveLimit);
 			//‰ñ“]
 			m_angle = aRotate.GetValue();
 			//double dAngle = (720 - m_angle) / 10.0;

@@ -35,15 +35,11 @@ bool IsRect1NotHittingRect2(const Rect& r1, const Rect& r2)
 
 bool IsRect1HittingRect2(const Rect& r1, const Rect& r2)
 {
-	//r1の中にr2の左上の点が入る
-	if (IsPointInsideRect(r2.UpperLeft(), r1))	return true;
-	//r1の中にr2の右上の点が入る
-	else if (IsPointInsideRect(r2.UpperRight(), r1)) return true;
-	//r1の中にr2の左下の点が入る
-	else if (IsPointInsideRect(r2.BottomLeft(), r1)) return true;
-	//r1の中にr2の右下の点が入る
-	else if (IsPointInsideRect(r2.BottomRight(), r1)) return true;
-	//当たらない場合
+	if ((r1.Left() < r2.Right() && r1.Right() > r2.Left()) &&
+		(r1.Top() < r2.Bottom() && r1.Bottom() > r2.Top()))
+	{
+		return true;
+	}
 	else return false;
 }
 

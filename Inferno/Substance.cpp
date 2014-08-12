@@ -107,11 +107,18 @@ Vec2<int> Substance::GetPosition() const
 	return m_pos;
 }
 
-Rect Substance::GetRegion() const
+//Rect Substance::GetRegion() const
+//{
+//	Rect r(m_pos, m_idea->GetHeight(), m_idea->GetWidth());
+//	return r;
+//}
+
+Rect Substance::GetHitBox() const
 {
 	Rect r(m_pos, m_idea->GetHeight(), m_idea->GetWidth());
 	return r;
 }
+
 
 bool Substance::CheckAttribute(GEAttribute attr) const
 {

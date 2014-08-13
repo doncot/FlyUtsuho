@@ -39,13 +39,16 @@ private:
 };
 
 //弾を持つクラス用に関数を提供
-class BulletOwner
+class BulletOwnSubstance: public Substance
 {
 public:
+	//弾を一発発射する
+	//角度を指定
+	void Shoot(const float degree, const int speed);
 	//自身が管理する弾が、指定対象に当たったか判定
 	bool CheckBulletHit(const Rect& hitbox) const;
 	//自分が撃った弾を渡す（読み取り専用） (死んだとき委譲する奴も別に作る必要があるな)
-	list<Bullet*> GetBulletList() const { return BulletOwner::m_bullets; }
+	list<Bullet*> GetBulletList() const { return m_bullets; }
 	void EraseGivenBullet(const Bullet& bullet);
 
 protected:
@@ -60,7 +63,7 @@ enum class PState
 };
 //enum class SEAnimeState;
 
-class Player : public Substance, public BulletOwner
+class Player : public BulletOwnSubstance
 {
 public:
 	typedef Substance Base;
@@ -73,10 +76,6 @@ public:
 	void RMove(const Vec2<int>& c);
 
 	void SetMoveLimit(const Rect& rect);
-
-	//弾を一発発射する
-	//角度を指定
-	void Shoot(const float degree, const int speed);
 
 	//弾に当たったら（要改修）
 	void Hit();
@@ -105,7 +104,7 @@ enum class EState
 	Leave,
 };
 
-class Enemy : public Substance, public BulletOwner
+class Enemy : public BulletOwnSubstance
 {
 public:
 	Enemy();

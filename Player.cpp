@@ -5,8 +5,6 @@
 #include<cmath>
 #include"ResourceManager.h"
 
-const double pi = std::acos(-1);
-
 namespace
 {
 	Inferno::Animation aTransX;
@@ -57,19 +55,6 @@ void Player::SetMoveLimit(const Rect& rect)
 	Rect temp = rect;
 	temp.SetPosofULCorner(0, 0);
 	m_moveLimit = temp;
-}
-
-void Player::Shoot(const float degree, const int speed)
-{
-	float x = std::cos(degree * pi / 180.0);
-	x *= speed;
-	float y = std::sin(degree * pi / 180.0);
-	y *= speed;
-
-	//’e¶¬
-	auto newBullet = ResourceManager::CreateBulletInstance(L"redbullet");
-	newBullet->Fire(m_pos, Vec2<int>(x,y));
-	m_bullets.push_back(newBullet);
 }
 
 void Player::Hit()

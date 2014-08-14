@@ -116,7 +116,7 @@ bool SVShooter::Initialize()
 		bgm.Initialize(&audio);
 		fire.Initialize(&audio);
 		pichun.Initialize(&audio);
-		//bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
+		bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
 		fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
 		pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
 		pichun.SetVolume(0.3f);
@@ -149,7 +149,7 @@ bool SVShooter::GameLoop()
 	{
 	case sn_title:
 		//BGM
-		//bgm.Play();
+		bgm.Play();
 
 		//入力
 		if (m_input.IsAnyKeyPressed() == true || m_input.IsMouseLButtonPressed() == true )
@@ -195,8 +195,8 @@ bool SVShooter::GameLoop()
 		if (m_input.IsKeyPressed('Z'))
 		{
 			m_utsuho->Shoot(0,8);
-			//fire.Stop();
-			//fire.Play();
+			fire.Stop();
+			fire.Play();
 		}
 
 		//更新処理（移動・アニメーション）
@@ -248,7 +248,7 @@ bool SVShooter::GameLoop()
 
 				m_score -= 2500;
 				
-				m_utsuho->Hit();
+				m_utsuho->ProcessHit();
 				
 				continue;
 			}

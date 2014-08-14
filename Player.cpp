@@ -57,8 +57,9 @@ void Player::SetMoveLimit(const Rect& rect)
 	m_moveLimit = temp;
 }
 
-void Player::Hit()
+void Player::ProcessHit()
 {
+	//stateをクラスに分離してその中でポリモーフィズムとして実行する事もできるな、将来的に
 	if (m_curState == PState::Neutral)
 	{
 		m_curState = PState::Damaged;

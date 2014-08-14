@@ -77,8 +77,8 @@ public:
 
 	void SetMoveLimit(const Rect& rect);
 
-	//弾に当たったら（要改修）
-	void Hit();
+	//弾・敵に当たったら（要改修）
+	void ProcessHit();
 
 	void Update();
 	void Draw(const Graphics& g) const;

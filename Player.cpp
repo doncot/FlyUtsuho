@@ -71,6 +71,11 @@ void Player::ProcessHit()
 	}
 }
 
+void Player::Shoot(const float degree, const int speed)
+{
+	ShootInternal(m_pos, degree, speed);
+}
+
 void Player::Update()
 {
 	//©•ª‚Ö‚Ìƒ_ƒ[ƒW

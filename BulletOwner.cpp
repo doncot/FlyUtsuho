@@ -5,7 +5,7 @@ const double pi = std::acos(-1);
 
 namespace Inferno
 {
-	void BulletOwnSubstance::Shoot(const float degree, const int speed)
+	void BulletOwner::ShootInternal(const Vec2<int> bornPos,const float degree, const int speed)
 	{
 		float x = std::cos(degree * pi / 180.0);
 		x *= speed;
@@ -15,11 +15,11 @@ namespace Inferno
 		//弾生成
 		//このリソースマネージャーのシングルトンは将来的にはなんとかすべき
 		auto newBullet = ResourceManager::CreateBulletInstance(L"redbullet");
-		newBullet->Fire(m_pos, Vec2<int>(x, y));
+		newBullet->Fire(bornPos, Vec2<int>(x, y));
 		m_bullets.push_back(newBullet);
 	}
 
-	bool BulletOwnSubstance::CheckBulletHit(const Rect& hitbox) const
+	bool BulletOwner::CheckBulletHit(const Rect& hitbox) const
 	{
 		//どれか1つの弾に当たったら、そのフレームでは処理を終える
 		for (auto bullet : m_bullets)
@@ -32,7 +32,7 @@ namespace Inferno
 		return false;
 	}
 
-	void BulletOwnSubstance::EraseGivenBullet(const Bullet& bullet)
+	void BulletOwner::EraseGivenBullet(const Bullet& bullet)
 	{
 		for (auto i = m_bullets.begin(); i != m_bullets.end();)
 		{

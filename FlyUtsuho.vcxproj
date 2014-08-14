@@ -101,6 +101,7 @@
     <ClInclude Include="ShooterElements.h" />
     <ClInclude Include="ShooterScene.h" />
     <ClInclude Include="SVShooter.h" />
+    <ClInclude Include="Task.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />

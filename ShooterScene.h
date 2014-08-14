@@ -6,6 +6,7 @@
 #include"Animation.h"
 #include"Inferno\MyException.h"
 #include"Task.h"
+#include<unordered_map>
 
 class Graphics;
 
@@ -24,7 +25,7 @@ public:
 	void CreateEnemy(const int id);
 	void DeleteEnemy(const int id);
 
-	void SetImageFromFile(const int id, const wstring& filename);
+	void CreateResourceFromFile(const int id, const wstring& filename);
 
 	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 

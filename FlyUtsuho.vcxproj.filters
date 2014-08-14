@@ -37,6 +37,9 @@
     <Filter Include="リソース ファイル\Script">
       <UniqueIdentifier>{323bead2-14c8-42a3-b868-a3d4ad6f3de9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inferno\Dusk">
+      <UniqueIdentifier>{24fb267f-aee4-4cd9-bfad-dc0338d918f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SVShooter.h">
@@ -99,9 +102,6 @@
     <ClInclude Include="GameCommon.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Scripter.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ShooterScene.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -110,6 +110,9 @@
     </ClInclude>
     <ClInclude Include="Task.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Interpreter.h">
+      <Filter>Inferno\Dusk</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

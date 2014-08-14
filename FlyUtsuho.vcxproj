@@ -97,7 +97,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Score.h" />
-    <ClInclude Include="Scripter.h" />
+    <ClInclude Include="Interpreter.h" />
     <ClInclude Include="ShooterElements.h" />
     <ClInclude Include="ShooterScene.h" />
     <ClInclude Include="SVShooter.h" />

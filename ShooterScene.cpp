@@ -54,8 +54,8 @@ namespace Inferno
 		insert->SetAttribute(GEAttribute::Visible, false);
 		m_subList.push_back(insert);
 	}
-
-	void ShooterScene::SetImageFromFile(const int id, const wstring& filename)
+	 
+	void ShooterScene::CreateResourceFromFile(const int id, const wstring& filename)
 	{
 		auto newBase = new EnemyBase();
 		newBase->m_tex.LoadImageFile(*m_graphics, filename);

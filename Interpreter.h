@@ -30,6 +30,9 @@ namespace
 		std::wregex pattern(L"^//.*", std::regex_constants::extended);
 		return std::regex_match(str, pattern);
 	}
+
+	//Ž¯•ÊŽq
+	//const wchar_t* const ID = 
 }
 
 namespace Inferno
@@ -129,7 +132,7 @@ public:
 					std::regex_constants::extended);
 				if (std::regex_match(buff, match, pattern))
 				{
-					scene->SetImageFromFile(std::atoi( TString(match.str(1)).GetStringA() ),
+					scene->CreateResourceFromFile(std::atoi(TString(match.str(1)).GetStringA()),
 						match.str(2));
 
 					continue;

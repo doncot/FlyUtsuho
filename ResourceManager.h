@@ -18,6 +18,8 @@ namespace Inferno
 	class Enemy;
 	class Idea;
 
+	//typedef ResourceHandle
+
 class ResourceManager
 {
 public:

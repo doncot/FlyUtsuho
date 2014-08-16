@@ -7,16 +7,16 @@ namespace Inferno
 {
 	//staticメンバ変数初期化
 	class Idea; class Texture;
-	std::list<Idea*> ResourceManager::m_bulletResources;
-	std::list<Idea*> ResourceManager::m_enemyResources;
+	const Graphics* ResourceManager::m_g;
+	std::unordered_map<std::wstring, Idea*> ResourceManager::m_resources;
 	std::list<Texture*> ResourceManager::m_textures;
 
 	ResourceManager::~ResourceManager()
 	{
-		for (auto i = m_bulletResources.begin(); i != m_bulletResources.end();)
+		for (auto i = m_resources.begin(); i != m_resources.end();)
 		{
-			SAFE_DELETE(*i);
-			i = m_bulletResources.erase(i);
+			delete i->second;
+			i = m_resources.erase(i);
 		}
 
 		for (auto i = m_textures.begin(); i != m_textures.end();)
@@ -26,7 +26,7 @@ namespace Inferno
 		}
 	}
 
-	void ResourceManager::SetEnemy(const wstring& resourceName, const wstring& imageName)
+	void ResourceManager::SetEnemy(const ResourceHandle& hResource, const wstring& imageName)
 	{
 		//テクスチャ
 		auto newTex = new Texture();
@@ -34,17 +34,16 @@ namespace Inferno
 		m_textures.push_back(newTex);
 		//イデアの設定
 		auto newResource = new Idea();
-		newResource->SetName(resourceName);
 		newResource->SetTexture(*newTex);
 
 		//当たり判定の設定
 
 		//セット
-		m_enemyResources.push_back(newResource);
+		m_resources.emplace(hResource,newResource);
 	}
 
 
-	void ResourceManager::SetBullet(const wstring& resourceName, const wstring& imageName,
+	void ResourceManager::SetBullet(const ResourceHandle& hResource, const wstring& imageName,
 		const Rect& screen, const int margin)
 	{
 		//テクスチャ
@@ -53,7 +52,6 @@ namespace Inferno
 		m_textures.push_back(newTex);
 		//イデアの設定
 		auto newResource = new Idea();
-		newResource->SetName(resourceName);
 		newResource->SetTexture(*newTex);
 
 		//当たり判定の設定
@@ -62,37 +60,37 @@ namespace Inferno
 		newResource->SetActiveRange(screen, margin);
 
 		//セット
-		m_bulletResources.push_back(newResource);
+		m_resources.emplace(hResource,newResource);
 	}
 
-	Enemy* ResourceManager::CreateEnemyInstance(const wstring& resourceName)
+	Bullet* ResourceManager::CreateBulletInstance(const std::wstring& resourceName)
 	{
-		Enemy* newEnemy = nullptr;
-		for (auto e : m_enemyResources)
+		Bullet* pNewInstance = nullptr;
+		try
 		{
-			if (e->CheckName(resourceName))
-			{
-				newEnemy = new Enemy(*e);
-			}
+			pNewInstance = new Bullet(*m_resources.at(resourceName));
 		}
+		catch (std::out_of_range& e)
+		{
+			//TODO:見つからなかった場合インタプリタエラーを出す
 
-		//見つからなかった場合nullを返す
-		return newEnemy;
+		}
+		return pNewInstance;
 	}
 
-	Bullet* ResourceManager::CreateBulletInstance(const wstring& resourceName)
+	Enemy* ResourceManager::CreateEnemyInstance(const std::wstring& resourceName)
 	{
-		Bullet* newBullet = nullptr;
-		for (auto e : m_bulletResources)
+		Enemy* pNewInstance = nullptr;
+		try
 		{
-			if (e->CheckName(resourceName))
-			{
-				newBullet = new Bullet(*e);
-			}
+			pNewInstance = new Enemy(*m_resources.at(resourceName));
 		}
-		
-		//見つからなかった場合nullを返す
-		return newBullet;
+		catch (std::out_of_range& e)
+		{
+			//TODO:見つからなかった場合インタプリタエラーを出す
+
+		}
+		return pNewInstance;
 	}
 
 	//private

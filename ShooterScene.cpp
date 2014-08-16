@@ -5,16 +5,10 @@ namespace Inferno
 {
 	ShooterScene::~ShooterScene()
 	{
-		for (auto i = m_subList.begin(); i != m_subList.end();)
+		for (auto i = m_substances.begin(); i != m_substances.end();)
 		{
-			SAFE_DELETE(*i);
-			i = m_subList.erase(i);
-		}
-
-		for (auto i = m_baseList.begin(); i != m_baseList.end();)
-		{
-			SAFE_DELETE(*i);
-			i = m_baseList.erase(i);
+			SAFE_DELETE(i->second);
+			i = m_substances.erase(i);
 		}
 
 		for (auto i = m_taskList.begin(); i != m_taskList.end();)
@@ -47,34 +41,16 @@ namespace Inferno
 		m_graphics = &g;
 	}
 
-	void ShooterScene::CreateEnemy(const int id)
+	void ShooterScene::CreateEnemyInstance(const std::wstring& resourceName,const std::wstring& instanceName)
 	{
-		auto insert = new Enemy();
-		insert->SetID(id);
-		insert->SetAttribute(GEAttribute::Visible, false);
-		m_subList.push_back(insert);
+		auto newEnemy = ResourceManager::CreateEnemyInstance(resourceName);
+		m_substances.emplace(instanceName,newEnemy);
 	}
 	 
-	void ShooterScene::CreateResourceFromFile(const int id, const wstring& filename)
+	void ShooterScene::CreateEnemyResourceFromFile(const ResourceHandle& hResource,
+		const wstring& filename)
 	{
-		auto newBase = new EnemyBase();
-		newBase->m_tex.LoadImageFile(*m_graphics, filename);
-		newBase->m_idea.SetTexture(newBase->m_tex);
-		//TODO:Ideaに重複があったら抜く
-
-		//新しいBaseを登録
-		m_baseList.push_back(newBase);
-
-
-		//該当のidを持つSubstanceにEnemyBaseをセット
-		for (auto e : m_subList)
-		{
-			//idが一致したら
-			if (e->GetID() == id)
-			{
-				e->SetIdea(newBase->m_idea);
-			}
-		}
+		ResourceManager::SetEnemy(hResource, filename);
 	}
 
 	void ShooterScene::RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor)
@@ -101,15 +77,15 @@ namespace Inferno
 
 	bool ShooterScene::ProcessPlayerBulletToEnemyHit(const Bullet& bullet)
 	{
-		for (auto sub_i = m_subList.begin(); sub_i != m_subList.end();)
+		for (auto sub_i = m_substances.begin(); sub_i != m_substances.end();)
 		{
-			if (IsRect1HittingRect2((*sub_i)->GetHitBox(),bullet.GetHitBox()))
+			if (IsRect1HittingRect2(sub_i->second->GetHitBox(),bullet.GetHitBox()))
 			{
 				//当たっていたら
 				//体力とか減らすのかな本当は
 				//（ここままじゃ死亡時のアニメがないな、どう伝えよう）
-				SAFE_DELETE(*sub_i);
-				sub_i = m_subList.erase(sub_i);
+				SAFE_DELETE( sub_i->second );
+				sub_i = m_substances.erase(sub_i);
 
 				//上の層で処理するために当たった事を知らせる
 				return true;
@@ -121,7 +97,7 @@ namespace Inferno
 
 	bool ShooterScene::ProcessEnemyBulletToPlayerHit(const Rect& rect)
 	{
-		for (auto sub_i = m_subList.begin(); sub_i != m_subList.end();)
+		for (auto sub_i = m_substances.begin(); sub_i != m_substances.end();)
 		{
 
 		}
@@ -148,17 +124,17 @@ namespace Inferno
 
 			//ここら辺は全部Task->DoTaskで
 			//TODO:taskのlistは全部substanceが持つべき？
-			//暫定処理としてm_subListをtaskに渡すか？
+			//暫定処理としてm_substancesをtaskに渡すか？
 			int targetSub = (*e_t)->GetID();
 			//ここでSubListを探索
 			//非常によくないO(n^2)
-			for (auto e_s = m_subList.begin(); e_s != m_subList.end();)
+			for (auto e_s = m_substances.begin(); e_s != m_substances.end();)
 			{
 				//該当タスクの場合
-				if (targetSub == (*e_s)->GetID())
+				if (targetSub == e_s->second->GetID())
 				{
 					//実行（だいぶネストがひどい……）
-					bool result = (*e_t)->Do((*e_s));
+					bool result = (*e_t)->Do(e_s->second);
 					if ( result )
 					{
 						//終了したらタスクを消す
@@ -180,9 +156,9 @@ namespace Inferno
 
 	void ShooterScene::Draw()
 	{
-		for (auto e : m_subList)
+		for (auto e : m_substances)
 		{
-			e->Draw(*m_graphics);
+			e.second->Draw(*m_graphics);
 		}
 	}
 

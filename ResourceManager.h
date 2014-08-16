@@ -11,6 +11,7 @@ ResourceManager.h
 #include"Inferno\Graphics.h"
 #include"Inferno\Texture.h"
 #include"Inferno\Common.h"
+#include<unordered_map>
 
 namespace Inferno
 {
@@ -18,29 +19,32 @@ namespace Inferno
 	class Enemy;
 	class Idea;
 
-	//typedef ResourceHandle
+	typedef std::wstring ResourceHandle;
 
+//TODO:ここら辺はgameelemets系の詳細を知りすぎ。抽象化すべし
 class ResourceManager
 {
 public:
-	ResourceManager(const Graphics& g) :m_g(&g){}
+	ResourceManager(const Graphics& g) { m_g = &g; }
 	~ResourceManager();
 	//Set系は直接パラメーターを設定する。Load系はXMLファイル書いてあるパラを読み込む
 
-	void SetEnemy(const std::wstring& resourceName, const std::wstring& imageFile);
+	static void SetEnemy(const ResourceHandle& hResource, const std::wstring& imageFile);
 	void SetBullet(const std::wstring& resourceName, const std::wstring& imageFile,
 		const Rect& moveLimitScreen, const int moveLimitMargin);
 	//void LoadBullet(const wstring name, const wstring imageFile);
 
-	//弾のインスタンスを渡す
+	//インスタンスを生成して渡す
 	//インスタンスの消去は呼び出し元に任せる
-	static Enemy* CreateEnemyInstance(const std::wstring& reasourceName);
 	static Bullet* CreateBulletInstance(const std::wstring& resourceName);
+	static Enemy* CreateEnemyInstance(const std::wstring& resourceName);
+
 
 private:
-	const Graphics* m_g;
-	static std::list<Idea*> m_bulletResources;
-	static std::list<Idea*> m_enemyResources;
+	static const Graphics* m_g;
+	//汎用のリソースコンテナ（ハッシュテーブル）
+	static std::unordered_map<std::wstring,Idea*> m_resources;
+	//static std::list<Idea*> m_enemyResources;
 	//ゲームで使用する全てのテクスチャ。テクスチャ管理クラスは作らずに取り敢えずここで全部やる
 	static std::list<Texture*> m_textures;
 

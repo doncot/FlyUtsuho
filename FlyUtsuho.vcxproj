@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Script\TestScene.script" />
+    <None Include="TestScene_rev2.script" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

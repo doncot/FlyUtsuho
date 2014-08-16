@@ -33,6 +33,8 @@ namespace
 
 	//識別子
 	//const wchar_t* const ID = 
+	const wstring SPACES = L"[[:s:]]*";
+	const wstring STRING = L"\"([^\"]*)\"";
 }
 
 namespace Inferno
@@ -115,29 +117,31 @@ public:
 					continue;
 			}
 
-			//create命令
+			//loadresource命令
 			{
-				std::wregex pattern(L"^create\\([[:s:]]*([[:d:]]+)[[:s:]]*\\)$", std::regex_constants::extended);
-				if (std::regex_match(buff, match, pattern))
-				{
-					//id
-					scene->CreateEnemy(std::atoi( TString(match.str(1)).GetStringA()));
-					continue;
-				}
-			}
-
-			//loadimage命令
-			{
-				std::wregex pattern(L"^loadimage\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\"([^\"]+)\"[[:s:]]*\\)$",
+				std::wregex pattern(L"^[[:s:]]*([[:alnum:]_]+)[[:s:]]*=[[:s:]]*loadresource\\([[:s:]]*\"([^\"]+)\"[[:s:]]*\\)$",
 					std::regex_constants::extended);
 				if (std::regex_match(buff, match, pattern))
 				{
-					scene->CreateResourceFromFile(std::atoi(TString(match.str(1)).GetStringA()),
+					scene->CreateEnemyResourceFromFile(match.str(1),
 						match.str(2));
 
 					continue;
 				}
 			}
+
+			
+			//Instance.create命令
+			{
+				std::wregex pattern(L"^[[:s:]]*([[:alnum:]_]+)[[:s:]]*=[[:s:]]*([[:alnum:]]+)\\.create\\(\\)$", std::regex_constants::extended);
+				if (std::regex_match(buff, match, pattern))
+				{
+					//id
+					scene->CreateEnemyInstance(match.str(2), match.str(1));
+					continue;
+				}
+			}
+			
 
 			//deploy命令
 			{
@@ -189,6 +193,7 @@ public:
 				}
 			}
 
+			//ここまで来て読めない物があったらエラーを出す
 		}
 
 		//古いロケールを読み戻す

@@ -22,10 +22,10 @@ public:
 	void InitializeScene(const Graphics& g, const Rect& clientSize);
 
 	//登録関数（シーンがスタートする前に使う。命令によってはスタート後にも使える）
-	void CreateEnemy(const int id);
+	void CreateEnemyInstance(const std::wstring& resourceName, const std::wstring& instanceName);
 	void DeleteEnemy(const int id);
 
-	void CreateResourceFromFile(const int id, const wstring& filename);
+	void CreateEnemyResourceFromFile(const ResourceHandle& hResource, const wstring& filename);
 
 	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
 
@@ -49,8 +49,8 @@ public:
 private:
 	const Graphics* m_graphics;
 
-	std::list<Substance*> m_subList;
-	std::list<EnemyBase*> m_baseList;
+	std::unordered_map<std::wstring,Substance*> m_substances;
+	//std::list<EnemyBase*> m_baseList;
 	std::list<BaseTask*> m_taskList;
 	//std::queue<GMessage> m_messageQueue;
 

@@ -38,17 +38,13 @@ public:
 	int GetHeight() const;
 	Vec2<int> GetDrawBase() const;
 	//テクスチャの設定を渡すことを考えてのテクスチャクラス渡しだが
-	///冗長なのでファイル名だけにした方がよい
+	//冗長なのでファイル名だけにした方がよい（←なぜだっけ？）
 	void SetTexture(const Texture& tex);
 	const Texture* GetTexture() const;
-
-	void SetName(const wstring& name) { m_name = name; }
-	bool CheckName(const wstring& name) { return m_name == name; }
 
 	void SetActiveRange(const Rect& screen, int margin);
 
 private:
-	std::wstring m_name; //リソースの名前（リソースはこれで検索する）
 	const Texture* m_tex;
 
 	Vec2<int> m_drawBase; //描画基準（ここでは絵の中心）

@@ -19,28 +19,28 @@ struct EnemyBase
 class BaseTask
 {
 public:
-	BaseTask(const int taskId) : m_id(taskId) {}
+	BaseTask(const wstring& instance) : m_instanceName(instance) {}
 
 	virtual ~BaseTask(){}
 
 	void SetDeployTiming(const Millisec& msec) { m_deployTiming = msec; }
 	Millisec GetDeployTiming() const { return m_deployTiming; }
 
-	int GetID() const { return m_id; }
+	const wstring GetInstanceName() const { return m_instanceName; }
 
 	//タスクを実行する
 	//終了したらtrueを返す
 	virtual bool Do(Substance* sub) = 0;
 
 protected:
-	const int m_id = 0;
+	const wstring m_instanceName;
 	Millisec m_deployTiming = 0;
 };
 
 class DeployTask : public BaseTask
 {
 public:
-	DeployTask(const int taskId) : Base(taskId) {}
+	DeployTask(const wstring& instance) : Base(instance) {}
 
 	void SetDeployCor(const Vec2<int> c) { m_pos = c; }
 	const Vec2<int> GetDeployCor() const { return m_pos; }
@@ -60,7 +60,7 @@ private:
 class MoveTask : public BaseTask
 {
 public:
-	MoveTask(const int taskId) : Base(taskId) {}
+	MoveTask(const wstring& instance) : Base(instance) {}
 	void SetMove(const Millisec dur, const Vec2<int> from, const Vec2<int> to,
 		const Animation::TransitType ttype)
 	{

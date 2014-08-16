@@ -53,21 +53,21 @@ namespace Inferno
 		ResourceManager::SetEnemy(hResource, filename);
 	}
 
-	void ShooterScene::RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor)
+	void ShooterScene::RegisterDeploy(const wstring& instance, const Millisec deployTime, const Vec2<int> deployCor)
 	{
 		//Deployタスクを生成
-		auto newTask = new DeployTask(id);
+		auto newTask = new DeployTask(instance);
 		newTask->SetDeployTiming(deployTime);
 		newTask->SetDeployCor(deployCor);
 
 		m_taskList.push_back(newTask);
 	}
 
-	void ShooterScene::RegisterMove(const int id, const Millisec delay, const Millisec dur,
+	void ShooterScene::RegisterMove(const wstring& instance, const Millisec delay, const Millisec dur,
 		const Vec2<int> from, const Vec2<int> to, const Animation::TransitType ttype)
 	{
 		//移動タスクを登録
-		auto newTask = new MoveTask(id);
+		auto newTask = new MoveTask(instance);
 		newTask->SetDeployTiming(delay);
 		newTask->SetTimer(m_activeSceneTimer);
 		newTask->SetMove(dur, from, to, ttype);
@@ -125,13 +125,13 @@ namespace Inferno
 			//ここら辺は全部Task->DoTaskで
 			//TODO:taskのlistは全部substanceが持つべき？
 			//暫定処理としてm_substancesをtaskに渡すか？
-			int targetSub = (*e_t)->GetID();
+			const wstring targetSub = (*e_t)->GetInstanceName();
 			//ここでSubListを探索
 			//非常によくないO(n^2)
 			for (auto e_s = m_substances.begin(); e_s != m_substances.end();)
 			{
 				//該当タスクの場合
-				if (targetSub == e_s->second->GetID())
+				if (targetSub == e_s->first)
 				{
 					//実行（だいぶネストがひどい……）
 					bool result = (*e_t)->Do(e_s->second);

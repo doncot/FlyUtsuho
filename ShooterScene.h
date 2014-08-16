@@ -27,9 +27,9 @@ public:
 
 	void CreateEnemyResourceFromFile(const ResourceHandle& hResource, const wstring& filename);
 
-	void RegisterDeploy(const int id, const Millisec deployTime, const Vec2<int> deployCor);
+	void RegisterDeploy(const wstring& instance, const Millisec deployTime, const Vec2<int> deployCor);
 
-	void RegisterMove(const int id, const Millisec delay, const Millisec dur,
+	void RegisterMove(const wstring& instance, const Millisec delay, const Millisec dur,
 		const Vec2<int> from, const Vec2<int> to, const Animation::TransitType ttype);
 
 	//©‹@’e‚Æ“G‚ÌÕ“Ëˆ—i‚±‚Ì’†‚Å“G‚ª€‚Ê‚Æ‚±‚Ü‚Å‚â‚éj

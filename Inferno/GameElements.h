@@ -99,9 +99,6 @@ public:
 	
 	void SetAlpha(const int alpha);
 
-	void SetID(const int id);
-	int GetID() const;
-
 	//DispatchMessage(GMessageQueue)
 	//InterpretMessage(GMessageQueue);
 
@@ -117,7 +114,6 @@ private:
 	bool AmIOutOfRange() const;
 
 protected:
-	int m_id;
 	const Idea* m_idea;
 	Vec2<int> m_pos; //Œ»İÀ•W
 	float m_angle; //“x”–@‚Å‰ñ“]î•ñ

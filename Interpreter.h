@@ -145,10 +145,10 @@ public:
 
 			//deploy–½—ß
 			{
-				std::wregex pattern(L"^deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
+				std::wregex pattern(L"^([[:alnum:]_]+)\\.deploy\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*\\)$");
 				if (std::regex_match(buff, match, pattern))
 				{
-					scene->RegisterDeploy(std::atoi(TString(match.str(1)).GetStringA()),
+					scene->RegisterDeploy(match.str(1),
 						std::atoi(TString(match.str(2)).GetStringA()),
 						Vec2<int>(std::atoi(TString(match.str(3)).GetStringA()),
 						std::atoi(TString(match.str(4)).GetStringA()))
@@ -159,10 +159,10 @@ public:
 
 			//move–½—ß
 			{
-				std::wregex pattern(L"^move\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*,[[:s:]]*([[:upper:]]+)[[:s:]]*\\)$");
+				std::wregex pattern(L"^([[:alnum:]_]+)\\.move\\([[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*([[:d:]]+)[[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*,[[:s:]]*\\[[[:s:]]*(-?[[:d:]]+)[[:s:]]*,[[:s:]]*(-?[[:d:]]+)[[:s:]]*\\][[:s:]]*,[[:s:]]*([[:upper:]]+)[[:s:]]*\\)$");
 				if (std::regex_match(buff, match, pattern))
 				{
-					scene->RegisterMove(std::atoi(TString(match.str(1)).GetStringA()),
+					scene->RegisterMove( match.str(1),
 						std::atoi(TString(match.str(2)).GetStringA()),
 						std::atoi(TString(match.str(3)).GetStringA()),
 						Vec2<int>(std::atoi(TString(match.str(4)).GetStringA()),

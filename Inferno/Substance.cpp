@@ -144,10 +144,6 @@ void Substance::SetAlpha(const int alpha)
 	m_alpha = alpha;
 }
 
-void Substance::SetID(const int id) { m_id = id; }
-
-int Substance::GetID() const { return m_id; }
-
 void Substance::Update()
 {
 	if (this->AmIOutOfRange())

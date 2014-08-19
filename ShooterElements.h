@@ -12,6 +12,34 @@ namespace Inferno
 //後ろにあるので
 class Enemy;
 
+//継承用
+class Damageable
+{
+public:
+	//要素へのダメージを与える。処理もここで（継承先で呼び出す）
+	//返り値：ダメージ状態が終了したら真を返す
+	//blowVecは吹き飛ぶ方向
+	bool EarnDamage(const Vec2<int>& blowVec = Vec2<int>())
+	{
+		//stateをクラスに分離してその中でポリモーフィズムとして実行する事もできるな、将来的に
+		if ( !m_isInDamagedState )
+		{
+			m_isInDamagedState = true;
+			/*
+			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
+			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
+			*/
+			return false;
+		}
+
+		return true;
+	}
+
+private:
+	//ダメージ状態かどうかのフラグ
+	bool m_isInDamagedState = false;;
+};
+
 class Bullet : public Substance
 {
 public:
@@ -64,7 +92,7 @@ enum class PState
 };
 //enum class SEAnimeState;
 
-class Player : public Substance, public BulletOwner
+class Player : public Substance, public BulletOwner, public Damageable
 {
 public:
 	Player() : m_curState(PState::Neutral),m_moveLimit(0,0) {}
@@ -75,9 +103,6 @@ public:
 	void RMove(const Vec2<int>& c);
 
 	void SetMoveLimit(const Rect& rect);
-
-	//弾・敵に当たったら（要改修）
-	void ProcessHit();
 
 	void Shoot(const float degree, const int speed);
 
@@ -105,7 +130,7 @@ enum class EState
 	Leave,
 };
 
-class Enemy : public Substance, public BulletOwner
+class Enemy : public Substance, public BulletOwner, public Damageable
 {
 public:
 	Enemy();

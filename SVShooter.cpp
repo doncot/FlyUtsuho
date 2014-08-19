@@ -149,7 +149,7 @@ bool SVShooter::GameLoop()
 	{
 	case sn_title:
 		//BGM
-		bgm.Play();
+		//bgm.Play();
 
 		//“ü—Í
 		if (m_input.IsAnyKeyPressed() == true || m_input.IsMouseLButtonPressed() == true )
@@ -234,28 +234,37 @@ bool SVShooter::GameLoop()
 
 		//Õ“Ë”»’è**************************************************************
 		//“G’e‚ÆŽ©‹@‚ÌÕ“Ë”»’è
-		for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
+		if (scene.ProcessEnemyBulletToPlayerHit(m_utsuho->GetHitBox()))
 		{
-			//’¼Œ‚
-			if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetHitBox()) )
-			{
-				//’e‚ðíœ
-				SAFE_DELETE(*e);
-				e = purpleBullets.erase(e);
-				//”í’eSE
-				pichun.Stop();
-				pichun.Play();
-
-				m_score -= 2500;
-				
-				m_utsuho->ProcessHit();
-				
-				continue;
-			}
-
-			//ŽŸƒCƒeƒŒ[ƒ^[
-			e++;
+			//”í’eSE
+			pichun.Stop();
+			pichun.Play();
+			m_score -= 2500;
+					
+			m_utsuho->EarnDamage();
 		}
+		//for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
+		//{
+		//	//’¼Œ‚
+		//	if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetHitBox()) )
+		//	{
+		//		//’e‚ðíœ
+		//		SAFE_DELETE(*e);
+		//		e = purpleBullets.erase(e);
+		//		//”í’eSE
+		//		pichun.Stop();
+		//		pichun.Play();
+
+		//		m_score -= 2500;
+		//		
+		//		m_utsuho->ProcessHit();
+		//		
+		//		continue;
+		//	}
+
+		//	//ŽŸƒCƒeƒŒ[ƒ^[
+		//	e++;
+		//}
 
 		//—‘‚ÆŽ©‹@‚ÌÕ“ËŒŸo
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), egg.GetHitBox()))

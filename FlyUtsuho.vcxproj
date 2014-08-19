@@ -151,7 +151,6 @@
     <Media Include="SE\sensescircuit\pui.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Script\TestScene.script" />
     <None Include="Script\TestScene_rev2.script" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

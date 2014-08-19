@@ -57,20 +57,6 @@ void Player::SetMoveLimit(const Rect& rect)
 	m_moveLimit = temp;
 }
 
-void Player::ProcessHit()
-{
-	//stateをクラスに分離してその中でポリモーフィズムとして実行する事もできるな、将来的に
-	if (m_curState == PState::Neutral)
-	{
-		m_curState = PState::Damaged;
-		/*
-		aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
-		aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
-		*/
-		SetAttribute(GEAttribute::UserLock, true);
-	}
-}
-
 void Player::Shoot(const float degree, const int speed)
 {
 	ShootInternal(m_pos, degree, speed);

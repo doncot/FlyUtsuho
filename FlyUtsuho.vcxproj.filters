@@ -240,8 +240,5 @@
     <None Include="Script\TestScene_rev2.script">
       <Filter>リソース ファイル\Script</Filter>
     </None>
-    <None Include="Script\TestScene.script">
-      <Filter>リソース ファイル\Script</Filter>
-    </None>
   </ItemGroup>
 </Project>

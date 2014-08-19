@@ -5,10 +5,10 @@ namespace Inferno
 {
 	ShooterScene::~ShooterScene()
 	{
-		for (auto i = m_substances.begin(); i != m_substances.end();)
+		for (auto i = m_enemies.begin(); i != m_enemies.end();)
 		{
 			SAFE_DELETE(i->second);
-			i = m_substances.erase(i);
+			i = m_enemies.erase(i);
 		}
 
 		for (auto i = m_taskList.begin(); i != m_taskList.end();)
@@ -44,7 +44,7 @@ namespace Inferno
 	void ShooterScene::CreateEnemyInstance(const std::wstring& resourceName,const std::wstring& instanceName)
 	{
 		auto newEnemy = ResourceManager::CreateEnemyInstance(resourceName);
-		m_substances.emplace(instanceName,newEnemy);
+		m_enemies.emplace(instanceName,newEnemy);
 	}
 	 
 	void ShooterScene::CreateEnemyResourceFromFile(const ResourceHandle& hResource,
@@ -77,7 +77,7 @@ namespace Inferno
 
 	bool ShooterScene::ProcessPlayerBulletToEnemyHit(const Bullet& bullet)
 	{
-		for (auto sub_i = m_substances.begin(); sub_i != m_substances.end();)
+		for (auto sub_i = m_enemies.begin(); sub_i != m_enemies.end();)
 		{
 			if (IsRect1HittingRect2(sub_i->second->GetHitBox(),bullet.GetHitBox()))
 			{
@@ -85,7 +85,7 @@ namespace Inferno
 				//‘Ì—Í‚Æ‚©Œ¸‚ç‚·‚Ì‚©‚È–{“–‚Í
 				//i‚±‚±‚Ü‚Ü‚¶‚áŽ€–SŽž‚ÌƒAƒjƒ‚ª‚È‚¢‚ÈA‚Ç‚¤“`‚¦‚æ‚¤j
 				SAFE_DELETE( sub_i->second );
-				sub_i = m_substances.erase(sub_i);
+				sub_i = m_enemies.erase(sub_i);
 
 				//ã‚Ì‘w‚Åˆ—‚·‚é‚½‚ß‚É“–‚½‚Á‚½Ž–‚ð’m‚ç‚¹‚é
 				return true;
@@ -95,11 +95,25 @@ namespace Inferno
 		return false;
 	}
 
-	bool ShooterScene::ProcessEnemyBulletToPlayerHit(const Rect& rect)
+	bool ShooterScene::ProcessEnemyBulletToPlayerHit(const Rect& player)
 	{
-		for (auto sub_i = m_substances.begin(); sub_i != m_substances.end();)
+		for (auto sub_i = m_enemies.begin(); sub_i != m_enemies.end();)
 		{
+			if (IsRect1HittingRect2(player, sub_i->second->GetHitBox()))
+			{
+				//“G‚Ö‚Ìƒ_ƒ[ƒW‚Í–³‚µAŽ©‹@‚Öƒqƒbƒg‚ð“`‚¦‚éˆ×‚Éã‚É“`’B
+				return true;
+			}
 
+			if (sub_i->second->CheckBulletHit(player))
+			{
+				//’e‚ðÁ‚µ
+				SAFE_DELETE(sub_i->second);
+				//Ž©‹@‚ªƒ_ƒ[ƒW‚ðŽó‚¯‚½Ž–‚ð“`’B
+				return true;
+			}
+
+			sub_i++;
 		}
 		return false;
 	}
@@ -124,11 +138,11 @@ namespace Inferno
 
 			//‚±‚±‚ç•Ó‚Í‘S•”Task->DoTask‚Å
 			//TODO:task‚Ìlist‚Í‘S•”substance‚ªŽ‚Â‚×‚«H
-			//Žb’èˆ—‚Æ‚µ‚Äm_substances‚ðtask‚É“n‚·‚©H
+			//Žb’èˆ—‚Æ‚µ‚Äm_enemies‚ðtask‚É“n‚·‚©H
 			const wstring targetSub = (*e_t)->GetInstanceName();
 			//‚±‚±‚ÅSubList‚ð’Tõ
 			//”ñí‚É‚æ‚­‚È‚¢O(n^2)
-			for (auto e_s = m_substances.begin(); e_s != m_substances.end();)
+			for (auto e_s = m_enemies.begin(); e_s != m_enemies.end();)
 			{
 				//ŠY“–ƒ^ƒXƒN‚Ìê‡
 				if (targetSub == e_s->first)
@@ -156,7 +170,7 @@ namespace Inferno
 
 	void ShooterScene::Draw()
 	{
-		for (auto e : m_substances)
+		for (auto e : m_enemies)
 		{
 			e.second->Draw(*m_graphics);
 		}

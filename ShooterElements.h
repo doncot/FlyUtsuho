@@ -16,28 +16,42 @@ class Enemy;
 class Damageable
 {
 public:
+	//自分で登録
+	template<typename FuncType>
+	void RegisterMyDamage(const int damagePoint, FuncType pred)
+	{
+		m_isInDamagedState = false;
+		m_damgePoint = damagePoint;
+		m_damageFunc = damageFunc;
+	}
+
+	//継承先で実装
+	void virtual RegisterDamage(const int damagePoint){}
+
 	//要素へのダメージを与える。処理もここで（継承先で呼び出す）
 	//返り値：ダメージ状態が終了したら真を返す
 	//blowVecは吹き飛ぶ方向
-	bool EarnDamage(const Vec2<int>& blowVec = Vec2<int>())
+	bool ProcessDamage()
 	{
-		//stateをクラスに分離してその中でポリモーフィズムとして実行する事もできるな、将来的に
-		if ( !m_isInDamagedState )
+		//喰らっているなら
+		if (m_isInDamagedState)
 		{
-			m_isInDamagedState = true;
+			//ダメージ処理
+			return m_damageFunc();
+		}
+
 			/*
 			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
 			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
 			*/
-			return false;
-		}
-
 		return true;
 	}
 
 private:
 	//ダメージ状態かどうかのフラグ
-	bool m_isInDamagedState = false;;
+	bool m_isInDamagedState = false;
+	bool (*m_damageFunc)() = nullptr;
+	int m_damgePoint = 0;
 };
 
 class Bullet : public Substance
@@ -105,6 +119,8 @@ public:
 	void SetMoveLimit(const Rect& rect);
 
 	void Shoot(const float degree, const int speed);
+
+	void RegisterDamage(const int damagePoint);
 
 	void Update();
 	void Draw(const Graphics& g) const;

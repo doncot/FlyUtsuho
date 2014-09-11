@@ -62,40 +62,54 @@ void Player::Shoot(const float degree, const int speed)
 	ShootInternal(m_pos, degree, speed);
 }
 
+void Player::RegisterDamage(const int damagePoint)
+{
+	RegisterMyDamage(damagePoint,
+		[=]() -> bool
+		{
+
+			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
+			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
+		}
+	);
+}
+
 void Player::Update()
 {
 	//自分へのダメージ
-	if (m_curState == PState::Damaged)
-	{
-		//ダメージフェーズが終わったら
-		if (aTransX.HasEnded())
-		{
-			m_curState = PState::Neutral;
-			SetAttribute(GEAttribute::UserLock, false);
-			m_angle = 0; //ここでリセットしないと次も値が溜まったままになる
-			SetAlpha(0xff);
-		}
-		else
-		{
-			//アニメーション
-			//移動
-			m_pos.x = aTransX.GetValue();
-			//簡易版
-			//double dx = (120 - m_pos.x) / 30.0;
-			//m_pos.x += dx;
-			m_pos = KeepSubInsideRect(this->GetHitBox(), m_moveLimit);
-			//回転
-			m_angle = aRotate.GetValue();
-			//double dAngle = (720 - m_angle) / 10.0;
-			//m_angle += dAngle;
+	ProcessDamage();
 
-			//点滅
-			static int count = 0;
-			SetAlpha(Inferno::Blink(count++, 0xff, 25));
-		}
-	}
+	//if (m_curState == PState::Damaged)
+	//{
+	//	//ダメージフェーズが終わったら
+	//	if (aTransX.HasEnded())
+	//	{
+	//		m_curState = PState::Neutral;
+	//		SetAttribute(GEAttribute::UserLock, false);
+	//		m_angle = 0; //ここでリセットしないと次も値が溜まったままになる
+	//		SetAlpha(0xff);
+	//	}
+	//	else
+	//	{
+	//		//アニメーション
+	//		//移動
+	//		m_pos.x = aTransX.GetValue();
+	//		//簡易版
+	//		//double dx = (120 - m_pos.x) / 30.0;
+	//		//m_pos.x += dx;
+	//		m_pos = KeepSubInsideRect(this->GetHitBox(), m_moveLimit);
+	//		//回転
+	//		m_angle = aRotate.GetValue();
+	//		//double dAngle = (720 - m_angle) / 10.0;
+	//		//m_angle += dAngle;
 
-	//弾関連
+	//		//点滅
+	//		static int count = 0;
+	//		SetAlpha(Inferno::Blink(count++, 0xff, 25));
+	//	}
+	//}
+
+	//自分が管理している弾関連
 	for (auto i = m_bullets.begin(); i != m_bullets.end();)
 	{
 		//殺して欲しい奴は殺す
@@ -108,7 +122,6 @@ void Player::Update()
 
 		//移動
 		(*i)->Update();
-		
 
 		i++;
 	}

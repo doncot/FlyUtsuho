@@ -241,7 +241,7 @@ bool SVShooter::GameLoop()
 			pichun.Play();
 			m_score -= 2500;
 					
-			m_utsuho->EarnDamage();
+			//m_utsuho->RegisterDamage();
 		}
 		//for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
 		//{

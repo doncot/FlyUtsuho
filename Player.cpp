@@ -67,9 +67,10 @@ void Player::RegisterDamage(const int damagePoint)
 	RegisterMyDamage(damagePoint,
 		[=]() -> bool
 		{
-
 			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
 			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
+
+			return true;
 		}
 	);
 }

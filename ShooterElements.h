@@ -6,6 +6,7 @@
 #include<Timer.h>
 #include"Animation.h"
 #include"ResourceManager.h"
+#include<functional>
 
 namespace Inferno
 {
@@ -22,7 +23,7 @@ public:
 	{
 		m_isInDamagedState = false;
 		m_damgePoint = damagePoint;
-		m_damageFunc = damageFunc;
+		m_damageFunc = pred;
 	}
 
 	//継承先で実装
@@ -50,7 +51,8 @@ public:
 private:
 	//ダメージ状態かどうかのフラグ
 	bool m_isInDamagedState = false;
-	bool (*m_damageFunc)() = nullptr;
+	std::function<bool()> m_damageFunc;
+	//bool (*m_damageFunc)() = nullptr;
 	int m_damgePoint = 0;
 };
 

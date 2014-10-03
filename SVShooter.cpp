@@ -243,28 +243,9 @@ bool SVShooter::GameLoop()
 					
 			//m_utsuho->RegisterDamage();
 		}
-		//for (auto e = purpleBullets.begin(); e != purpleBullets.end();)
-		//{
-		//	//直撃
-		//	if ( Inferno::IsPointInsideRect((*e)->GetPosition(), m_utsuho->GetHitBox()) )
-		//	{
-		//		//弾を削除
-		//		SAFE_DELETE(*e);
-		//		e = purpleBullets.erase(e);
-		//		//被弾SE
-		//		pichun.Stop();
-		//		pichun.Play();
 
-		//		m_score -= 2500;
-		//		
-		//		m_utsuho->ProcessHit();
-		//		
-		//		continue;
-		//	}
-
-		//	//次イテレーター
-		//	e++;
-		//}
+		//敵機と自機の衝突判定
+		//if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), ))
 
 		//卵と自機の衝突検出
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), egg.GetHitBox()))

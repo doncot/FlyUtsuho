@@ -35,6 +35,8 @@ public:
 	//自機弾と敵の衝突処理（この中で敵が死ぬとこまでやる）
 	//※本来この処理はシーン内でやるため、playerをsceneに移した後はいらない関数
 	bool ProcessPlayerBulletToEnemyHit(const Bullet& bullet);
+	//敵vs自機
+	bool ProcessPlayerToEnemyHit(const Rect& player);
 	//敵弾+敵と指定の物体との衝突判定（ここで来るのはplayer）
 	//この関数内で敵と敵弾は処理（被弾したり死んだり）される。
 	//返り値でプレイヤー側へのレスポンスも求めれる

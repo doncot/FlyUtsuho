@@ -17,7 +17,7 @@ class Enemy;
 class Damageable
 {
 public:
-	//自分で登録
+	//自分で登録（継承先でRegisterDamageという名前を使ってるのでMyをつける）
 	template<typename FuncType>
 	void RegisterMyDamage(const int damagePoint, FuncType pred)
 	{
@@ -25,9 +25,6 @@ public:
 		m_damgePoint = damagePoint;
 		m_damageFunc = pred;
 	}
-
-	//継承先で実装
-	void virtual RegisterDamage(const int damagePoint){}
 
 	//要素へのダメージを与える。処理もここで（継承先で呼び出す）
 	//返り値：ダメージ状態が終了したら真を返す
@@ -41,10 +38,6 @@ public:
 			return m_damageFunc();
 		}
 
-			/*
-			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
-			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
-			*/
 		return true;
 	}
 

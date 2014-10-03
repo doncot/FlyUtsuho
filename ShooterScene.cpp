@@ -1,5 +1,6 @@
 #include"ShooterScene.h"
 #include"Inferno\Collision.h"
+#include<algorithm>
 
 namespace Inferno
 {
@@ -92,6 +93,19 @@ namespace Inferno
 			}
 			sub_i++;
 		}
+		return false;
+	}
+
+	bool ShooterScene::ProcessPlayerToEnemyHit(const Rect& player)
+	{
+/*
+		//TODO:‚±‚±‚ÅŽ~‚Ü‚Á‚Ä‚¢‚é
+		auto enemyItr = std::find_if(m_enemies.begin(), m_enemies.end(),[&](std::unordered_map<std::wstring,Enemy*>::iterator itr)->bool
+		{
+
+		}
+		);*/
+
 		return false;
 	}
 

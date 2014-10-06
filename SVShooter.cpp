@@ -244,8 +244,16 @@ bool SVShooter::GameLoop()
 			//m_utsuho->RegisterDamage();
 		}
 
-		//“G‹@‚ÆŽ©‹@‚ÌÕ“Ë”»’è
-		//if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), ))
+		//Ž©‹@‚Æ“G‹@‚ÌÕ“Ë”»’è
+		if (scene.ProcessPlayerToEnemyHit(m_utsuho->GetHitBox()))
+		{
+			//”í’eSE
+			pichun.Stop();
+			pichun.Play();
+			m_score -= 2500;
+
+			//m_utsuho->RegisterDamage();
+		}
 
 		//—‘‚ÆŽ©‹@‚ÌÕ“ËŒŸo
 		if (Inferno::IsRect1HittingRect2(m_utsuho->GetHitBox(), egg.GetHitBox()))

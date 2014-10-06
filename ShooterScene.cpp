@@ -98,13 +98,20 @@ namespace Inferno
 
 	bool ShooterScene::ProcessPlayerToEnemyHit(const Rect& player)
 	{
-/*
-		//TODO:ここで止まっている
-		auto enemyItr = std::find_if(m_enemies.begin(), m_enemies.end(),[&](std::unordered_map<std::wstring,Enemy*>::iterator itr)->bool
-		{
 
+		//TODO:アルゴリズムを使いたいが、分からない
+		//auto enemyItr = std::find_if(m_enemies.begin(), m_enemies.end(),[&](std::unordered_map<std::wstring,Enemy*> enemies) -> bool
+		//{
+		//	return true;
+		//}
+		//);
+		for (auto i = m_enemies.begin(); i != m_enemies.end(); i++)
+		{
+			if (IsRect1HittingRect2(player, (*i).second->GetHitBox()))
+			{
+				return true;
+			}
 		}
-		);*/
 
 		return false;
 	}

@@ -44,6 +44,8 @@ public:
 private:
 	//ダメージ状態かどうかのフラグ
 	bool m_isInDamagedState = false;
+	//ダメージの処理をするファンクタ
+	//返り値：ダメージ処理が終了したかを返す
 	std::function<bool()> m_damageFunc;
 	//bool (*m_damageFunc)() = nullptr;
 	int m_damgePoint = 0;

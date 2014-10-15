@@ -7,6 +7,8 @@
 
 namespace
 {
+	//余りよくない、タスクに突っ込むのが理想
+	//playerは１人しかいないので、無名空間（staticと同じ）でよい
 	Inferno::Animation aTransX;
 	Inferno::Animation aRotate;
 }
@@ -64,11 +66,14 @@ void Player::Shoot(const float degree, const int speed)
 
 void Player::RegisterDamage(const int damagePoint)
 {
+
+	//これは登録だからここには来ないのでは？（ここにくるのは更新系のはず）
+	aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
+	aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
+
 	RegisterMyDamage(damagePoint,
 		[=]() -> bool
 		{
-			aTransX.Start(0, 550, m_pos.x, m_pos.x - 200, Animation::TransitType::EaseOut);
-			aRotate.Start(0, 600, 0, 720, Animation::TransitType::EaseOut);
 
 			return true;
 		}

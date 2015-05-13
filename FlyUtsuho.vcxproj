@@ -146,6 +146,7 @@
     <Image Include="Sprites\utsuho_moji.png" />
   </ItemGroup>
   <ItemGroup>
+    <Media Include="BGM\Nuclear_Fusion.wav" />
     <Media Include="SE\niconicommons\nc899.wav" />
     <Media Include="SE\sensescircuit\pui.wav" />
   </ItemGroup>

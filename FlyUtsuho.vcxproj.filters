@@ -232,6 +232,9 @@
     <Media Include="SE\niconicommons\nc899.wav">
       <Filter>リソース ファイル\SE\niconicommons</Filter>
     </Media>
+    <Media Include="BGM\Nuclear_Fusion.wav">
+      <Filter>リソース ファイル\BGM</Filter>
+    </Media>
   </ItemGroup>
   <ItemGroup>
     <None Include="Script\TestScene_rev2.script">

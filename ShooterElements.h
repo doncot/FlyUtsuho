@@ -113,6 +113,7 @@ public:
 
 	void Entry();
 	void Update();
+	void Draw(const Graphics& g) const;
 
 private:
 	Timer m_timer;

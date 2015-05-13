@@ -14,6 +14,8 @@ namespace
 
 namespace Inferno
 {
+	typedef Substance Base;
+
 	Enemy::Enemy()
 	{
 		this->SetAttribute(GEAttribute::Visible, false);
@@ -73,6 +75,7 @@ namespace Inferno
 
 			if (shootInterval.HasFinished())
 			{
+				ShootInternal(m_pos, 180, 1.0);
 				/*
 				auto born = new Inferno::Bullet(&purpleBullet_);
 				born->Fire(m_onryouList[0]->GetPosition(), Inferno::Vec2<int>(-2, 0));
@@ -101,6 +104,15 @@ namespace Inferno
 		}
 	}
 
-
+	void Enemy::Draw(const Graphics& g) const
+	{
+		//Ž©•ªŽ©g‚ð•`‰æ
+		Base::Draw(g);
+		//’e‚Ì•`‰æ
+		for (auto e : m_bullets)
+		{
+			e->Draw(g);
+		}
+	}
 
 }

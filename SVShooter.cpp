@@ -116,7 +116,7 @@ bool SVShooter::Initialize()
 		bgm.Initialize(&audio);
 		fire.Initialize(&audio);
 		pichun.Initialize(&audio);
-		bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
+		//bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
 		fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
 		pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
 		pichun.SetVolume(0.3f);
@@ -149,7 +149,7 @@ bool SVShooter::GameLoop()
 	{
 	case sn_title:
 		//BGM
-		bgm.Play();
+		//bgm.Play();
 
 		//“ü—Í
 		if (m_input.IsAnyKeyPressed() == true || m_input.IsMouseLButtonPressed() == true )

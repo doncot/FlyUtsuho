@@ -143,7 +143,6 @@
     <Image Include="Sprites\purplebullet.png" />
     <Image Include="Sprites\underground.png" />
     <Image Include="Sprites\utsuho.png" />
-    <Image Include="Sprites\utsuho_moji.png" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="BGM\Nuclear_Fusion.wav" />

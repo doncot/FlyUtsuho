@@ -221,9 +221,6 @@
     <Image Include="Sprites\utsuho.png">
       <Filter>リソース ファイル\Sprites</Filter>
     </Image>
-    <Image Include="Sprites\utsuho_moji.png">
-      <Filter>リソース ファイル\Sprites</Filter>
-    </Image>
   </ItemGroup>
   <ItemGroup>
     <Media Include="SE\sensescircuit\pui.wav">

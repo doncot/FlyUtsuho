@@ -33,7 +33,7 @@ FlyUtsuho
 ##### 組み込み命令一覧
 ###### void encoding(String encodingName)
 エンコーディングを指定する。**必ず**一行目に書く。指定がない場合、utf8として解釈する。引数arg1に与えられるのは"utf8"か"sjis"のみ。
-###### var loadresource(String resourcePath)
+###### ResourceVariable loadresource(String resourcePath)
 リソースファイルのパス名を与え、**リソース変数(ResourceVariable)**として返す。現時点ではリソースファイルはただの画像ファイルだが、最終的にはxml設定ファイルを読み込む。
 ###### void ResourceVariable.deploy(int deployTime, [int x,int y])
 配置命令。この命令を実行しないと、画面には映らない。deployTimeで配置タイミングをゲームスタート開始時からミリ秒後で指定。x,yで設置希望座標を指定。

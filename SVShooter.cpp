@@ -276,13 +276,16 @@ bool SVShooter::GameLoop()
 				if (scene.ProcessPlayerBulletToEnemyHit(**bullet_i))
 				{
 					//当たっていた場合
+					//スコア加算
+					m_score += 150;
+
 					//弾を管理するplayerに該当の弾を渡し、消してもらう
 					//消す前に次弾をキープ
 					auto nextBullet = bullet_i;
 					nextBullet++;
 					m_utsuho->EraseGivenBullet(**bullet_i);
 					//!!!!注意!!!!:この時点でこのbulletは無効。
-					//TODO:こういうときこそmoveでは？
+					//TODO:こういうときこそ(C++11の)moveでは？
 					bullet_i = nextBullet;
 					continue;
 				}

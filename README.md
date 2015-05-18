@@ -39,9 +39,11 @@ FlyUtsuho
 配置命令。この命令を実行しないと、画面には映らない。deployTimeで配置タイミングをゲームスタート開始時からミリ秒後で指定。x,yで設置希望座標を指定。
 ###### void ResourceVariable.move(int moveTime,int duration,[int from_x,int from_y],[int to_x,int to_y],TransitType type)
 移動命令。moveTimeに移動タイミングを指定（指定方法はdeploy命令と同じ）。durationで移動継続時間を指定。第三引数と第四引数で移動前と移動後の座標を指定。第五引数でアニメーション移動方法を指定する。
-
+ 
 *アニメーション移動方法：LINEAR（線形[等速直線]移動）。EASEOUT（段々遅くなる）。EASEIN（ゆっくりから速くなる）。
 
+## コンパイル
+* Microsoft DirectX SDK (June 2010)をインストールし、その中のインクルードディレクトリとライブラリパスをプロジェクトに設定する。
 
 ## システム要件
 * DirectX9.0cが動作する環境（実行だけならSDKはいらない）。

@@ -112,14 +112,14 @@ bool SVShooter::Initialize()
 		m_scene = sn_title;
 
 		//サウンド
-		audio.Initialize();
-		bgm.Initialize(&audio);
-		fire.Initialize(&audio);
-		pichun.Initialize(&audio);
-		//bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
-		fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
-		pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
-		pichun.SetVolume(0.3f);
+		//audio.Initialize();
+		//bgm.Initialize(&audio);
+		//fire.Initialize(&audio);
+		//pichun.Initialize(&audio);
+		////bgm.LoadWaveFile(_T("BGM\\Nuclear_Fusion.wav"));
+		//fire.LoadWaveFile(_T("SE\\sensescircuit\\pui.wav"));
+		//pichun.LoadWaveFile(_T("SE\\niconicommons\\nc899.wav"));
+		//pichun.SetVolume(0.3f);
 
 		//テキスト
 		scoreText.Initialize(m_graphics);

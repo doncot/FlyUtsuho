@@ -39,9 +39,35 @@ public:
 		{
 			throw Inferno::CreationFailed(TEXT("ColnitializeEX"));
 		}
+#if defined(_DEBUG)
 		if (FAILED(hr = XAudio2Create(&m_xaudio, XAUDIO2_DEBUG_ENGINE)))
+#else //undefined _DEBUG
+		if (FAILED(hr = XAudio2Create(&m_xaudio, XAUDIO2_DEFAULT_PROCESSOR)))
+#endif 
 		{
-			throw Inferno::CreationFailed(TEXT("XAudio2"));
+			wstring err;
+			switch (hr)
+			{
+			case XAUDIO2_E_INVALID_CALL:
+				err = TEXT("invalid call");
+				break;
+			case XAUDIO2_E_XMA_DECODER_ERROR:
+				err = TEXT("XMA failed");
+				break;
+			case XAUDIO2_E_XAPO_CREATION_FAILED:
+				err = TEXT("create to make effect");
+				break;
+			case XAUDIO2_E_DEVICE_INVALIDATED:
+				err = TEXT("device is invalid");
+				break;
+			default:
+				err = TEXT("unknown");
+				break;
+			}
+
+			wstringstream ss;
+			ss << TEXT("XAudio2") << "(type: " << err << ")";
+			throw Inferno::CreationFailed(ss.str());
 		}
 		if (FAILED(hr = m_xaudio->CreateMasteringVoice(&m_masterVoice)))
 		{

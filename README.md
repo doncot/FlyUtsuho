@@ -46,6 +46,9 @@ FlyUtsuho
 ## システム要件
 * DirectX9.0cが動作する環境（SDKはいらない）。
 
+## トラブルシューティング
+* "d3dx9_43.dll"がないと言われる -> DirectXエンドユーザーランタイムをインストールする（https://www.microsoft.com/ja-jp/download/details.aspx?id=35）
+
 ## ライセンス
 * 未完成なので、再配布不許可（No License）。参考にできるならしてみやがれ（滅茶苦茶なコードで本当すみません）。
 * 完成できたら、MITライセンスで公開します。

@@ -1,11 +1,12 @@
-/*
-共通処理ファイル
+/**
+共通ヘッダー
 win32用
 */
+#pragma once
 
-#ifndef INCLUDE_COMMON_H
-#define INCLUDE_COMMON_H
 #include<Windows.h>
+#include<tchar.h>
+#include<cassert>
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(p)       { if (p!=nullptr) { delete (p);     (p)=nullptr; } }
@@ -18,7 +19,7 @@ win32用
 #endif
 
 #ifndef ERROR_MESSAGE
-#define ERROR_MESSAGE(x) { MessageBox(NULL,(x),TEXT("エラー"),MB_OK|MB_ICONERROR); }
+#define ERROR_MESSAGE(x) { MessageBox(nullptr,(x),TEXT("エラー"),MB_OK|MB_ICONERROR); }
 #endif
 
 #ifndef ERROR_EXIT
@@ -30,9 +31,8 @@ win32用
 	TCHAR ext[_MAX_EXT];\
 	_tsplitpath_s(TEXT(__FILE__),drive,_MAX_DRIVE,dir,_MAX_DIR,fname,_MAX_FNAME,ext,_MAX_EXT);\
 	_stprintf_s(msg, msg_size, TEXT("%s\r\nファイル：%s%s\r\n行番号：%d"),x,fname,ext,__LINE__);\
-	MessageBox(NULL,msg,TEXT("Error"),MB_OK|MB_ICONEXCLAMATION);\
+	MessageBox(nullptr,msg,TEXT("Error"),MB_OK|MB_ICONEXCLAMATION);\
 	PostQuitMessage(1);\
 }
 #endif
 
-#endif //INCLUDE_COMMON_H

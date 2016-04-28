@@ -13,7 +13,7 @@ public:
 	SVShooter();
 	~SVShooter();
 
-	bool Initialize();
+	bool Startup();
 	bool GameLoop();
 
 	enum SceneName

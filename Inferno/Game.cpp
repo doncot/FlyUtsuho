@@ -1,18 +1,34 @@
 #include<Game.h>
 #include"Graphics.h"
 
-
 namespace
 {
 	Inferno::Input* InputHandle;
 	LRESULT WINAPI MessageHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 }
 
+using namespace Inferno;
 
-Game::Game()
-:m_IsInitialized(false), m_elapsedFrame(0), m_frameCount(0)
+Game::Game() :
+	m_IsInitialized(false), m_elapsedFrame(0), m_frameCount(0)
 {
 	InputHandle = &m_input;
+
+	//ウィンドウの初期化
+	Base::Resize(800, 600);
+	Base::SetWindowAlignment(HorizontalAlignment::Center, VerticalAlignment::Center);
+	Base::Show();
+
+	//ウィドウプロシージャを書き換え
+	::SetWindowLongPtr(GetHWnd(), GWLP_WNDPROC, (LONG_PTR)MessageHandler);
+
+	//IME無効化
+	m_input.DisableIME(GetHWnd());
+
+	//グラフィックスの初期化
+	m_graphics.Initialize(GetHWnd());
+
+	//タイマーをスタート
 }
 
 Game::~Game()
@@ -22,33 +38,10 @@ Game::~Game()
 	InputHandle = nullptr;
 }
 
-bool Game::Initialize()
-{
-	//ウィンドウの初期化
-	Base::Initialize();
-	Base::Resize(800, 600);
-	Base::SetPos(Base::Center, Base::Center);
-	Base::Show();
-
-	//ウィドウプロシージャを書き換え
-	::SetWindowLongPtr(GetHWND(), GWLP_WNDPROC, (LONG_PTR)MessageHandler);
-
-	//IME無効化
-	m_input.DisableIME(GetHWND());
-
-	//グラフィックスの初期化
-	m_graphics.Initialize(GetHWND());
-
-	//タイマーをスタート
-	
-
-	return true;
-}
-
 void Game::SetClientSize(const int width, const int height)
 {
 	Base::Resize(width,height);
-	Base::SetPos(Base::Center, Base::Center);
+	Base::SetWindowAlignment(HorizontalAlignment::Center, VerticalAlignment::Center);
 	m_graphics.DisplayBlankScreen(0, 0, 128);
 }
 
@@ -85,6 +78,10 @@ namespace
 		case WM_DESTROY:
 			PostQuitMessage(0);
 			break;
+
+		case WM_ERASEBKGND:
+			//無視
+			return TRUE;
 		default:
 			break;
 		}

@@ -2,38 +2,49 @@
 ゲーム用のウィンドウをクラス化したもの
 */
 #pragma once
-#include<Windows.h>
-#include<tchar.h>
-#include<Input.h>
+#include<Common.h>
 
 namespace Inferno
 {
-class SimpleWindow
-{
-public:
 	//定数
-	enum WindowPostion
+	enum class HorizontalAlignment
 	{
-		Center,
 		Left,
+		Center,
 		Right,
 	};
 
+	enum class VerticalAlignment
+	{
+		Top,
+		Center,
+		Bottom,
+	};
+
+class SimpleWindow
+{
 public:
 	SimpleWindow();
-	~SimpleWindow();
-	virtual bool Initialize();
+	virtual ~SimpleWindow() noexcept;
+
 	void Resize(const int width, const int height);
-	void Show() const; //現在の位置とサイズでウィンドウをアクティブにする
-	void SetTitleText(LPCTSTR str) const;
-	void SetPos(const WindowPostion x, const WindowPostion y);
 
-	HWND GetHWND() const;
-	int GetWindowWidth() const;
-	int GetWindowHeight() const;
-	int GetClientWidth() const;
-	int GetClientHeight() const;
+	///<summary>
+	///現在の位置とサイズでウィンドウをアクティブにする
+	///</summary>
+	void Show() const;
+	void SetTitle(LPCTSTR str) const;
+	void SetWindowAlignment(const HorizontalAlignment h, const VerticalAlignment v);
 
+	HWND GetHWnd() const;
+	int GetWindowWidth() const noexcept;
+	int GetWindowHeight() const noexcept;
+	int GetClientWidth() const noexcept;
+	int GetClientHeight() const noexcept;
+	
+	///<summary>
+	///ウィンドウを終了させる
+	///</summary>
 	virtual bool Terminate();
 
 private:

@@ -63,11 +63,10 @@ SVShooter::~SVShooter()
 	SAFE_DELETE(resourceMan);
 }
 
-bool SVShooter::Initialize()
+bool SVShooter::Startup()
 {
 	try
 	{
-		Base::Initialize();
 		m_screenRect.SetSize(GetClientWidth(),GetClientHeight());
 		m_screenRect.SetPosofULCorner(0, 0);
 
@@ -131,11 +130,11 @@ bool SVShooter::Initialize()
 	}
 	catch (const Inferno::MyExceptionBase_RuntimeError& e)
 	{
-		MessageBoxW(GetHWND(), e.what_w(), L"‰Šú‰»Ž¸”s", MB_OK);
+		MessageBox(GetHWnd(), e.what_w(), TEXT("‰Šú‰»Ž¸”s"), MB_OK);
 	}
 	catch (const exception& e)
 	{
-		MessageBoxW(GetHWND(), TString(e.what()).GetStringW(), L"‰Šú‰»Ž¸”s", MB_OK);
+		MessageBox(GetHWnd(), TString(e.what()).GetStringW(), TEXT("‰Šú‰»Ž¸”s"), MB_OK);
 	}
 	return true;
 }

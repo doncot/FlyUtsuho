@@ -1,15 +1,24 @@
 #include<SimpleWindow.h>
 #include<Input.h>
-#include<Windows.h>
-#include<tchar.h>
 #include"MyException.h"
 #include"TString.h"
 #include"MyTypes.h"
 
-LPCTSTR className = TEXT("SimpleWindow");
+//メモリリーク検出用。
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC
+#include <stdlib.h>
+#include <crtdbg.h>
+#ifndef DBG_NEW
+#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+#define new DBG_NEW
+#endif
+#endif
 
 namespace
 {
+	LPCTSTR className = TEXT("SimpleWindow");
+
 	LRESULT WINAPI SimpleWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 }
 
@@ -20,16 +29,8 @@ SimpleWindow::SimpleWindow()
 #if defined(_DEBUG)
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif //_DEBUG
-}
 
-SimpleWindow::~SimpleWindow()
-{
-	UnregisterClass(className, m_wc.hInstance);
-}
-
-bool SimpleWindow::Initialize()
-{
-	::SetProcessDPIAware();
+	//::SetProcessDPIAware();
 
 	//WindowClass設定
 	m_wc.cbSize = sizeof(WNDCLASSEX);
@@ -37,17 +38,18 @@ bool SimpleWindow::Initialize()
 	m_wc.lpfnWndProc = SimpleWindowProc;
 	m_wc.cbClsExtra = 0L;
 	m_wc.cbWndExtra = 0L;
-	m_wc.hInstance = GetModuleHandle(NULL);
-	m_wc.hIcon = LoadIcon(NULL, IDI_APPLICATION);
-	m_wc.hCursor = LoadCursor(NULL, IDC_ARROW);
-	m_wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	m_wc.lpszMenuName = NULL;
+	m_wc.hInstance = GetModuleHandle(nullptr);
+	m_wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
+	m_wc.hCursor = LoadCursor(nullptr, IDC_ARROW);
+	m_wc.hbrBackground = (HBRUSH)(COLOR_WINDOW);
+	m_wc.lpszMenuName = nullptr;
 	m_wc.lpszClassName = className;
-	m_wc.hIconSm = NULL;
+	m_wc.hIconSm = nullptr;
+
 	//WindowClass登録
 	if (!RegisterClassEx(&m_wc))
 	{
-		throw Inferno::CreationFailed(TEXT("ウィンドウクラス"));
+		throw Inferno::CreationFailed(TEXT("ウィンドウクラスの登録に失敗しました。"));
 	}
 
 	//ウィンドウを生成
@@ -56,15 +58,20 @@ bool SimpleWindow::Initialize()
 		CW_USEDEFAULT, CW_USEDEFAULT, //ウィンドウ位置
 		CW_USEDEFAULT, CW_USEDEFAULT, //ウィンドウサイズ
 		GetDesktopWindow(), //ここは注意
-		NULL, m_wc.hInstance, NULL);
-	if (m_hWnd == NULL)
+		nullptr, m_wc.hInstance, nullptr);
+	if (m_hWnd == nullptr)
 	{
-		throw Inferno::CreationFailed(TEXT("ウィンドウ"));
+		throw Inferno::CreationFailed(TEXT("ウィンドウの生成に失敗しました。"));
 	}
 
 	this->Resize(800, 600);
+}
 
-	return true;
+SimpleWindow::~SimpleWindow()
+{
+	::UnregisterClass(className, m_wc.hInstance);
+
+	::_CrtDumpMemoryLeaks();
 }
 
 void SimpleWindow::Resize(const int width, const int height)
@@ -98,7 +105,7 @@ void SimpleWindow::Resize(const int width, const int height)
 	m_clientWidth = width;
 }
 
-void SimpleWindow::SetPos(const WindowPostion x, const WindowPostion y)
+void SimpleWindow::SetWindowAlignment(const HorizontalAlignment h, const VerticalAlignment v)
 {
 	//GetWindowPlacementとSetWindowPlacementで
 	//位置の保存と復元ができる
@@ -114,23 +121,25 @@ void SimpleWindow::SetPos(const WindowPostion x, const WindowPostion y)
 	int ry = 0;
 
 	//位置を座標に直す
-	switch (x)
+	switch(h)
 	{
-	case Center:
+	case HorizontalAlignment::Center:
 		rx = (GetSystemMetrics(SM_CXSCREEN) - ww) / 2;
 		if (rx < 0) rx=0; //画面が小さすぎた場合
 		break;
 	default:
+		assert(false);
 		break;
 	}
 
-	switch (y)
+	switch(v)
 	{
-	case Center:
+	case VerticalAlignment::Center:
 		ry = (GetSystemMetrics(SM_CYSCREEN) - wh) / 2;
 		if (ry < 0) ry = 0; //画面が小さすぎた場合
 		break;
 	default:
+		assert(false);
 		break;
 	}
 
@@ -181,45 +190,46 @@ void SimpleWindow::SetPos(const WindowPostion x, const WindowPostion y)
 
 void SimpleWindow::Show() const
 {
-	::ValidateRect(m_hWnd, 0);
-	::ShowWindow(m_hWnd, SW_SHOW);
+	::ShowWindow(m_hWnd, SW_NORMAL);
+	::ValidateRect(m_hWnd, nullptr);
 	::UpdateWindow(m_hWnd); //WM_PAINTメッセージを出して、領域を更新
 }
 
-void SimpleWindow::SetTitleText(LPCTSTR str) const
+void SimpleWindow::SetTitle(LPCTSTR str) const
 {
 	::SetWindowText(m_hWnd, str);
 }
 
 
-HWND SimpleWindow::GetHWND() const
+HWND SimpleWindow::GetHWnd() const
 {
 	return m_hWnd;
 }
 
-int SimpleWindow::GetWindowWidth() const
+int SimpleWindow::GetWindowWidth() const noexcept
 {
 	return m_windowWidth;
 }
 
-int SimpleWindow::GetWindowHeight() const
+int SimpleWindow::GetWindowHeight() const noexcept
 {
 	return m_windowHeight;
 }
 
-int SimpleWindow::GetClientWidth() const
+int SimpleWindow::GetClientWidth() const noexcept
 {
 	return m_clientWidth;
 }
 
-int SimpleWindow::GetClientHeight() const
+int SimpleWindow::GetClientHeight() const noexcept
 {
 	return m_clientHeight;
 }
 
 bool SimpleWindow::Terminate()
 {
-	DestroyWindow(m_hWnd);
+	::DestroyWindow(m_hWnd);
+
 	return true;
 }
 
@@ -234,6 +244,7 @@ LRESULT WINAPI SimpleWindowProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lPara
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+
 	default:
 		break;
 	}

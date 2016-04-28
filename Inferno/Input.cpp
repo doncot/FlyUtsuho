@@ -70,7 +70,7 @@ void Input::ClearMouseLButton()
 
 void Input::DisableIME(HWND hWnd)
 {
-	m_hIMC = ImmAssociateContext(hWnd, NULL);
+	m_hIMC = ImmAssociateContext(hWnd, nullptr);
 }
 
 void Input::EnableIME(HWND hWnd)

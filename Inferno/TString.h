@@ -30,21 +30,21 @@
  *  使用例２：
  *      TString tStr = L"ユニコード文字列";
  *      tStr += "マルチバイト文字列";
- *      MessageBox( NULL, tStr, NULL, MB_OK );
+ *      MessageBox( nullptr, tStr, nullptr, MB_OK );
  *      出力：ユニコード文字列マルチバイト文字列
  *	
  *  使用例３：
  *      TString tStr;
  *      tStr = _T("両対応の文字列");
- *      MessageBox  ( NULL, tStr, NULL, MB_OK );                    //設定に応じた文字列を取り出す例
- *      MessageBoxA ( NULL, tStr.GetStringA(), NULL, MB_OK );       //マルチバイト文字列を取り出す例
- *      MessageBoxW ( NULL, tStr.GetStringW(), NULL, MB_OK );       //ユニコード文字列を取り出す例
+ *      MessageBox  ( nullptr, tStr, nullptr, MB_OK );                    //設定に応じた文字列を取り出す例
+ *      MessageBoxA ( nullptr, tStr.GetStringA(), nullptr, MB_OK );       //マルチバイト文字列を取り出す例
+ *      MessageBoxW ( nullptr, tStr.GetStringW(), nullptr, MB_OK );       //ユニコード文字列を取り出す例
  *	
  *  使用例４：
  *      // 一時変数を使わずに戻り値で文字列を取得する例
- *      MessageBox  ( NULL, TString( "マルチバイト文字列" ), NULL, MB_OK );			
- *      MessageBoxA ( NULL, TString( L"ユニコード文字列" ).GetStringA(), NULL, MB_OK );
- *      MessageBoxW ( NULL, TSTring( "マルチバイト文字列" ).GetStringW(), NULL, MB_OK );
+ *      MessageBox  ( nullptr, TString( "マルチバイト文字列" ), nullptr, MB_OK );			
+ *      MessageBoxA ( nullptr, TString( L"ユニコード文字列" ).GetStringA(), nullptr, MB_OK );
+ *      MessageBoxW ( nullptr, TSTring( "マルチバイト文字列" ).GetStringW(), nullptr, MB_OK );
  *
  * -----------------------------------------------------------------------------------------
  *  <関数リファレンス>
@@ -854,12 +854,12 @@ public:
 	//
 	char * WideToMBCS( WCHAR * wString )
 	{
-		int		len = WideCharToMultiByte( CP_ACP, 0, wString, -1, NULL, 0, NULL, NULL);
+		int		len = WideCharToMultiByte( CP_ACP, 0, wString, -1, nullptr, 0, nullptr, nullptr);
 		char *	buf = new char[ len + 1 ];
-		if ( buf == NULL )
-			return NULL;
+		if ( buf == nullptr )
+			return nullptr;
 		
-	    WideCharToMultiByte( CP_ACP, 0, wString, -1, buf, len + 1, NULL, NULL) ;
+	    WideCharToMultiByte( CP_ACP, 0, wString, -1, buf, len + 1, nullptr, nullptr) ;
 		*( buf + len ) = '\0';
 		mbRetStr = buf;
 		delete [] buf;
@@ -871,10 +871,10 @@ public:
 	//
 	WCHAR * MBCSToWide( char * mbString )
 	{
-		int	len = MultiByteToWideChar( CP_ACP, 0, mbString, -1, NULL, 0 );
+		int	len = MultiByteToWideChar( CP_ACP, 0, mbString, -1, nullptr, 0 );
 		WCHAR *	buf = new WCHAR[ len + 1 ];
-		if ( buf == NULL )
-			return NULL;
+		if ( buf == nullptr )
+			return nullptr;
 		
 	    MultiByteToWideChar( CP_ACP, 0, mbString, -1, buf, len + 1 ) ;
 		*( buf + len ) = '\0';

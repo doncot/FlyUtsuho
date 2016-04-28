@@ -158,18 +158,18 @@ public:
 
 		//http://www13.plala.or.jp/kymats/study/MULTIMEDIA/load_wave.html より
 		//ファイルを開いて、その全てをメモリ領域にコピーします。
-		HANDLE fh = CreateFile(fileName.c_str(), GENERIC_READ, 0, NULL,
-			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+		HANDLE fh = CreateFile(fileName.c_str(), GENERIC_READ, 0, nullptr,
+			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
 		if (fh == INVALID_HANDLE_VALUE)
 		{
 			throw Inferno::MyExceptionBase_RuntimeError(
 				_T("ファイル") + fileName + _T("が開けません。")
 				);
 		}
-		DWORD dwFileSize = GetFileSize(fh, NULL);
+		DWORD dwFileSize = GetFileSize(fh, nullptr);
 		BYTE *lpBuf = (BYTE*)HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, dwFileSize);
 		DWORD dwReadSize;
-		ReadFile(fh, lpBuf, dwFileSize, &dwReadSize, NULL);
+		ReadFile(fh, lpBuf, dwFileSize, &dwReadSize, nullptr);
 		CloseHandle(fh);
 		
 		//ファイルの先頭から8～11バイトに "WAVE" という文字列があるかチェック
@@ -274,7 +274,7 @@ namespace
 	{
 	public:
 		HANDLE hBufferEndEvent;
-		VoiceCallback() : hBufferEndEvent(CreateEvent(NULL, FALSE, FALSE, NULL)){}
+		VoiceCallback() : hBufferEndEvent(CreateEvent(nullptr, FALSE, FALSE, nullptr)){}
 		~VoiceCallback(){ CloseHandle(hBufferEndEvent); }
 
 		//Called when the voice has just finished playing a contiguous audio stream.

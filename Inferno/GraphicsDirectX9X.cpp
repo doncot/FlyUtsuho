@@ -52,20 +52,20 @@ void Graphics::Finalize()
 
 void Graphics::DisplayBlankScreen(const int r, const int g, const int b) const
 {
-	m_d3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(r, g, b), 1.0f, 0);
-	m_d3dDevice->Present(NULL, NULL, NULL, NULL);
+	m_d3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(r, g, b), 1.0f, 0);
+	m_d3dDevice->Present(nullptr, nullptr, nullptr, nullptr);
 }
 
 bool Graphics::BeginScene() const
 {
-	m_d3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 128), 1.0f, 0);
+	m_d3dDevice->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(0, 0, 128), 1.0f, 0);
 	return SUCCEEDED(m_d3dDevice->BeginScene());
 }
 
 void Graphics::EndScene() const
 {
 	m_d3dDevice->EndScene();
-	m_d3dDevice->Present(NULL, NULL, NULL, NULL);
+	m_d3dDevice->Present(nullptr, nullptr, nullptr, nullptr);
 }
 
 bool Graphics::BeginSprite() const
@@ -138,8 +138,8 @@ void Graphics::TransformSprite(const Matrix* m) const
 
 void Graphics::DrawSprite(const LP_TEXTURE tex, Vec2<float> center, const int alpha) const
 {
-	m_sprite->Draw(tex, NULL, &D3DXVECTOR3(center.x, center.y, 0),
-		NULL, D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	m_sprite->Draw(tex, nullptr, &D3DXVECTOR3(center.x, center.y, 0),
+		nullptr, D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 }

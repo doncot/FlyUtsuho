@@ -2,7 +2,7 @@
 ゲーム用のウィンドウをクラス化したもの
 */
 #pragma once
-#include<Common.h>
+#include"Common.h"
 
 namespace Inferno
 {

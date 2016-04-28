@@ -10,7 +10,7 @@ namespace
 using namespace Inferno;
 
 Game::Game() :
-	m_IsInitialized(false), m_elapsedFrame(0), m_frameCount(0)
+	 m_elapsedFrame(0), m_frameCount(0)
 {
 	InputHandle = &m_input;
 

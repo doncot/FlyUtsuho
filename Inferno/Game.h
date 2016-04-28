@@ -4,30 +4,37 @@ Game.h
 これは基底で各ゲームごとに派生させる
 */
 #pragma once
-#include<SimpleWindow.h>
+#include"SimpleWindow.h"
 #include"Graphics.h"
-#include<Input.h>
+#include"Input.h"
 #include"Timer.h"
 
-class Game: public Inferno::SimpleWindow
+namespace Inferno
 {
-public:
-	Game();
-	virtual ~Game();
-	void SetClientSize(const int width, const int height);
+	class Graphics;
+	class Input;
+	class Timer;
 
-	virtual bool GameLoop();
-	virtual void Exit();
+	class Game : public Inferno::SimpleWindow
+	{
+	public:
+		Game();
+		virtual ~Game() override;
+		void SetClientSize(const int width, const int height);
 
-protected:
-	Inferno::Graphics m_graphics;
-	Inferno::Input m_input;	
+		virtual bool GameLoop();
+		virtual void Exit();
 
-	bool m_IsInitialized;
-	Inferno::Timer m_globalTimer; //ゲーム開始時にスタート
-	int m_elapsedFrame; //ゲーム開始からの経過フレーム
-	int m_frameCount; //前回のループからの経過フレーム
+	protected:
+		Inferno::Graphics m_graphics;
+		Inferno::Input m_input;
 
-private:
-	typedef Inferno::SimpleWindow Base;
-};
+		Inferno::Timer m_globalTimer; //ゲーム開始時にスタート
+
+		int m_elapsedFrame; //ゲーム開始からの経過フレーム
+		int m_frameCount; //前回のループからの経過フレーム
+
+	private:
+		typedef Inferno::SimpleWindow Base;
+	};
+}

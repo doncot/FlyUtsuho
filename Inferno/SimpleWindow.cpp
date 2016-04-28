@@ -1,14 +1,14 @@
-#include<SimpleWindow.h>
+#include"SimpleWindow.h"
 
 //メモリリーク検出用。
 #ifdef _DEBUG
-#define _CRTDBG_MAP_ALLOC
-#include <stdlib.h>
-#include <crtdbg.h>
-#ifndef DBG_NEW
-#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
-#define new DBG_NEW
-#endif
+	#define _CRTDBG_MAP_ALLOC
+	#include <stdlib.h>
+	#include <crtdbg.h>
+	#ifndef DBG_NEW
+		#define DBG_NEW new (_NORMAL_BLOCK, __FILE__, __LINE__)
+	#define new DBG_NEW
+	#endif
 #endif
 
 namespace
@@ -20,7 +20,9 @@ namespace
 
 namespace Inferno
 {
-const DWORD SimpleWindow::m_windowStyle = WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX; //|WS_MAXIMIZEBOX,
+///ウィンドウスタイルの値を保持
+///AdjustWindowRectにてバグがあってWS_CAPTIONを設定する必要がある（WS_SYSMENUに含まれるので冗長なはずだが、計算に入れてない）
+const DWORD SimpleWindow::m_windowStyle = WS_OVERLAPPED | WS_SYSMENU | WS_CAPTION | WS_MINIMIZEBOX; //|WS_MAXIMIZEBOX,
 
 SimpleWindow::SimpleWindow()
 {
@@ -74,33 +76,39 @@ SimpleWindow::~SimpleWindow()
 
 void SimpleWindow::Resize(const int width, const int height)
 {
-	// ウィンドウサイズを再設定する
-	RECT rect;
-	int ww, wh;
-	int cw, ch;
-	// クライアント領域の外の幅を計算
-	GetClientRect(m_hWnd, &rect);		// クライアント部分のサイズの取得
-	cw = rect.right - rect.left;	// クライアント領域外の横幅を計算
-	ch = rect.bottom - rect.top;	// クライアント領域外の縦幅を計算
+	RECT rect = {0, 0, width, height};
+	::AdjustWindowRect(&rect, m_windowStyle, false);
 
-	// ウインドウ全体の横幅の幅を計算
-	GetWindowRect(m_hWnd, &rect);		// ウインドウ全体のサイズ取得
-	ww = rect.right - rect.left;	// ウインドウ全体の幅の横幅を計算
-	wh = rect.bottom - rect.top;	// ウインドウ全体の幅の縦幅を計算
-	ww = ww - cw;					// クライアント領域以外に必要な幅
-	wh = wh - ch;					// クライアント領域以外に必要な高さ
+	const int windowWidth = rect.right - rect.left;
+	const int windowHeight = rect.bottom - rect.top;
 
-	// ウィンドウサイズの再計算
-	ww = width + ww;			// 必要なウインドウの幅
-	wh = height + wh;		// 必要なウインドウの高さ
+	//// ウィンドウサイズを再設定する
+	//RECT rect;
+	//int ww, wh;
+	//int cw, ch;
+	//// クライアント領域の外の幅を計算
+	//GetClientRect(m_hWnd, &rect);		// クライアント部分のサイズの取得
+	//cw = rect.right - rect.left;	// クライアント領域外の横幅を計算
+	//ch = rect.bottom - rect.top;	// クライアント領域外の縦幅を計算
+
+	//// ウインドウ全体の横幅の幅を計算
+	//GetWindowRect(m_hWnd, &rect);		// ウインドウ全体のサイズ取得
+	//ww = rect.right - rect.left;	// ウインドウ全体の幅の横幅を計算
+	//wh = rect.bottom - rect.top;	// ウインドウ全体の幅の縦幅を計算
+	//ww = ww - cw;					// クライアント領域以外に必要な幅
+	//wh = wh - ch;					// クライアント領域以外に必要な高さ
+
+	//// ウィンドウサイズの再計算
+	//ww = width + ww;			// 必要なウインドウの幅
+	//wh = height + wh;		// 必要なウインドウの高さ
 
 	// ウインドウサイズの再設定
-	SetWindowPos(m_hWnd, HWND_TOP, 0, 0, ww, wh, SWP_NOMOVE);
+	SetWindowPos(m_hWnd, HWND_TOP, 0, 0, windowWidth, windowHeight, SWP_NOMOVE);
 
-	m_windowHeight = wh;
-	m_windowWidth = ww;
-	m_clientHeight = height;
+	m_windowWidth = windowWidth;
+	m_windowHeight = windowHeight;
 	m_clientWidth = width;
+	m_clientHeight = height;
 }
 
 void SimpleWindow::SetWindowAlignment(HorizontalAlignment h, VerticalAlignment v)

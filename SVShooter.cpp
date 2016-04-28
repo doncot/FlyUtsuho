@@ -63,7 +63,7 @@ SVShooter::~SVShooter()
 	SAFE_DELETE(resourceMan);
 }
 
-bool SVShooter::Startup()
+void SVShooter::Startup()
 {
 	try
 	{
@@ -136,7 +136,6 @@ bool SVShooter::Startup()
 	{
 		MessageBox(GetHWnd(), TString(e.what()).GetStringW(), TEXT("èâä˙âªé∏îs"), MB_OK);
 	}
-	return true;
 }
 
 bool SVShooter::GameLoop()

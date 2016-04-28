@@ -7,14 +7,14 @@
 #include<list>
 #include"Score.h"
 
-class SVShooter final : public Game
+class SVShooter final : public Inferno::Game
 {
 public:
 	SVShooter();
 	~SVShooter();
 
-	bool Startup();
-	bool GameLoop();
+	void Startup();
+	bool GameLoop() override;
 
 	enum SceneName
 	{

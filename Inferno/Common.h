@@ -1,6 +1,8 @@
 /**
+<summary>
 共通ヘッダー
 win32用
+</summary>
 */
 #pragma once
 

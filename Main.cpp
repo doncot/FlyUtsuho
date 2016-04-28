@@ -3,8 +3,6 @@
 
 #include"SVShooter.h"
 
-
-
 using namespace Inferno;
 
 INT WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)

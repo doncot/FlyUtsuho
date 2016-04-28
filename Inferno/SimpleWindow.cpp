@@ -1,8 +1,4 @@
 #include<SimpleWindow.h>
-#include<Input.h>
-#include"MyException.h"
-#include"TString.h"
-#include"MyTypes.h"
 
 //メモリリーク検出用。
 #ifdef _DEBUG
@@ -24,6 +20,8 @@ namespace
 
 namespace Inferno
 {
+const DWORD SimpleWindow::m_windowStyle = WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX; //|WS_MAXIMIZEBOX,
+
 SimpleWindow::SimpleWindow()
 {
 #if defined(_DEBUG)
@@ -34,7 +32,8 @@ SimpleWindow::SimpleWindow()
 
 	//WindowClass設定
 	m_wc.cbSize = sizeof(WNDCLASSEX);
-	m_wc.style = CS_CLASSDC | CS_HREDRAW | CS_VREDRAW; //CS_CLASSDC:全てのウィンドウが同じデバイスコンテキストを共有する
+	//CS_CLASSDC:全てのウィンドウが同じデバイスコンテキストを共有する
+	m_wc.style = CS_CLASSDC | CS_HREDRAW | CS_VREDRAW;
 	m_wc.lpfnWndProc = SimpleWindowProc;
 	m_wc.cbClsExtra = 0L;
 	m_wc.cbWndExtra = 0L;
@@ -49,19 +48,18 @@ SimpleWindow::SimpleWindow()
 	//WindowClass登録
 	if (!RegisterClassEx(&m_wc))
 	{
-		throw Inferno::CreationFailed(TEXT("ウィンドウクラスの登録に失敗しました。"));
+		throw std::runtime_error("ウィンドウクラスの登録に失敗しました。");
 	}
 
 	//ウィンドウを生成
 	m_hWnd = CreateWindow(className, TEXT("SimpleWindow"),
-		WS_OVERLAPPED | WS_SYSMENU | WS_MINIMIZEBOX, //|WS_MAXIMIZEBOX,
+		m_windowStyle,
 		CW_USEDEFAULT, CW_USEDEFAULT, //ウィンドウ位置
 		CW_USEDEFAULT, CW_USEDEFAULT, //ウィンドウサイズ
-		GetDesktopWindow(), //ここは注意
-		nullptr, m_wc.hInstance, nullptr);
+		nullptr, nullptr, m_wc.hInstance, nullptr);
 	if (m_hWnd == nullptr)
 	{
-		throw Inferno::CreationFailed(TEXT("ウィンドウの生成に失敗しました。"));
+		throw std::runtime_error("ウィンドウの生成に失敗しました。");
 	}
 
 	this->Resize(800, 600);
@@ -105,7 +103,7 @@ void SimpleWindow::Resize(const int width, const int height)
 	m_clientWidth = width;
 }
 
-void SimpleWindow::SetWindowAlignment(const HorizontalAlignment h, const VerticalAlignment v)
+void SimpleWindow::SetWindowAlignment(HorizontalAlignment h, VerticalAlignment v)
 {
 	//GetWindowPlacementとSetWindowPlacementで
 	//位置の保存と復元ができる
@@ -201,7 +199,7 @@ void SimpleWindow::SetTitle(LPCTSTR str) const
 }
 
 
-HWND SimpleWindow::GetHWnd() const
+HWND SimpleWindow::GetHWnd() const noexcept
 {
 	return m_hWnd;
 }
@@ -226,11 +224,9 @@ int SimpleWindow::GetClientHeight() const noexcept
 	return m_clientHeight;
 }
 
-bool SimpleWindow::Terminate()
+void SimpleWindow::Terminate()
 {
 	::DestroyWindow(m_hWnd);
-
-	return true;
 }
 
 }

@@ -7,6 +7,7 @@ win32—p
 #include<Windows.h>
 #include<tchar.h>
 #include<cassert>
+#include<stdexcept>
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(p)       { if (p!=nullptr) { delete (p);     (p)=nullptr; } }

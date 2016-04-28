@@ -6,7 +6,7 @@
 
 namespace Inferno
 {
-	//定数
+	///水平方向の配置
 	enum class HorizontalAlignment
 	{
 		Left,
@@ -14,6 +14,7 @@ namespace Inferno
 		Right,
 	};
 
+	///垂直方向の配置
 	enum class VerticalAlignment
 	{
 		Top,
@@ -34,9 +35,10 @@ public:
 	///</summary>
 	void Show() const;
 	void SetTitle(LPCTSTR str) const;
-	void SetWindowAlignment(const HorizontalAlignment h, const VerticalAlignment v);
+	void SetWindowAlignment(HorizontalAlignment h, VerticalAlignment v);
 
-	HWND GetHWnd() const;
+	HWND GetHWnd() const noexcept;
+
 	int GetWindowWidth() const noexcept;
 	int GetWindowHeight() const noexcept;
 	int GetClientWidth() const noexcept;
@@ -45,7 +47,7 @@ public:
 	///<summary>
 	///ウィンドウを終了させる
 	///</summary>
-	virtual bool Terminate();
+	virtual void Terminate();
 
 private:
 	WNDCLASSEX m_wc;
@@ -58,6 +60,10 @@ private:
 	//ウィンドウ枠を除いた領域(クライアント領域)
 	int m_clientWidth;
 	int m_clientHeight;
+
+	//定数
+	///ウィンドウスタイル
+	static const DWORD m_windowStyle;
 	
 private:
 	SimpleWindow(SimpleWindow& w) = delete;
